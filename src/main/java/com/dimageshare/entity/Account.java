@@ -17,7 +17,7 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @Data
-@Table(name = "e_admin_accounts")
+@Table(name = "accounts")
 @EntityListeners(AuditingEntityListener.class)
 public class Account {
     @Id

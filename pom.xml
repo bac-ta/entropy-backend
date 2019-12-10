@@ -93,9 +93,16 @@
             <artifactId>guava</artifactId>
             <version>20.0</version>
         </dependency>
+        <!--For hibernate core-->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
+        </dependency>
+        <!--For bootstrap-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>4.4.1</version>
         </dependency>
     </dependencies>
     <build>
