@@ -7,9 +7,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
 @EnableJpaAuditing
-public class NewProjectDemoApplication extends SpringBootServletInitializer {
+public class JavaWebviewApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
-        SpringApplication.run(NewProjectDemoApplication.class, args);
+        SpringApplication.run(JavaWebviewApplication.class, args);
     }
 }
