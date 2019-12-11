@@ -6,6 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+/**
+ * @author bac-ta
+ */
 public class DateUtil {
     private static final String DATE_FORMATER = "yyyy-MM-dd HH:mm:ss.S";
     private static final String DATE_FORMATER_BIRTHDAY = "yyyy-MM-dd";

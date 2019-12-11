@@ -7,9 +7,12 @@ import org.springframework.stereotype.Repository;
 import javax.validation.constraints.NotBlank;
 import java.util.Optional;
 
+/**
+ * @author bac-ta
+ */
 @Repository
 public interface AdminAccountRepository extends JpaRepository<Account, String> {
-    Optional<Account> findByUsernameOrEmailOrPhoneNumberAndPassword(String username, String email, String phoneNumber, @NotBlank String password);
+    Optional<Account> findByUsernameOrEmailAndPassword(String username, String email, String password);
 
     Account findByEmail(String email);
 

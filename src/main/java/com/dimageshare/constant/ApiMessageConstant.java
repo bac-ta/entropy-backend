@@ -1,5 +1,8 @@
 package com.dimageshare.constant;
 
+/**
+ * @author bac-ta
+ */
 public class ApiMessageConstant {
     public static final String LOGIN_SUCCESS = "Login in successful";
     public static final String LOGIN_ERROR = "Login in error";

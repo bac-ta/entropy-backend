@@ -5,6 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
+/**
+ * @author bac-ta
+ */
 @SpringBootApplication
 @EnableJpaAuditing
 public class JavaWebviewApplication extends SpringBootServletInitializer {

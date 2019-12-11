@@ -12,6 +12,9 @@ import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @author bac-ta
+ */
 public class Util {
     private static final String DATE_FORMATER = "yyyy-MM-dd HH:mm:ss.S";
     private static final String DATE_FORMATER_BIRTHDAY = "yyyy-MM-dd";

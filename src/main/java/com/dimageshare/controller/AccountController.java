@@ -1,13 +1,16 @@
 package com.dimageshare.controller;
 
 import com.dimageshare.constant.UrlBaseApi;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * @author bac-ta
+ */
 @Controller
-@RequestMapping(UrlBaseApi.URL_BASE_USER)
-@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+@RequestMapping(UrlBaseApi.URL_BASE_ACCOUNT)
 public class AccountController {
+    public String login() {
+        return
+    }
 }
