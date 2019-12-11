@@ -1,5 +1,7 @@
 package com.dimageshare.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -7,11 +9,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -19,6 +18,8 @@ import javax.validation.constraints.NotBlank;
 @Data
 @Table(name = "accounts")
 @EntityListeners(AuditingEntityListener.class)
+@Builder
+@AllArgsConstructor
 public class Account {
     @Id
     @GeneratedValue(generator = "uuid")
@@ -31,21 +32,6 @@ public class Account {
     @Column(name = "phone_number")
     private String phoneNumber;
     @NotBlank
+    @Column(length = 20)
     private String password;
-
-    public Account(String email, String username, String phoneNumber, String password) {
-        this.email = email;
-        this.username = username;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-    }
-
-    public Account(String adminId, String email, String username, String phoneNumber, String password) {
-        this.adminId = adminId;
-        this.email = email;
-        this.username = username;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-    }
 }
-
