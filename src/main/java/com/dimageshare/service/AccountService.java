@@ -15,11 +15,11 @@ import java.util.Optional;
  * @author bac-ta
  */
 @Service
-public class AdminAccountService {
+public class AccountService {
     private AdminAccountRepository adminAccountRepository;
 
     @Autowired
-    public AdminAccountService(AdminAccountRepository adminAccountRepository) {
+    public AccountService(AdminAccountRepository adminAccountRepository) {
         this.adminAccountRepository = adminAccountRepository;
     }
 
