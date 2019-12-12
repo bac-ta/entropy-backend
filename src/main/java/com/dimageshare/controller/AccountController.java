@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @author bac-ta
@@ -24,8 +25,8 @@ public class AccountController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody AccountLoginReq accountLogin) {
+    public ModelAndView login(@RequestBody AccountLoginReq accountLogin) {
         AccountLoginResp resp = accountService.login(accountLogin);
-        return "/login";
+        return null;
     }
 }
