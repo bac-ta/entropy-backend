@@ -27,7 +27,8 @@ public class Account {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String adminId;
+    @Column
+    private String id;
     @Column(unique = true)
     private String email;
     @Column(unique = true)
@@ -35,6 +36,6 @@ public class Account {
     @Column(name = "phone_number")
     private String phoneNumber;
     @NotBlank
-    @Column(length = 20)
+    @Column
     private String password;
 }
