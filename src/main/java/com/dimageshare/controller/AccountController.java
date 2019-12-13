@@ -25,9 +25,10 @@ public class AccountController {
     }
 
     @PostMapping("/login")
-    public ModelAndView login(@RequestBody AccountLoginReq accountLogin) {
+    public String login(@RequestBody AccountLoginReq accountLogin) {
         ModelAndView mv = new ModelAndView();
         AccountLoginResp resp = accountService.login(accountLogin);
-        return null;
+        mv.addObject(resp);
+        return "/login";
     }
 }
