@@ -64,6 +64,3 @@ server:
     max-threads: 200
   servlet:
     context-path: /api
-
-max:
-  age: 200
