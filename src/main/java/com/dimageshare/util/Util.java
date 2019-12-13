@@ -1,7 +1,7 @@
 package com.dimageshare.util;
 
 import com.dimageshare.constant.AttributeConstant;
-import com.dimageshare.enumeration.UserInfoLoginType;
+import com.dimageshare.enumeration.AccountInfoLoginType;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.Mac;
@@ -68,18 +68,18 @@ public class Util {
         return new String(hexChars);
     }
 
-    public static UserInfoLoginType detectInfo(String input) {
+    public static AccountInfoLoginType detectInfo(String input) {
         pattern = Pattern.compile(EMAIL_PATTERN);
         matcher = pattern.matcher(input);
         if (matcher.find())
-            return UserInfoLoginType.EMAIL_TYPE;
+            return AccountInfoLoginType.EMAIL_TYPE;
         else {
             pattern = Pattern.compile(PHONE_NUMBER_PATTERN);
             matcher = pattern.matcher(input);
             if (matcher.find())
-                return UserInfoLoginType.PHONE_NUMBER_TYPE;
+                return AccountInfoLoginType.PHONE_NUMBER_TYPE;
             else
-                return UserInfoLoginType.USER_NAME_TYPE;
+                return AccountInfoLoginType.USER_NAME_TYPE;
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.dimageshare.entity;
 
+import com.dimageshare.enumeration.AccountType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,6 +10,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -38,4 +41,7 @@ public class Account {
     @NotBlank
     @Column
     private String password;
+    @Column(name = "type", length = 20)
+    @Enumerated(EnumType.STRING)
+    private AccountType accountType;
 }
