@@ -1,7 +1,8 @@
 #Config app
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/java-webview?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/legacy?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
     password:
 
