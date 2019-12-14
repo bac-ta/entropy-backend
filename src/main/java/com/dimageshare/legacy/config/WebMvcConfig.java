@@ -1,4 +1,4 @@
-package com.dimageshare.legacy.security;
+package com.dimageshare.legacy.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
