@@ -1,9 +1,8 @@
 package com.dimageshare.legacy.service;
 
-import com.dimageshare.legacy.web.dto.UserRegistrationDto;
+import com.dimageshare.legacy.dto.UserRegistrationDto;
+import com.dimageshare.legacy.entity.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
-
-import com.dimageshare.legacy.model.User;
 
 public interface UserService extends UserDetailsService {
 
