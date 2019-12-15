@@ -7,6 +7,9 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.Collection;
 
+/**
+ * @author bac-ta
+ */
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 @Data

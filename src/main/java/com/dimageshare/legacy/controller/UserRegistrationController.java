@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.dimageshare.legacy.entity.User;
 import com.dimageshare.legacy.service.UserService;
 
+/**
+ * @author bac-ta
+ */
 @Controller
 @RequestMapping("/registration")
 public class UserRegistrationController {
@@ -34,14 +37,14 @@ public class UserRegistrationController {
 
     @PostMapping
     public String registerUserAccount(@ModelAttribute("user") @Valid UserRegistrationDto userDto,
-                                      BindingResult result){
+                                      BindingResult result) {
 
         User existing = userService.findByEmail(userDto.getEmail());
-        if (existing != null){
+        if (existing != null) {
             result.rejectValue("email", null, "There is already an account registered with that email");
         }
 
-        if (result.hasErrors()){
+        if (result.hasErrors()) {
             return "registration";
         }
 

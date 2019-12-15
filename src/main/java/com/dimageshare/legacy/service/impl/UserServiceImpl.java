@@ -17,6 +17,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
+/**
+ * @author bac-ta
+ */
 @Service
 public class UserServiceImpl implements UserService {
 

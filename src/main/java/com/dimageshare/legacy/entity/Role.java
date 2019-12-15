@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * @author bac-ta
+ */
 @Entity
 @Data
 public class Role {
@@ -14,9 +17,6 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-
-    public Role() {
-    }
 
     public Role(String name) {
         this.name = name;
