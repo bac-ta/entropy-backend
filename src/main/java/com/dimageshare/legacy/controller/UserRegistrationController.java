@@ -3,6 +3,7 @@ package com.dimageshare.legacy.controller;
 import javax.validation.Valid;
 
 import com.dimageshare.legacy.dto.UserRegistrationDto;
+import com.dimageshare.legacy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.dimageshare.legacy.entity.User;
-import com.dimageshare.legacy.service.UserService;
 
 /**
  * @author bac-ta
@@ -22,8 +22,12 @@ import com.dimageshare.legacy.service.UserService;
 @RequestMapping("/registration")
 public class UserRegistrationController {
 
-    @Autowired
     private UserService userService;
+
+    @Autowired
+    public UserRegistrationController(UserService userService) {
+        this.userService = userService;
+    }
 
     @ModelAttribute("user")
     public UserRegistrationDto userRegistrationDto() {
