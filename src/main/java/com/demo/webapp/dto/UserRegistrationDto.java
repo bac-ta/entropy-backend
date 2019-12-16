@@ -1,6 +1,7 @@
 package com.demo.webapp.dto;
 
 import com.demo.webapp.anonation.FieldMatch;
+import com.demo.webapp.constant.APIMessage;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,8 +14,8 @@ import javax.validation.constraints.NotEmpty;
  * @author bac-ta
  */
 @FieldMatch.List({
-        @FieldMatch(first = "password", second = "confirmPassword", message = "The password fields must match"),
-        @FieldMatch(first = "email", second = "confirmEmail", message = "The email fields must match")
+        @FieldMatch(first = "password", second = "confirmPassword", message = APIMessage.PASSWORD_INCORRECT),
+        @FieldMatch(first = "email", second = "confirmEmail", message = APIMessage.EMAIL_INCORRECT)
 })
 @AllArgsConstructor
 @Data
