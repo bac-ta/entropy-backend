@@ -19,6 +19,11 @@ spring:
     view:
       prefix: /WEB-INF/jsp/
       suffix: .jsp
+  thymeleaf:
+    cache: false
+    enabled: true
+    prefix: classpath:/templates/
+    suffix: .html
 
 #  security:
 #    oauth2:
