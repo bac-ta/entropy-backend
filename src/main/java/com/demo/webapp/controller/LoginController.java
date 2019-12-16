@@ -1,4 +1,4 @@
-package com.dimageshare.legacy.controller;
+package com.demo.webapp.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

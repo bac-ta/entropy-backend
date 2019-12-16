@@ -1,6 +1,6 @@
-package com.dimageshare.legacy.dto;
+package com.demo.webapp.dto;
 
-import com.dimageshare.legacy.anonation.FieldMatch;
+import com.demo.webapp.anonation.FieldMatch;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.dimageshare.legacy.util;
+package com.demo.webapp.util;
 
 /**
  * @author bac-ta

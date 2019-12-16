@@ -1,4 +1,4 @@
-package com.dimageshare.legacy.entity;
+package com.demo.webapp.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

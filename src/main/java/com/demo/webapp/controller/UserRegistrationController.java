@@ -1,9 +1,9 @@
-package com.dimageshare.legacy.controller;
+package com.demo.webapp.controller;
 
 import javax.validation.Valid;
 
-import com.dimageshare.legacy.dto.UserRegistrationDto;
-import com.dimageshare.legacy.service.UserService;
+import com.demo.webapp.dto.UserRegistrationDto;
+import com.demo.webapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.dimageshare.legacy.entity.User;
+import com.demo.webapp.entity.User;
 
 /**
  * @author bac-ta

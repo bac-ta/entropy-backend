@@ -1,4 +1,4 @@
-package com.dimageshare.legacy;
+package com.demo.webapp;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

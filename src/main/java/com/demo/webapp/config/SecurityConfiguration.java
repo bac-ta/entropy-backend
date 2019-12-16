@@ -1,6 +1,6 @@
-package com.dimageshare.legacy.config;
+package com.demo.webapp.config;
 
-import com.dimageshare.legacy.service.UserService;
+import com.demo.webapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

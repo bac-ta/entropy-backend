@@ -1,6 +1,6 @@
-package com.dimageshare.legacy.repository;
+package com.demo.webapp.repository;
 
-import com.dimageshare.legacy.entity.User;
+import com.demo.webapp.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

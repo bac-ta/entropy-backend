@@ -1,4 +1,4 @@
-package com.dimageshare.legacy.anonation;
+package com.demo.webapp.anonation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

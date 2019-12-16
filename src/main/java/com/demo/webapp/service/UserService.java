@@ -1,9 +1,9 @@
-package com.dimageshare.legacy.service;
+package com.demo.webapp.service;
 
-import com.dimageshare.legacy.dto.UserRegistrationDto;
-import com.dimageshare.legacy.entity.Role;
-import com.dimageshare.legacy.entity.User;
-import com.dimageshare.legacy.repository.UserRepository;
+import com.demo.webapp.repository.UserRepository;
+import com.demo.webapp.dto.UserRegistrationDto;
+import com.demo.webapp.entity.Role;
+import com.demo.webapp.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
