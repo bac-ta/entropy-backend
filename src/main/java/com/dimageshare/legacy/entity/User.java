@@ -3,6 +3,7 @@ package com.dimageshare.legacy.entity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -15,6 +16,7 @@ import java.util.Collection;
 @Data
 @AllArgsConstructor
 @Builder
+@NoArgsConstructor
 public class User {
 
     @Id
