@@ -16,6 +16,7 @@ import javax.persistence.Id;
 /**
  * @author bac-ta
  */
+
 @Entity
 @Data
 @AllArgsConstructor

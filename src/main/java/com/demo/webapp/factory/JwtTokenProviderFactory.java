@@ -1,11 +1,14 @@
-package com.demo.webapp.security.jwt;
+package com.demo.webapp.factory;
 
 import org.springframework.security.core.Authentication;
 
-public interface JwtTokenProviderService {
+/**
+ * @author bac-ta
+ */
+public interface JwtTokenProviderFactory {
     String generateToken(Authentication authentication);
 
-    String getUserIdFromJWT(String token);
+    Long getUserIdFromJWT(String token);
 
     boolean validateToken(String authToken);
 }

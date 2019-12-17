@@ -1,6 +1,7 @@
 package com.demo.webapp.security.jwt;
 
 import com.demo.webapp.constant.ExceptionMessage;
+import com.demo.webapp.factory.JwtTokenProviderFactory;
 import com.google.gson.Gson;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -16,7 +17,7 @@ import org.springframework.security.core.Authentication;
 
 import java.util.Date;
 
-public class AccountJwtTokenProvider implements JwtTokenProviderService {
+public class AccountJwtTokenProvider implements JwtTokenProviderFactory {
 
     private static final Logger logger = LoggerFactory.getLogger(AccountJwtTokenProvider.class);
     @Value("${admin.security.jwt.client-secret-key}")
@@ -35,9 +36,9 @@ public class AccountJwtTokenProvider implements JwtTokenProviderService {
     }
 
     @Override
-    public String getUserIdFromJWT(String token) {
+    public Long getUserIdFromJWT(String token) {
         Claims claims = Jwts.parser().setSigningKey(clientSecrectKey).parseClaimsJws(token).getBody();
-        return claims.getSubject();
+        return Long.valueOf(claims.getSubject());
     }
 
     @Override

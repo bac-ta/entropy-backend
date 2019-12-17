@@ -5,6 +5,9 @@ import lombok.Getter;
 
 import java.util.Arrays;
 
+/**
+ * @author bac-ta
+ */
 public enum UserType {
     NORMAL(0, "NORMAL"),
     GUEST(1, "GUEST"),
