@@ -1,5 +1,6 @@
 package com.demo.webapp.security.config;
 
+import com.demo.webapp.service.AuthenticationService;
 import com.demo.webapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,11 +18,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private UserService userService;
+    private AuthenticationService authService;
 
     @Autowired
     public SecurityConfiguration(UserService userService) {
-        this.userService = userService;
+        this.authService = authService;
     }
 
     @Override
@@ -56,7 +57,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
-        auth.setUserDetailsService(userService);
+        auth.setUserDetailsService(authService);
         auth.setPasswordEncoder(passwordEncoder());
         return auth;
     }
