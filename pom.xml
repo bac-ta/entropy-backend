@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.demo.webapp</groupId>
-    <artifactId>legacy</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>legacy-backend</artifactId>
+    <version>0.0.1</version>
     <packaging>war</packaging>
 
-    <name>legacy</name>
-    <description>Legacy project</description>
+    <name>legacy-backend</name>
+    <description>Legacy backend project</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
