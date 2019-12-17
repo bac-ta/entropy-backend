@@ -8,9 +8,10 @@ import java.util.Optional;
 
 /**
  * @author bac-ta
- * */
+ */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    User findByEmail(String email);
+    User findByEmailOrUserName(String email, String username);
+
     Optional<User> findById(Long id);
 }

@@ -1,5 +1,6 @@
 package com.demo.webapp.entity;
 
+import com.demo.webapp.entity.base.Base;
 import com.demo.webapp.enumeration.UserType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +22,7 @@ import javax.persistence.Id;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Role {
+public class Role extends Base {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column

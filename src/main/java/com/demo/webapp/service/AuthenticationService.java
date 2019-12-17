@@ -25,8 +25,8 @@ public class AuthenticationService implements UserDetailsService {
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email);
+    public UserDetails loadUserByUsername(String emailOrUsername) throws UsernameNotFoundException {
+        User user = userRepository.findByEmailOrUserName(emailOrUsername, emailOrUsername);
         return AccountPrincipal.create(user);
     }
 
