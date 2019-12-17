@@ -1,4 +1,4 @@
-package com.demo.webapp.config;
+package com.demo.webapp.security.config;
 
 import com.demo.webapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

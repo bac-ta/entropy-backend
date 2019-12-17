@@ -1,10 +1,11 @@
-package com.demo.webapp.dto;
+package com.demo.webapp.rest.request;
 
 import com.demo.webapp.anonation.FieldMatch;
 import com.demo.webapp.constant.APIMessage;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;
@@ -20,7 +21,8 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 @Data
 @Builder
-public class UserRegistrationDto {
+@NoArgsConstructor
+public class UserRegistrationReq {
 
     @NotEmpty
     private String firstName;
@@ -44,9 +46,5 @@ public class UserRegistrationDto {
 
     @AssertTrue
     private Boolean terms;
-
-    public UserRegistrationDto() {
-        super();
-    }
 
 }
