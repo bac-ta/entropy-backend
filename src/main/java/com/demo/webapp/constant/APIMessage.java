@@ -10,4 +10,9 @@ public class APIMessage {
     public static final String CONFIRM_EMAIL_NOT_BLANK = "Confirm email must not blank";
     public static final String CONFIRM_PASSWORD_NOT_BLANK = "Confirm password must not blank";
     public static final String USER_TYPE_NOT_BLANK = "User type must not blank";
+    public static String RESOURCE_NOT_FOUND = "%s not found with %s : '%s'";
+
+    public static String LOGIN_SUCCESSFUL = "Login success full";
+    public static String ENDTRY_POINT_UNAUTHORIZED = "Responding with unauthorized error. Message - {}";
+
 }

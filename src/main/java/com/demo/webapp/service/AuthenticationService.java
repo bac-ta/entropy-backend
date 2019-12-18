@@ -1,38 +1,41 @@
 package com.demo.webapp.service;
 
-import com.demo.webapp.entity.User;
-import com.demo.webapp.repository.UserRepository;
-import com.demo.webapp.security.jwt.AccountPrincipal;
-import com.demo.webapp.util.ResourceNotFoundExceptionHandler;
+import com.demo.webapp.constant.APIMessage;
+import com.demo.webapp.factory.JwtTokenProviderFactory;
+import com.demo.webapp.rest.request.LoginInfoReq;
+import com.demo.webapp.rest.response.LoginInfoResp;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-/**
- * @author bac-ta
- */
 @Service
-public class AuthenticationService implements UserDetailsService {
-    private UserRepository userRepository;
+public class AuthenticationService {
+    private JwtTokenProviderFactory jwtFactory;
+    private AuthenticationManager authManager;
 
     @Autowired
-    public AuthenticationService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public AuthenticationService(JwtTokenProviderFactory jwtFactory, AuthenticationManager authManager) {
+        this.jwtFactory = jwtFactory;
+        this.authManager = authManager;
     }
 
-    @Override
-    @Transactional
-    public UserDetails loadUserByUsername(String emailOrUsername) throws UsernameNotFoundException {
-        User user = userRepository.findByEmailOrUserName(emailOrUsername, emailOrUsername);
-        return AccountPrincipal.create(user);
+    public LoginInfoResp login(LoginInfoReq req) {
+        String emailOrUsername = req.getEmailOrUsername();
+        String password = req.getPassword();
+
+        Authentication authentication = authManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        emailOrUsername,
+                        password
+                )
+        );
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = jwtFactory.generateToken(authentication);
+        return new LoginInfoResp(APIMessage.LOGIN_SUCCESSFUL, jwt);
     }
 
-    @Transactional
-    public UserDetails loadById(Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundExceptionHandler("Account", "id", id));
-        return AccountPrincipal.create(user);
-    }
 }

@@ -9,6 +9,9 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.Column;
 import java.util.Date;
 
+/**
+ * @author bac-ta
+ */
 @Data
 public class Base {
     @Column

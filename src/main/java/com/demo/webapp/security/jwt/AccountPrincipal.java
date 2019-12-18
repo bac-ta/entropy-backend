@@ -18,12 +18,13 @@ import java.util.stream.Collectors;
 public class AccountPrincipal implements UserDetails {
     private Long id;
     private String email;
+    private String username;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
 
     public static AccountPrincipal create(User user) {
         Set<GrantedAuthority> authorities = user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getUserType().name())).collect(Collectors.toSet());
-        return new AccountPrincipal(user.getId(), user.getEmail(), user.getPassword(), authorities);
+        return new AccountPrincipal(user.getId(), user.getEmail(), user.getUserName(), user.getPassword(), authorities);
     }
 
     @Override

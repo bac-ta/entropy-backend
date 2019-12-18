@@ -14,15 +14,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
+@Component
+public class JwtTokenProvider implements JwtTokenProviderFactory {
 
-public class AccountJwtTokenProvider implements JwtTokenProviderFactory {
-
-    private static final Logger logger = LoggerFactory.getLogger(AccountJwtTokenProvider.class);
-    @Value("${admin.security.jwt.client-secret-key}")
+    private static final Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
+    @Value("${app.auth.tokenSecret}")
     private String clientSecrectKey;
-    @Value("${admin.security.jwt.expirationInMs}")
+    @Value("${app.auth.tokenExpirationMsec}")
     private int expirationInMs;
 
     @Override

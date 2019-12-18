@@ -10,9 +10,9 @@ import javax.validation.constraints.NotBlank;
 @Data
 @AllArgsConstructor
 public class LoginInfoReq {
-    @JsonProperty(required = true)
+    @JsonProperty(value = "email_or_username", required = true)
     @NotBlank(message = APIMessage.EMAIL_NOT_BLANK)
-    private String email;
+    private String emailOrUsername;
     @JsonProperty(required = true)
     @NotBlank(message = APIMessage.PASSWORD_NOT_BLANK)
     private String password;

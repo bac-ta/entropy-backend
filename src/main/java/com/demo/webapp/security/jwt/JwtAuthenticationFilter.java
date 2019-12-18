@@ -1,6 +1,7 @@
 package com.demo.webapp.security.jwt;
 
-import com.demo.webapp.service.AuthenticationService;
+import com.demo.webapp.service.UserDetailsServiceImpl;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,12 +16,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class AccountJwtAuthenticationFilter extends OncePerRequestFilter {
-    private AccountJwtTokenProvider tokenProvider;
-    private AuthenticationService authService;
+@NoArgsConstructor
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
+    private JwtTokenProvider tokenProvider;
+    private UserDetailsServiceImpl authService;
 
     @Autowired
-    public AccountJwtAuthenticationFilter(AccountJwtTokenProvider tokenProvider, AuthenticationService authService) {
+    public JwtAuthenticationFilter(JwtTokenProvider tokenProvider, UserDetailsServiceImpl authService) {
         this.tokenProvider = tokenProvider;
         this.authService = authService;
     }

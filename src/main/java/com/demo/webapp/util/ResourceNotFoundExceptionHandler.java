@@ -1,5 +1,6 @@
 package com.demo.webapp.util;
 
+import com.demo.webapp.constant.APIMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -10,7 +11,7 @@ public class ResourceNotFoundExceptionHandler extends RuntimeException {
     private Object fieldValue;
 
     public ResourceNotFoundExceptionHandler(String resourceName, String fieldName, Object fieldValue) {
-        super(String.format("%s not found with %s : '%s'", resourceName, fieldName, fieldValue));
+        super(String.format(APIMessage.RESOURCE_NOT_FOUND, resourceName, fieldName, fieldValue));
         this.resourceName = resourceName;
         this.fieldName = fieldName;
         this.fieldValue = fieldValue;
