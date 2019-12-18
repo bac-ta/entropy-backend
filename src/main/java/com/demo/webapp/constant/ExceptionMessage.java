@@ -5,5 +5,4 @@ public class ExceptionMessage {
     public static final String INVALID_JWT_TOKEN = "Invalid jwt token";
     public static final String EXPIRED_JWT_TOKEN = "Out of expired jwt token";
     public static final String UNSUPPORT_JWT_TOKEN = "Unsupport jwt token";
-    public static final String JWT_CLAIMS_EMPTY = "JWT claims string is empty";
 }

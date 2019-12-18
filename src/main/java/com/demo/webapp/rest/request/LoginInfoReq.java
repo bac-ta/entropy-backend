@@ -1,5 +1,6 @@
 package com.demo.webapp.rest.request;
 
+import com.demo.webapp.anonation.PasswordVerifier;
 import com.demo.webapp.constant.APIMessage;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -15,5 +16,6 @@ public class LoginInfoReq {
     private String emailOrUsername;
     @JsonProperty(required = true)
     @NotBlank(message = APIMessage.PASSWORD_NOT_BLANK)
+    @PasswordVerifier
     private String password;
 }
