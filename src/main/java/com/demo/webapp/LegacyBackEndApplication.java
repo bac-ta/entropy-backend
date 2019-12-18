@@ -8,10 +8,10 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
  * @author bac-ta
  */
 @SpringBootApplication
-public class LegacyApplication extends SpringBootServletInitializer {
+public class LegacyBackEndApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
-        SpringApplication.run(LegacyApplication.class, args);
+        SpringApplication.run(LegacyBackEndApplication.class, args);
     }
 }
 
