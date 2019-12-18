@@ -2,7 +2,6 @@ package com.demo.webapp.security.jwt;
 
 import com.demo.webapp.constant.ExceptionMessage;
 import com.demo.webapp.factory.JwtTokenProviderFactory;
-import com.google.gson.Gson;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -17,6 +16,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 @Component
 public class JwtTokenProvider implements JwtTokenProviderFactory {
 
@@ -31,8 +33,13 @@ public class JwtTokenProvider implements JwtTokenProviderFactory {
         AccountPrincipal principal = (AccountPrincipal) authentication.getPrincipal();
         Date dateNow = new Date();
         Date expiryDate = new Date(dateNow.getTime() + expirationInMs);
-        String payload = new Gson().toJson(principal);
-        return Jwts.builder().setSubject(principal.getId().toString()).setPayload(payload).setIssuedAt(dateNow).
+
+        Map<String, Object> claimMap = new HashMap<>();
+        claimMap.put("username", principal.getUsername());
+        claimMap.put("email", principal.getEmail());
+        claimMap.put("authorities", principal.getAuthorities());
+
+        return Jwts.builder().setId(Long.toString(principal.getId())).setClaims(claimMap).setIssuedAt(dateNow).
                 setExpiration(expiryDate).signWith(SignatureAlgorithm.HS512, clientSecrectKey).compact();
     }
 

@@ -1,6 +1,7 @@
 package com.demo.webapp.rest.request;
 
 import com.demo.webapp.anonation.FieldMatch;
+import com.demo.webapp.anonation.PasswordVerifier;
 import com.demo.webapp.constant.APIMessage;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 /**
@@ -43,6 +45,7 @@ public class UserRegistrationReq {
 
     @NotBlank(message = APIMessage.PASSWORD_NOT_BLANK)
     @JsonProperty(required = true)
+    @PasswordVerifier
     private String password;
 
     @NotBlank(message = APIMessage.CONFIRM_PASSWORD_NOT_BLANK)
@@ -56,17 +59,17 @@ public class UserRegistrationReq {
 
     @Email
     @NotBlank(message = APIMessage.CONFIRM_EMAIL_NOT_BLANK)
-    @JsonProperty(required = true)
+    @JsonProperty(value = "confirm_email", required = true)
     private String confirmEmail;
 
-    @JsonProperty(required = true)
+    @JsonProperty(value = "user_name", required = true)
     @NotBlank(message = APIMessage.USER_NAME_NOT_BLANK)
     private String username;
 
     @JsonProperty(value = "gender_type", defaultValue = "0")
     private Integer genderType;
 
-    @NotBlank(message = APIMessage.USER_TYPE_NOT_BLANK)
+    @NotEmpty(message = APIMessage.USER_TYPE_NOT_EMPTY)
     @JsonProperty(value = "user_types", required = true)
     private List<Integer> userTypes;
 }

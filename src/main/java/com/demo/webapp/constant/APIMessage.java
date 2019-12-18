@@ -9,7 +9,7 @@ public class APIMessage {
     public static final String LAST_NAME_NOT_BLANK = "Last name must not blank";
     public static final String CONFIRM_EMAIL_NOT_BLANK = "Confirm email must not blank";
     public static final String CONFIRM_PASSWORD_NOT_BLANK = "Confirm password must not blank";
-    public static final String USER_TYPE_NOT_BLANK = "User type must not blank";
+    public static final String USER_TYPE_NOT_EMPTY = "User type must not empty";
     public static final String USER_NAME_NOT_BLANK = "User name must not blank";
 
     public static String RESOURCE_NOT_FOUND = "%s not found with %s : '%s'";

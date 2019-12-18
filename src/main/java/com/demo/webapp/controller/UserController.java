@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+import java.text.ParseException;
+
 @RestController
 @RequestMapping(APIEndpointBase.USER_ENDPOINT_BASE)
 public class UserController {
@@ -23,7 +26,7 @@ public class UserController {
     }
 
     @PostMapping("/regist")
-    public ResponseEntity<UserRegistrationResp> registUser(@RequestBody UserRegistrationReq req) {
+    public ResponseEntity<UserRegistrationResp> registUser(@Valid @RequestBody UserRegistrationReq req) throws ParseException {
         UserRegistrationResp resp = userService.regist(req);
         return new ResponseEntity<>(resp, HttpStatus.OK);
     }

@@ -29,7 +29,7 @@ import java.util.Date;
  */
 
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"email", "username"}))
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"email", "user_name"}))
 @Data
 @AllArgsConstructor
 @Builder
@@ -39,9 +39,9 @@ public class User extends Base {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "firstname")
+    @Column(name = "first_name")
     private String firstName;
-    @Column(name = "lastname")
+    @Column(name = "last_name")
     private String lastName;
     @Column
     private String email;
@@ -52,7 +52,7 @@ public class User extends Base {
     @Column(name = "gender_type")
     @Enumerated(value = EnumType.STRING)
     private GenderType genderType;
-    @Column(name = "username")
+    @Column(name = "user_name")
     private String userName;
     @Column
     private String password;
