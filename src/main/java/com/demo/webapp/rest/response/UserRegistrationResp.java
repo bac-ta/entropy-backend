@@ -14,5 +14,4 @@ import org.springframework.http.HttpStatus;
 public class UserRegistrationResp {
     private Long id;
     private String message;
-    private HttpStatus status;
 }

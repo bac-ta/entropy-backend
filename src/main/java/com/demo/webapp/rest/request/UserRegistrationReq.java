@@ -2,6 +2,7 @@ package com.demo.webapp.rest.request;
 
 import com.demo.webapp.anonation.FieldMatch;
 import com.demo.webapp.constant.APIMessage;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,6 +38,7 @@ public class UserRegistrationReq {
     private String phoneNumber;
 
     @JsonProperty(value = "date_of_birth")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private String dateOfBirth;
 
     @NotBlank(message = APIMessage.PASSWORD_NOT_BLANK)
@@ -57,9 +59,14 @@ public class UserRegistrationReq {
     @JsonProperty(required = true)
     private String confirmEmail;
 
+    @JsonProperty(required = true)
+    @NotBlank(message = APIMessage.USER_NAME_NOT_BLANK)
+    private String username;
+
+    @JsonProperty(value = "gender_type", defaultValue = "0")
+    private Integer genderType;
+
     @NotBlank(message = APIMessage.USER_TYPE_NOT_BLANK)
     @JsonProperty(value = "user_types", required = true)
     private List<Integer> userTypes;
-
-
 }
