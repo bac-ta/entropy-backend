@@ -1,5 +1,8 @@
 package com.demo.webapp.constant;
 
+/**
+ * @author bac-ta
+ */
 public class APIMessage {
     public static final String PASSWORD_NOT_MATCH = "Password and confirm password not match";
     public static final String EMAIL_NOT_MATCH = "Email and confirm email not match";

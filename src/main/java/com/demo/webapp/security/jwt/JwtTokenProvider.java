@@ -19,6 +19,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author bac-ta
+ */
 @Component
 public class JwtTokenProvider implements JwtTokenProviderFactory {
 

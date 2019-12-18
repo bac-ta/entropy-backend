@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.text.ParseException;
 
+/**
+ * @author bac-ta
+ */
 @RestController
 @RequestMapping(APIEndpointBase.USER_ENDPOINT_BASE)
 public class UserController {

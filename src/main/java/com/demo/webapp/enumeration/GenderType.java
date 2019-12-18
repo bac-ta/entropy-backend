@@ -4,6 +4,9 @@ import lombok.Getter;
 
 import java.util.Arrays;
 
+/**
+ * @author bac-ta
+ */
 public enum GenderType {
     MALE(0, "MALE"),
     FEMALE(1, "FEMALE"),

@@ -1,5 +1,8 @@
 package com.demo.webapp.constant;
 
+/**
+ * @author bac-ta
+ */
 public class ExceptionMessage {
     public static final String INVALID_JWT_SIGNATURE = "Invalid jwt signature";
     public static final String INVALID_JWT_TOKEN = "Invalid jwt token";

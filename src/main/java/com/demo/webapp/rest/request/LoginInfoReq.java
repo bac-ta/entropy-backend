@@ -8,6 +8,9 @@ import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 
+/**
+ * @author bac-ta
+ */
 @Data
 @AllArgsConstructor
 public class LoginInfoReq {

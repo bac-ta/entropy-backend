@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+/**
+ * @author bac-ta
+ */
 @Data
 @AllArgsConstructor
 public class LoginInfoResp {
