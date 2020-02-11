@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class LegacyBackEndApplicationTests {
+public class EntropyBackEndApplicationTests {
 
     @Test
     public void contextLoads() {
