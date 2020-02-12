@@ -6,4 +6,5 @@ package com.entropy.backend.constant;
 public class APIEndpointBase {
     public static final String AUTH_ENDPOINT_BASE = "/auth";
     public static final String USER_ENDPOINT_BASE = "/user";
+    public static final String POST_ENDPOINT_BASE = "/post";
 }
