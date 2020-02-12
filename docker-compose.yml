@@ -5,8 +5,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    expose:
+      - "8080"
     ports:
-      - "9394:9394"
+      - "8080:8080"
     restart: always
     depends_on:
       - db # This service depends on mysql. Start that first.
