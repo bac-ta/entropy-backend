@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 public class AccountPrincipal implements UserDetails {
     private Long id;
     private String email;
-    private String username;
+    private String userName;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
 
@@ -32,7 +32,7 @@ public class AccountPrincipal implements UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return userName;
     }
 
     @Override

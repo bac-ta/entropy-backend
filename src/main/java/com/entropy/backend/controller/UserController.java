@@ -1,6 +1,7 @@
 package com.entropy.backend.controller;
 
 import com.entropy.backend.constant.APIEndpointBase;
+import com.entropy.backend.constant.APIMessage;
 import com.entropy.backend.rest.request.UserRegistrationReq;
 import com.entropy.backend.rest.response.UserRegistrationResp;
 import com.entropy.backend.service.UserService;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.text.ParseException;
 
 /**
  * @author bac-ta
@@ -29,8 +29,12 @@ public class UserController {
     }
 
     @PostMapping("/regist")
-    public ResponseEntity<UserRegistrationResp> registUser(@Valid @RequestBody UserRegistrationReq req) throws ParseException {
-        UserRegistrationResp resp = userService.regist(req);
-        return new ResponseEntity<>(resp, HttpStatus.OK);
+    public ResponseEntity<UserRegistrationResp> registUser(@Valid @RequestBody UserRegistrationReq req) {
+        try {
+            UserRegistrationResp resp = userService.regist(req);
+            return new ResponseEntity<>(resp, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new UserRegistrationResp(null, APIMessage.REGIST_USER_FAIL), HttpStatus.BAD_REQUEST);
+        }
     }
 }

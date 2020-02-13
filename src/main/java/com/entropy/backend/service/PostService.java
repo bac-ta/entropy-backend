@@ -24,6 +24,6 @@ public class PostService {
 
     public List<Post> findPosts(int start, int limit) {
         Pageable pageable = PageRequest.of(start, limit, Sort.by(Sort.Direction.DESC, "created"));
-        return repository.findPosts(pageable);
+        return (List<Post>) repository.findAll(pageable);
     }
 }

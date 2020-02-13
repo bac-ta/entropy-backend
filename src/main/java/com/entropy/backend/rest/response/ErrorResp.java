@@ -1,19 +1,16 @@
 package com.entropy.backend.rest.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 
-import javax.validation.constraints.NotBlank;
-
-/**
- * @author bac-ta
- */
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserRegistrationResp {
-    private Long id;
+@Data
+public class ErrorResp {
+    @JsonProperty("http_status")
+    private HttpStatus httpStatus;
     private String message;
 }
