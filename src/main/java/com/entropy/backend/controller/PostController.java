@@ -1,6 +1,7 @@
 package com.entropy.backend.controller;
 
 import com.entropy.backend.constant.APIEndpointBase;
+import com.entropy.backend.constant.APIMessage;
 import com.entropy.backend.entity.Post;
 import com.entropy.backend.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author bac-ta
@@ -31,6 +33,14 @@ public class PostController {
     public ResponseEntity<List<Post>> findPosts(@RequestParam("start") int start, @RequestParam("limit") int limit) {
         List<Post> posts = service.findPosts(start, limit);
         return new ResponseEntity<>(posts, HttpStatus.OK);
+    }
+
+    @GetMapping("/post")
+    public ResponseEntity<Object> findPostById(@RequestParam("id") int id) {
+        Optional<Post> optionalPost = service.findById(id);
+        if (optionalPost.isPresent())
+            return new ResponseEntity<>(optionalPost.get(), HttpStatus.OK);
+        return new ResponseEntity<>(new Error(APIMessage.POST_ID_INVALID), HttpStatus.BAD_REQUEST);
     }
 
 }

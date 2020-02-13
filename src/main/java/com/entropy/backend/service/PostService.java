@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author bac-ta
@@ -25,5 +26,10 @@ public class PostService {
     public List<Post> findPosts(int start, int limit) {
         Pageable pageable = PageRequest.of(start, limit, Sort.by(Sort.Direction.DESC, "created"));
         return (List<Post>) repository.findAll(pageable);
+    }
+
+    public Optional<Post> findById(int id) {
+        Optional<Post> optionalPost = repository.findById(id);
+        return optionalPost;
     }
 }

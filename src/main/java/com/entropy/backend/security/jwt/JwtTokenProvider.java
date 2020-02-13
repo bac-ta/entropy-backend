@@ -41,6 +41,7 @@ public class JwtTokenProvider implements JwtTokenProviderFactory {
         claimMap.put("username", principal.getUsername());
         claimMap.put("email", principal.getEmail());
         claimMap.put("authorities", principal.getAuthorities());
+        claimMap.put("id", principal.getId());
 
         return Jwts.builder().setId(Long.toString(principal.getId())).setClaims(claimMap).setIssuedAt(dateNow).
                 setExpiration(expiryDate).signWith(SignatureAlgorithm.HS512, clientSecrectKey).compact();

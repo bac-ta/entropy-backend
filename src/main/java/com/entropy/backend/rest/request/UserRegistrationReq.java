@@ -12,8 +12,6 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import java.util.List;
 
 /**
  * @author bac-ta
@@ -66,10 +64,6 @@ public class UserRegistrationReq {
     @NotBlank(message = APIMessage.USER_NAME_NOT_BLANK)
     private String username;
 
-    @JsonProperty(value = "gender_type", defaultValue = "0")
+    @JsonProperty(value = "gender_type", required = true)
     private Integer genderType;
-
-    @NotEmpty(message = APIMessage.USER_TYPE_NOT_EMPTY)
-    @JsonProperty(value = "user_types", required = true)
-    private List<Integer> userTypes;
 }

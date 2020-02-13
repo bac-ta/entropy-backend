@@ -15,10 +15,15 @@ public class APIMessage {
     public static final String USER_TYPE_NOT_EMPTY = "User type must not empty";
     public static final String USER_NAME_NOT_BLANK = "User name must not blank";
 
+    //Authenticate
     public static String RESOURCE_NOT_FOUND = "%s not found with %s : '%s'";
     public static String LOGIN_SUCCESSFUL = "Login successful";
     public static String ENDTRY_POINT_UNAUTHORIZED = "Responding with unauthorized error. Message - {}";
+
+    //User
     public static String REGIST_USER_SUCCESSFUL = "Regist user succesful";
     public static String REGIST_USER_FAIL = "Regist user fail";
 
+    //Post
+    public static String POST_ID_INVALID = "Post id not valid";
 }
