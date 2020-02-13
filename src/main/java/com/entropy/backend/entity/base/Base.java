@@ -7,12 +7,14 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 import java.util.Date;
 
 /**
  * @author bac-ta
  */
 @Data
+@MappedSuperclass
 public class Base {
     @Column
     @CreatedDate

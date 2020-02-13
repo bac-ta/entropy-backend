@@ -17,7 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
-import java.util.stream.Collectors;
+import java.util.Collections;
 
 /**
  * @author bac-ta
@@ -45,7 +45,7 @@ public class UserService {
                 .phoneNumber(registration.getPhoneNumber())
                 .genderType(GenderType.findByValue(registration.getGenderType()))
                 .dateOfBirth(new SimpleDateFormat(FormatString.DATE_OF_BIRTH_FORMAT).parse(registration.getDateOfBirth()))
-                .roles(registration.getUserTypes().stream().map(type -> new Role(UserType.findByValue(type))).collect(Collectors.toSet())).build();
+                .roles(Collections.singletonList(new Role(UserType.NORMAL))).build();
         User userSave = userRepository.save(user);
         Long id = userSave.getId();
         return new UserRegistrationResp(id, APIMessage.REGIST_USER_SUCCESSFUL);
