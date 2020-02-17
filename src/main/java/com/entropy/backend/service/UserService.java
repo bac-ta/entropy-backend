@@ -48,6 +48,7 @@ public class UserService {
                 .roles(Collections.singletonList(new Role(UserType.NORMAL))).build();
         User userSave = userRepository.save(user);
         Long id = userSave.getId();
+        logger.info("User id: " + id);
         return new UserRegistrationResp(id, APIMessage.REGIST_USER_SUCCESSFUL);
     }
 }

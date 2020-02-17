@@ -16,6 +16,14 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
 
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: dc5f322981574f18b6aa
+            client-secret: 5cffe0d9fcec3c4244df39a10ff7e8f62b7a6532
+
 server:
   servlet:
     context-path: /api
