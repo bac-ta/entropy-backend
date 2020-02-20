@@ -24,7 +24,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 public class Role extends Base {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Long id;
     @Enumerated(value = EnumType.STRING)
