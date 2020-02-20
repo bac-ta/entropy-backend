@@ -1,7 +1,9 @@
 package com.entropy.backend.service;
 
 import com.entropy.backend.entity.Post;
+import com.entropy.backend.enumeration.CategoryType;
 import com.entropy.backend.repository.PostRepository;
+import com.entropy.backend.rest.request.PostCreateReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -31,5 +33,21 @@ public class PostService {
     public Optional<Post> findById(int id) {
         Optional<Post> optionalPost = repository.findById(id);
         return optionalPost;
+    }
+
+    public Post createPost(PostCreateReq postReq) {
+        String title = postReq.getTitle();
+        String content = postReq.getContent();
+        String author = postReq.getAuthor();
+        Integer categoryTypeInt = postReq.getCategoryType();
+        CategoryType categoryType = CategoryType.findByValue(categoryTypeInt);
+        Post post = new Post();
+        post.setTitle(title);
+        post.setContent(content);
+        post.setCategoryType(categoryType);
+        post.setAuthor(author);
+
+        Post postCreated = repository.save(post);
+        return postCreated;
     }
 }

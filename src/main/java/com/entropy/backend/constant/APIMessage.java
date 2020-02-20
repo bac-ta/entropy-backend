@@ -26,4 +26,6 @@ public class APIMessage {
 
     //Post
     public static String POST_ID_INVALID = "Post id not valid";
+    public static String CREATE_POST_FAIL = "Create post fail";
+    public static String CREATE_POST_SUCCESSFUL = "Create post successful";
 }
