@@ -17,8 +17,7 @@ import javax.validation.constraints.NotBlank;
  * @author bac-ta
  */
 @FieldMatch.List({
-        @FieldMatch(first = "password", second = "confirmPassword", message = APIMessage.PASSWORD_NOT_MATCH),
-        @FieldMatch(first = "email", second = "confirmEmail", message = APIMessage.EMAIL_NOT_MATCH)
+        @FieldMatch(first = "password", second = "repeatPassword", message = APIMessage.PASSWORD_NOT_MATCH)
 })
 @AllArgsConstructor
 @Data
@@ -46,19 +45,14 @@ public class UserRegistrationReq {
     @PasswordVerifier
     private String password;
 
-    @NotBlank(message = APIMessage.CONFIRM_PASSWORD_NOT_BLANK)
-    @JsonProperty(value = "confirm_password", required = true)
-    private String confirmPassword;
+    @NotBlank(message = APIMessage.REPEAT_PASSWORD_NOT_BLANK)
+    @JsonProperty(value = "repeat_password", required = true)
+    private String repeatPassword;
 
     @Email
     @NotBlank(message = APIMessage.EMAIL_NOT_BLANK)
     @JsonProperty(required = true)
     private String email;
-
-    @Email
-    @NotBlank(message = APIMessage.CONFIRM_EMAIL_NOT_BLANK)
-    @JsonProperty(value = "confirm_email", required = true)
-    private String confirmEmail;
 
     @JsonProperty(value = "user_name", required = true)
     @NotBlank(message = APIMessage.USER_NAME_NOT_BLANK)
