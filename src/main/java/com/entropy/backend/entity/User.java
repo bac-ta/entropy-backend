@@ -1,7 +1,9 @@
 package com.entropy.backend.entity;
 
 import com.entropy.backend.entity.base.Base;
+import com.entropy.backend.enumeration.ApproveType;
 import com.entropy.backend.enumeration.GenderType;
+import com.entropy.backend.enumeration.StatusType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -49,13 +51,19 @@ public class User extends Base {
     private String phoneNumber;
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
-    @Column(name = "gender_type")
+    @Column(name = "gender_type", columnDefinition = "varchar(45) default 'MALE'")
     @Enumerated(value = EnumType.STRING)
     private GenderType genderType;
     @Column(name = "user_name")
     private String userName;
     @Column
     private String password;
+    @Column(name = "status_type", columnDefinition = "varchar(45) default 'ON'")
+    @Enumerated(value = EnumType.STRING)
+    private StatusType statusType;
+    @Column(name = "approve_type", columnDefinition = "varchar(45) default 'WAITTING'")
+    @Enumerated(value = EnumType.STRING)
+    private ApproveType approveType;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
