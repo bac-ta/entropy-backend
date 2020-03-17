@@ -3,7 +3,7 @@ package com.entropy.backend.security.config;
 import com.entropy.backend.enumeration.UserType;
 import com.entropy.backend.security.entrypoint.JwtAuthenticationEntryPoint;
 import com.entropy.backend.security.jwt.JwtAuthenticationFilter;
-import com.entropy.backend.service.UserDetailsServiceImpl;
+import com.entropy.backend.service.UserDetailsImplService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,11 +30,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 )
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private UserDetailsServiceImpl userDetailsService;
+    private UserDetailsImplService userDetailsService;
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     @Autowired
-    public SecurityConfiguration(UserDetailsServiceImpl userDetailsService, JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint) {
+    public SecurityConfiguration(UserDetailsImplService userDetailsService, JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint) {
         this.userDetailsService = userDetailsService;
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
     }

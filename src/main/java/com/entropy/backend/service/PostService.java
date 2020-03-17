@@ -3,7 +3,7 @@ package com.entropy.backend.service;
 import com.entropy.backend.entity.Post;
 import com.entropy.backend.enumeration.CategoryType;
 import com.entropy.backend.repository.PostRepository;
-import com.entropy.backend.rest.request.PostCreateReq;
+import com.entropy.backend.rest.request.post.PostCreateReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

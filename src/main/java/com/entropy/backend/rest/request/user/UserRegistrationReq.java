@@ -1,4 +1,4 @@
-package com.entropy.backend.rest.request;
+package com.entropy.backend.rest.request.user;
 
 import com.entropy.backend.anonation.FieldMatch;
 import com.entropy.backend.anonation.PasswordVerifier;

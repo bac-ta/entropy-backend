@@ -15,11 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
  * @author bac-ta
  */
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsImplService implements UserDetailsService {
     private UserRepository userRepository;
 
     @Autowired
-    public UserDetailsServiceImpl(UserRepository userRepository) {
+    public UserDetailsImplService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

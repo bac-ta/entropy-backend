@@ -1,10 +1,11 @@
-package com.entropy.backend.rest.response;
+package com.entropy.backend.rest.response.post;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ErrorResp {
+public class PostSaveResp {
+    private Integer id;
     private String message;
 }

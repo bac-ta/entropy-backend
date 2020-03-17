@@ -1,4 +1,4 @@
-package com.entropy.backend.rest.response;
+package com.entropy.backend.rest.response.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

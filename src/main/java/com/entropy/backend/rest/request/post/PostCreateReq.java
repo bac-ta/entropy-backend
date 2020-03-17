@@ -1,4 +1,4 @@
-package com.entropy.backend.rest.request;
+package com.entropy.backend.rest.request.post;
 
 import lombok.Data;
 

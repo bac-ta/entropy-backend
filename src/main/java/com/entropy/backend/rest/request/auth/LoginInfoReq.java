@@ -1,4 +1,4 @@
-package com.entropy.backend.rest.request;
+package com.entropy.backend.rest.request.auth;
 
 import com.entropy.backend.anonation.PasswordVerifier;
 import com.entropy.backend.constant.APIMessage;

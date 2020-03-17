@@ -1,6 +1,6 @@
 package com.entropy.backend.security.jwt;
 
-import com.entropy.backend.service.UserDetailsServiceImpl;
+import com.entropy.backend.service.UserDetailsImplService;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,10 +22,10 @@ import java.io.IOException;
 @NoArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private JwtTokenProvider tokenProvider;
-    private UserDetailsServiceImpl authService;
+    private UserDetailsImplService authService;
 
     @Autowired
-    public JwtAuthenticationFilter(JwtTokenProvider tokenProvider, UserDetailsServiceImpl authService) {
+    public JwtAuthenticationFilter(JwtTokenProvider tokenProvider, UserDetailsImplService authService) {
         this.tokenProvider = tokenProvider;
         this.authService = authService;
     }
