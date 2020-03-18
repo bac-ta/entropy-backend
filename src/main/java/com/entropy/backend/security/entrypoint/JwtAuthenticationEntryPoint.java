@@ -23,8 +23,8 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest httpServletRequest,
                          HttpServletResponse httpServletResponse,
-                         AuthenticationException e) throws IOException, ServletException {
-        logger.error(APIMessage.ENDTRY_POINT_UNAUTHORIZED, e.getMessage());
-        httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, e.getMessage());
+                         AuthenticationException e) throws IOException {
+        logger.error(APIMessage.ENDTRY_POINT_UNAUTHORIZED, APIMessage.ACCOUNT_INVALID);
+        httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, APIMessage.ACCOUNT_INVALID);
     }
 }
