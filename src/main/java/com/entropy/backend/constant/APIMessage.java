@@ -17,6 +17,7 @@ public class APIMessage {
     public static String RESOURCE_NOT_FOUND = "%s not found with %s : '%s'";
     public static String LOGIN_SUCCESSFUL = "Login successful";
     public static String ENDTRY_POINT_UNAUTHORIZED = "Responding with unauthorized error. Message - {}";
+    public static String ACCOUNT_INVALID = "Account invalid, please try again !";
 
     //User
     public static String REGIST_USER_SUCCESSFUL = "Regist user succesful";
