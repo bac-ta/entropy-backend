@@ -50,7 +50,9 @@ public class UserService {
                 .phoneNumber(registration.getPhoneNumber())
                 .genderType(GenderType.findByValue(registration.getGenderType()))
                 .dateOfBirth(new SimpleDateFormat(FormatString.DATE_OF_BIRTH_FORMAT).parse(registration.getDateOfBirth()))
-                .roles(Collections.singletonList(new Role(UserType.NORMAL))).build();
+                .roles(Collections.singletonList(new Role(UserType.NORMAL)))
+                .approveType(ApproveType.WAITING)
+                .statusType(StatusType.ON).build();
         User userSave = userRepository.save(user);
         Long id = userSave.getId();
         logger.info("User id: " + id);

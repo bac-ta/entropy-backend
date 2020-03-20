@@ -85,16 +85,16 @@ CREATE TABLE `user` (
   `created_by` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `updated` datetime DEFAULT NULL,
   `updated_by` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `approve_type` varchar(45) COLLATE utf8_unicode_ci DEFAULT 'WAITTING',
+  `approve_type` varchar(45) CHARACTER SET utf8 NOT NULL DEFAULT 'WAITTING',
   `date_of_birth` datetime DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `first_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `gender_type` varchar(45) COLLATE utf8_unicode_ci DEFAULT 'MALE',
-  `last_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `phone_number` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `status_type` varchar(45) COLLATE utf8_unicode_ci DEFAULT 'ON',
-  `user_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `first_name` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `gender_type` varchar(45) CHARACTER SET utf8 NOT NULL DEFAULT 'MALE',
+  `last_name` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `phone_number` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `status_type` varchar(45) CHARACTER SET utf8 NOT NULL DEFAULT 'ON',
+  `user_name` varchar(255) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UKc9miph0xbb4t9lvb0l2je3ndx` (`email`,`user_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -144,4 +144,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-17 22:27:51
+-- Dump completed on 2020-03-20 11:42:16
