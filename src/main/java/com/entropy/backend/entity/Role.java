@@ -6,13 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * @author bac-ta
@@ -20,6 +14,7 @@ import javax.persistence.Id;
 
 @Entity
 @Data
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"user_type"}))
 @AllArgsConstructor
 @NoArgsConstructor
 public class Role extends Base {
@@ -28,7 +23,7 @@ public class Role extends Base {
     @Column
     private Long id;
     @Enumerated(value = EnumType.STRING)
-    @Column(name = "user_type")
+    @Column(name = "user_type", columnDefinition = "varchar(45)")
     private UserType userType;
 
     public Role(UserType userType) {
