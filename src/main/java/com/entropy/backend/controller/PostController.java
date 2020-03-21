@@ -29,13 +29,13 @@ public class PostController {
         this.service = service;
     }
 
-    @GetMapping("/posts")
+    @GetMapping("/getMany")
     public ResponseEntity<List<Post>> findPosts(@RequestParam("start") int start, @RequestParam("limit") int limit) {
         List<Post> posts = service.findPosts(start, limit);
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
-    @GetMapping("/post")
+    @GetMapping("/get")
     public ResponseEntity<Object> findPostById(@RequestParam("id") int id) {
         Optional<Post> optionalPost = service.findById(id);
         if (optionalPost.isPresent())
@@ -43,6 +43,7 @@ public class PostController {
         return new ResponseEntity<>(new Error(APIMessage.POST_ID_INVALID), HttpStatus.BAD_REQUEST);
     }
 
+    @PostMapping("/create")
     public ResponseEntity<Object> createPost(@Valid @RequestBody PostCreateReq postReq) {
         Post post = service.createPost(postReq);
         if (post == null)
