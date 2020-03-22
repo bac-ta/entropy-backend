@@ -29,7 +29,7 @@ public class UserDetailsImplService implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String emailOrUsername) throws UsernameNotFoundException {
-        User user = userRepository.findByEmailOrUserNameAndApproveTypeAndStatusTypeAndUserType(emailOrUsername, emailOrUsername, ApproveType.ACCEPTED.name(), StatusType.ON.name(), UserType.ADMINITRATOR.name());
+        User user = userRepository.findUser(emailOrUsername, emailOrUsername, ApproveType.ACCEPTED, StatusType.ON, UserType.ADMINITRATOR);
         return AccountPrincipal.create(user);
     }
 

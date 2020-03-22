@@ -47,10 +47,10 @@ public class User extends Base {
     private String password;
     @Column(name = "status_type", nullable = false)
     @Enumerated(value = EnumType.STRING)
-    private StatusType statusType;
+    private StatusType statusType = StatusType.ON;
     @Column(name = "approve_type", nullable = false)
     @Enumerated(value = EnumType.STRING)
-    private ApproveType approveType;
+    private ApproveType approveType = ApproveType.WAITING;
     @Column(name = "user_type", nullable = false)
     @Enumerated(value = EnumType.STRING)
     private UserType userType;

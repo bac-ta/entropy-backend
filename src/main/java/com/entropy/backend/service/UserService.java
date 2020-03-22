@@ -45,7 +45,7 @@ public class UserService {
         user.setFirstName(registration.getFirstName());
         user.setLastName(registration.getLastName());
         user.setEmail(registration.getEmail());
-        user.setPassword(registration.getPassword());
+        user.setPassword(passwordEncoder.encode(registration.getPassword()));
         user.setUserName(registration.getUsername());
         user.setPhoneNumber(registration.getPhoneNumber());
         user.setGenderType(GenderType.findByValue(registration.getGenderType()));
