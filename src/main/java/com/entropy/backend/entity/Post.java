@@ -6,12 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
@@ -23,12 +18,15 @@ public class Post extends Base {
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column
+    @Column(nullable = false)
     private String title;
-    @Column
+    @Column(nullable = false, columnDefinition = "MEDIUMTEXT")
     private String content;
-    @Column(name = "category_type")
+    @Column(name = "category_type", nullable = false)
+    @Enumerated(value = EnumType.STRING)
     private CategoryType categoryType;
     @Column
     private String author;
+    @Column(name = "user_id", nullable = false)
+    private Integer userId;
 }

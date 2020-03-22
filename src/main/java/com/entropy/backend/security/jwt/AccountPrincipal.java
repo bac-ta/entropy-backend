@@ -9,8 +9,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * @author bac-ta
@@ -26,7 +26,9 @@ public class AccountPrincipal implements UserDetails {
     private Collection<? extends GrantedAuthority> authorities;
 
     public static AccountPrincipal create(User user) {
-        Set<GrantedAuthority> authorities = user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getUserType().name())).collect(Collectors.toSet());
+        String userType = user.getUserType().name();
+        Set<GrantedAuthority> authorities = new HashSet<>();
+        authorities.add(new SimpleGrantedAuthority(userType));
         return new AccountPrincipal(user.getId(), user.getEmail(), user.getUserName(), user.getPassword(), authorities);
     }
 

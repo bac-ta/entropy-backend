@@ -2,7 +2,6 @@ package com.entropy.backend.service;
 
 import com.entropy.backend.constant.APIMessage;
 import com.entropy.backend.constant.FormatString;
-import com.entropy.backend.entity.Role;
 import com.entropy.backend.entity.User;
 import com.entropy.backend.enumeration.ApproveType;
 import com.entropy.backend.enumeration.GenderType;
@@ -20,7 +19,6 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,16 +41,17 @@ public class UserService {
     }
 
     public UserRegistrationResp regist(UserRegistrationReq registration) throws Exception {
-        User user = User.builder().firstName(registration.getFirstName()).lastName(registration.getLastName())
-                .email(registration.getEmail())
-                .password(passwordEncoder.encode(registration.getPassword()))
-                .userName(registration.getUsername())
-                .phoneNumber(registration.getPhoneNumber())
-                .genderType(GenderType.findByValue(registration.getGenderType()))
-                .dateOfBirth(new SimpleDateFormat(FormatString.DATE_OF_BIRTH_FORMAT).parse(registration.getDateOfBirth()))
-                .roles(Collections.singletonList(new Role(UserType.NORMAL)))
-                .approveType(ApproveType.WAITING)
-                .statusType(StatusType.ON).build();
+        User user = new User();
+        user.setFirstName(registration.getFirstName());
+        user.setLastName(registration.getLastName());
+        user.setEmail(registration.getEmail());
+        user.setPassword(registration.getPassword());
+        user.setUserName(registration.getUsername());
+        user.setPhoneNumber(registration.getPhoneNumber());
+        user.setGenderType(GenderType.findByValue(registration.getGenderType()));
+        user.setDateOfBirth(new SimpleDateFormat(FormatString.DATE_OF_BIRTH_FORMAT).parse(registration.getDateOfBirth()));
+        user.setUserType(UserType.ADMINITRATOR);
+
         User userSave = userRepository.save(user);
         Long id = userSave.getId();
         logger.info("User id: " + id);
