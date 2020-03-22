@@ -5,6 +5,7 @@ import lombok.Getter;
 import java.util.Arrays;
 
 public enum CategoryType {
+    CONVERSE(-1, "CONVERSE"),
     DEVOPS(0, "DEVOPS"),
     JAVA(1, "JAVA"),
     JAVASCRIPT(2, "JAVASCRIPT"),
