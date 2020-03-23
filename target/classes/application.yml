@@ -32,5 +32,5 @@ server:
 app:
   auth:
     tokenSecret: ZGltYWdlc2hhcmUtbGVnYWN5LWJhY2tlbmQtcHJvamVjdA==
-    tokenExpirationMsec: 3600
+    tokenExpirationMsec: 360000
 

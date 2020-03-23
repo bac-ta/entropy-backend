@@ -1,18 +1,23 @@
 package com.entropy.backend.rest.request.post;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-import javax.persistence.Column;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Data
 public class PostCreateReq {
-    @Column
+    @NotBlank
     private String title;
-    @Column
+    @NotBlank
     private String content;
-    @Column(name = "category_type")
+    @NotNull
+    @JsonProperty("category_type")
     private Integer categoryType;
-    @Column
+    @NotBlank
     private String author;
+    @NotNull
+    @JsonProperty("publish_type")
     private Integer publishType;
 }

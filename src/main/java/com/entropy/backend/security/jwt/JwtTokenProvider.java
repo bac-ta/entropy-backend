@@ -50,7 +50,7 @@ public class JwtTokenProvider implements JwtTokenProviderFactory {
     @Override
     public Long getUserIdFromJWT(String token) {
         Claims claims = Jwts.parser().setSigningKey(clientSecrectKey).parseClaimsJws(token).getBody();
-        return Long.valueOf(claims.getSubject());
+        return Long.valueOf(claims.get("id").toString());
     }
 
     @Override
