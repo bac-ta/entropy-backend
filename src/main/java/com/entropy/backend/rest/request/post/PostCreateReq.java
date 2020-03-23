@@ -14,4 +14,5 @@ public class PostCreateReq {
     private Integer categoryType;
     @Column
     private String author;
+    private Integer publishType;
 }

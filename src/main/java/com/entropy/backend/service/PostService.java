@@ -2,6 +2,8 @@ package com.entropy.backend.service;
 
 import com.entropy.backend.entity.Post;
 import com.entropy.backend.enumeration.CategoryType;
+import com.entropy.backend.enumeration.PublishStype;
+import com.entropy.backend.enumeration.StatusType;
 import com.entropy.backend.repository.PostRepository;
 import com.entropy.backend.rest.request.post.PostCreateReq;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,8 +48,16 @@ public class PostService {
         post.setContent(content);
         post.setCategoryType(categoryType);
         post.setAuthor(author);
+        post.setPublishStype(PublishStype.findByValue(postReq.getPublishType()));
 
         Post postCreated = repository.save(post);
         return postCreated;
     }
+
+//    public void deletePost(int id){
+//
+//        Optional<Post> optionalPost = findById(id);
+//        if (!optionalPost.isPresent())
+//            repository.updatePostStatus(id, StatusType.OFF);
+//    }
 }

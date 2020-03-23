@@ -35,8 +35,8 @@ public class PostController {
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
-    @GetMapping("/get")
-    public ResponseEntity<Object> findPostById(@RequestParam("id") int id) {
+    @GetMapping("/get/{id}")
+    public ResponseEntity<Object> findPostById(@PathVariable("id") int id) {
         Optional<Post> optionalPost = service.findById(id);
         if (optionalPost.isPresent())
             return new ResponseEntity<>(optionalPost.get(), HttpStatus.OK);
@@ -51,4 +51,8 @@ public class PostController {
         return new ResponseEntity<>(new PostSaveResp(post.getId(), APIMessage.CREATE_POST_SUCCESSFUL), HttpStatus.OK);
 
     }
+//    @DeleteMapping("/delete/{id}")
+//    public ResponseEntity<Void> deletePost(@PathVariable("id") int id){
+//
+//    }
 }
