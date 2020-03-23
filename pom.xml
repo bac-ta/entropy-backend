@@ -130,6 +130,18 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+
+                <configuration>
+                    <user>root</user>
+                    <password>Silencer&amp;&amp;55</password>
+                    <schemas>
+                        <schema>entropyb</schema>
+                    </schemas>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
