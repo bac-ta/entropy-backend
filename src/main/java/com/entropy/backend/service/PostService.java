@@ -3,9 +3,9 @@ package com.entropy.backend.service;
 import com.entropy.backend.entity.Post;
 import com.entropy.backend.enumeration.CategoryType;
 import com.entropy.backend.enumeration.PublishStype;
-import com.entropy.backend.enumeration.StatusType;
 import com.entropy.backend.repository.PostRepository;
 import com.entropy.backend.rest.request.post.PostCreateReq;
+import com.entropy.backend.security.jwt.AccountPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -21,10 +21,12 @@ import java.util.Optional;
 @Service
 public class PostService {
     private PostRepository repository;
+    private AuthenticationService authService;
 
     @Autowired
-    public PostService(PostRepository repository) {
+    public PostService(PostRepository repository, AuthenticationService authService) {
         this.repository = repository;
+        this.authService = authService;
     }
 
     public List<Post> findPosts(int start, int limit) {
@@ -40,15 +42,18 @@ public class PostService {
     public Post createPost(PostCreateReq postReq) {
         String title = postReq.getTitle();
         String content = postReq.getContent();
-        String author = postReq.getAuthor();
         Integer categoryTypeInt = postReq.getCategoryType();
         CategoryType categoryType = CategoryType.findByValue(categoryTypeInt);
+
         Post post = new Post();
         post.setTitle(title);
         post.setContent(content);
         post.setCategoryType(categoryType);
-        post.setAuthor(author);
         post.setPublishStype(PublishStype.findByValue(postReq.getPublishType()));
+
+        AccountPrincipal principal = authService.getCurrentPrincipal();
+        post.setAuthor(principal.getUsername());
+        post.setUserId(Integer.parseInt(principal.getId().toString()));
 
         Post postCreated = repository.save(post);
         return postCreated;
