@@ -51,8 +51,10 @@ public class PostController {
         return new ResponseEntity<>(new PostSaveResp(post.getId(), APIMessage.CREATE_POST_SUCCESSFUL), HttpStatus.OK);
 
     }
-//    @DeleteMapping("/delete/{id}")
-//    public ResponseEntity<Void> deletePost(@PathVariable("id") int id){
-//
-//    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deletePost(@PathVariable("id") int id) {
+        service.deletePost(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

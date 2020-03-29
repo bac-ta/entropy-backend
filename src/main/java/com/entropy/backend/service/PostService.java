@@ -54,10 +54,14 @@ public class PostService {
         return postCreated;
     }
 
-//    public void deletePost(int id){
-//
-//        Optional<Post> optionalPost = findById(id);
-//        if (!optionalPost.isPresent())
-//            repository.updatePostStatus(id, StatusType.OFF);
-//    }
+    public void deletePost(int id){
+
+        Optional<Post> optionalPost = findById(id);
+        if (!optionalPost.isPresent())
+            repository.updatePostStatus(id, StatusType.OFF);
+    }
+
+    public String insertPostImage(){
+        return null;
+    }
 }
