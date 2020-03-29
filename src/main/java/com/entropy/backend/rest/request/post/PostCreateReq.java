@@ -15,8 +15,6 @@ public class PostCreateReq {
     @NotNull
     @JsonProperty("category_type")
     private Integer categoryType;
-    @NotBlank
-    private String author;
     @NotNull
     @JsonProperty("publish_type")
     private Integer publishType;

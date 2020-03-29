@@ -4,6 +4,7 @@ import com.entropy.backend.constant.APIMessage;
 import com.entropy.backend.factory.JwtTokenProviderFactory;
 import com.entropy.backend.rest.request.auth.LoginInfoReq;
 import com.entropy.backend.rest.response.auth.LoginInfoResp;
+import com.entropy.backend.security.jwt.AccountPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -39,6 +40,11 @@ public class AuthenticationService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtFactory.generateToken(authentication);
         return new LoginInfoResp(APIMessage.LOGIN_SUCCESSFUL, jwt);
+    }
+
+    public AccountPrincipal getCurrentPrincipal() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return (AccountPrincipal) authentication.getPrincipal();
     }
 
 }
