@@ -12,6 +12,11 @@ public class APIMessage {
     public static final String REPEAT_PASSWORD_NOT_BLANK = "Repeat password must not blank";
     public static final String USER_TYPE_NOT_EMPTY = "User type must not empty";
     public static final String USER_NAME_NOT_BLANK = "User name must not blank";
+    public static final String CREATE_FILEDIR_ERROR = "Could not create the directory where the uploaded files will be stored.";
+    public static final String FILE_INVALID_PATH_SEQUENCE = "Sorry! Filename contains invalid path sequence ";
+    public static final String FILE_NOT_STORE = "Could not store file &s . Please try again!";
+    public static final String FILE_NOT_FOUND = "File not found &s";
+
 
     //Authenticate
     public static String RESOURCE_NOT_FOUND = "%s not found with %s : '%s'";
@@ -27,4 +32,5 @@ public class APIMessage {
     public static String POST_ID_INVALID = "Post id not valid";
     public static String CREATE_POST_FAIL = "Create post fail";
     public static String CREATE_POST_SUCCESSFUL = "Create post successful";
+
 }

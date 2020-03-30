@@ -1,6 +1,6 @@
 package com.entropy.backend.service;
 
-import com.entropy.backend.entity.Post;
+import com.entropy.backend.model.entity.Post;
 import com.entropy.backend.enumeration.CategoryType;
 import com.entropy.backend.enumeration.PublishStype;
 import com.entropy.backend.enumeration.StatusType;

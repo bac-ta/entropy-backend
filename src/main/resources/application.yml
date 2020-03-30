@@ -34,3 +34,5 @@ app:
     tokenSecret: ZGltYWdlc2hhcmUtbGVnYWN5LWJhY2tlbmQtcHJvamVjdA==
     tokenExpirationMsec: 360000
 
+  file:
+    upload-dir: /tmp/entropyb

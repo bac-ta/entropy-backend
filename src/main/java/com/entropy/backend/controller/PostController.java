@@ -2,7 +2,7 @@ package com.entropy.backend.controller;
 
 import com.entropy.backend.constant.APIEndpointBase;
 import com.entropy.backend.constant.APIMessage;
-import com.entropy.backend.entity.Post;
+import com.entropy.backend.model.entity.Post;
 import com.entropy.backend.rest.request.post.PostCreateReq;
 import com.entropy.backend.rest.response.post.PostSaveResp;
 import com.entropy.backend.service.PostService;

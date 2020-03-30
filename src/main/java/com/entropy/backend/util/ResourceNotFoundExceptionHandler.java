@@ -20,6 +20,14 @@ public class ResourceNotFoundExceptionHandler extends RuntimeException {
         this.fieldValue = fieldValue;
     }
 
+    public ResourceNotFoundExceptionHandler(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public ResourceNotFoundExceptionHandler(String message) {
+        super(message);
+    }
+
     public String getResourceName() {
         return resourceName;
     }

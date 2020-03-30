@@ -1,4 +1,4 @@
-package com.entropy.backend.entity.base;
+package com.entropy.backend.model.entity.base;
 
 import lombok.Data;
 import org.springframework.data.annotation.CreatedBy;

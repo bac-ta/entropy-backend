@@ -1,6 +1,6 @@
-package com.entropy.backend.entity;
+package com.entropy.backend.model.entity;
 
-import com.entropy.backend.entity.base.Base;
+import com.entropy.backend.model.entity.base.Base;
 import com.entropy.backend.enumeration.CategoryType;
 import com.entropy.backend.enumeration.PublishStype;
 import com.entropy.backend.enumeration.StatusType;

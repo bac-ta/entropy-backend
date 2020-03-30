@@ -2,7 +2,7 @@ package com.entropy.backend.service;
 
 import com.entropy.backend.constant.APIMessage;
 import com.entropy.backend.constant.FormatString;
-import com.entropy.backend.entity.User;
+import com.entropy.backend.model.entity.User;
 import com.entropy.backend.enumeration.ApproveType;
 import com.entropy.backend.enumeration.GenderType;
 import com.entropy.backend.enumeration.StatusType;

@@ -1,6 +1,6 @@
 package com.entropy.backend.security.jwt;
 
-import com.entropy.backend.entity.User;
+import com.entropy.backend.model.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
