@@ -3,6 +3,7 @@ package com.entropy.backend.service;
 import com.entropy.backend.entity.Post;
 import com.entropy.backend.enumeration.CategoryType;
 import com.entropy.backend.enumeration.PublishStype;
+import com.entropy.backend.enumeration.StatusType;
 import com.entropy.backend.repository.PostRepository;
 import com.entropy.backend.rest.request.post.PostCreateReq;
 import com.entropy.backend.security.jwt.AccountPrincipal;
