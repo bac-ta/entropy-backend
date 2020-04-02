@@ -1,11 +1,8 @@
-package com.entropy.backend.rest.response.user;
+package com.entropy.backend.model.rest.response.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.http.HttpStatus;
-
-import javax.validation.constraints.NotBlank;
 
 /**
  * @author bac-ta

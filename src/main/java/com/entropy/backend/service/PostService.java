@@ -5,7 +5,7 @@ import com.entropy.backend.enumeration.CategoryType;
 import com.entropy.backend.enumeration.PublishStype;
 import com.entropy.backend.enumeration.StatusType;
 import com.entropy.backend.repository.PostRepository;
-import com.entropy.backend.rest.request.post.PostCreateReq;
+import com.entropy.backend.model.rest.request.post.PostCreateReq;
 import com.entropy.backend.security.jwt.AccountPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -60,14 +60,10 @@ public class PostService {
         return postCreated;
     }
 
-    public void deletePost(int id){
+    public void deletePost(int id) {
 
         Optional<Post> optionalPost = findById(id);
         if (!optionalPost.isPresent())
             repository.updatePostStatus(id, StatusType.OFF);
-    }
-
-    public String insertPostImage(){
-        return null;
     }
 }

@@ -1,4 +1,4 @@
-package com.entropy.backend.rest.response.file;
+package com.entropy.backend.model.rest.response.file;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

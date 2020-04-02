@@ -1,8 +1,8 @@
 package com.entropy.backend.controller;
 
 import com.entropy.backend.constant.APIEndpointBase;
-import com.entropy.backend.rest.request.auth.LoginInfoReq;
-import com.entropy.backend.rest.response.auth.LoginInfoResp;
+import com.entropy.backend.model.rest.request.auth.LoginInfoReq;
+import com.entropy.backend.model.rest.response.auth.LoginInfoResp;
 import com.entropy.backend.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

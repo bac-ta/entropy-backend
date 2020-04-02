@@ -2,8 +2,8 @@ package com.entropy.backend.controller;
 
 import com.entropy.backend.constant.APIEndpointBase;
 import com.entropy.backend.constant.APIMessage;
-import com.entropy.backend.rest.request.user.UserRegistrationReq;
-import com.entropy.backend.rest.response.user.UserRegistrationResp;
+import com.entropy.backend.model.rest.request.user.UserRegistrationReq;
+import com.entropy.backend.model.rest.response.user.UserRegistrationResp;
 import com.entropy.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

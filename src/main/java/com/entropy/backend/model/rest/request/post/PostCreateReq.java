@@ -1,4 +1,4 @@
-package com.entropy.backend.rest.request.post;
+package com.entropy.backend.model.rest.request.post;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
