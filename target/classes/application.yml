@@ -25,6 +25,14 @@ spring:
             client-secret: 5cffe0d9fcec3c4244df39a10ff7e8f62b7a6532
   flyway:
     baseline-on-migrate: true
+
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 100MB
+      max-request-size: 100MB
+
 server:
   servlet:
     context-path: /api
@@ -34,3 +42,5 @@ app:
     tokenSecret: ZGltYWdlc2hhcmUtbGVnYWN5LWJhY2tlbmQtcHJvamVjdA==
     tokenExpirationMsec: 360000
 
+  file:
+    upload-dir: /tmp/entropyb
