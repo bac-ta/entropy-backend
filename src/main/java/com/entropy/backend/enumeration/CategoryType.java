@@ -5,11 +5,13 @@ import lombok.Getter;
 import java.util.Arrays;
 
 public enum CategoryType {
-    CONVERSE(-1, "CONVERSE"),
-    DEVOPS(0, "DEVOPS"),
-    JAVA(1, "JAVA"),
-    JAVASCRIPT(2, "JAVASCRIPT"),
-    PYTHON(3, "PYTHON");
+    CONVERSE(0, "CONVERSE"),
+    DEVOPS(1, "DEVOPS"),
+    JAVA(2, "JAVA"),
+    JAVASCRIPT(3, "JAVASCRIPT"),
+    PYTHON(4, "PYTHON"),
+    GO(5, "GO");
+    BIGDATA(6, "BIGDATA");
     @Getter
     private int value;
     @Getter
