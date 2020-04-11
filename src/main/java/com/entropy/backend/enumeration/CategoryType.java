@@ -10,7 +10,7 @@ public enum CategoryType {
     JAVA(2, "JAVA"),
     JAVASCRIPT(3, "JAVASCRIPT"),
     PYTHON(4, "PYTHON"),
-    GO(5, "GO");
+    GO(5, "GO"),
     BIGDATA(6, "BIGDATA");
     @Getter
     private int value;
