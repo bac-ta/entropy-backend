@@ -2,15 +2,13 @@ package com.entropy.backend.service;
 
 import com.entropy.backend.constant.APIMessage;
 import com.entropy.backend.constant.FormatString;
-import com.entropy.backend.model.entity.User;
 import com.entropy.backend.enumeration.ApproveType;
 import com.entropy.backend.enumeration.GenderType;
 import com.entropy.backend.enumeration.StatusType;
-import com.entropy.backend.enumeration.UserType;
-import com.entropy.backend.repository.UserRepository;
+import com.entropy.backend.model.entity.User;
 import com.entropy.backend.model.rest.request.user.UserRegistrationReq;
 import com.entropy.backend.model.rest.response.user.UserRegistrationResp;
-import com.entropy.backend.security.entrypoint.JwtAuthenticationEntryPoint;
+import com.entropy.backend.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +29,7 @@ public class UserService {
     private UserRepository userRepository;
 
     private final BCryptPasswordEncoder passwordEncoder;
-    private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationEntryPoint.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
 
     @Autowired
@@ -50,7 +48,6 @@ public class UserService {
         user.setPhoneNumber(registration.getPhoneNumber());
         user.setGenderType(GenderType.findByValue(registration.getGenderType()));
         user.setDateOfBirth(new SimpleDateFormat(FormatString.DATE_OF_BIRTH_FORMAT).parse(registration.getDateOfBirth()));
-        user.setUserType(UserType.ADMINITRATOR);
 
         User userSave = userRepository.save(user);
         Long id = userSave.getId();

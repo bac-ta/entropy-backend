@@ -1,5 +1,7 @@
 package com.entropy.backend.enumeration;
 
+import com.entropy.backend.constant.APIMessage;
+import com.entropy.backend.util.ResourceNotFoundExceptionHandler;
 import lombok.Getter;
 
 import java.util.Arrays;
@@ -21,6 +23,6 @@ public enum StatusType {
     public static StatusType findByValue(int value) {
         return Arrays.stream(StatusType.values())
                 .filter(statusType -> statusType.getValue() == value)
-                .findFirst().orElse(null);
+                .findFirst().orElseThrow(() -> new ResourceNotFoundExceptionHandler(APIMessage.STATUS_TYPE_INVALID));
     }
 }

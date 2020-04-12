@@ -1,5 +1,7 @@
 package com.entropy.backend.enumeration;
 
+import com.entropy.backend.constant.APIMessage;
+import com.entropy.backend.util.ResourceNotFoundExceptionHandler;
 import lombok.Getter;
 
 import java.util.Arrays;
@@ -22,6 +24,6 @@ public enum ApproveType {
     public static ApproveType findByValue(int value) {
         return Arrays.stream(ApproveType.values())
                 .filter(approveType -> approveType.getValue() == value)
-                .findFirst().orElse(null);
+                .findFirst().orElseThrow(() -> new ResourceNotFoundExceptionHandler(APIMessage.APPROVE_TYPE_INVALID));
     }
 }

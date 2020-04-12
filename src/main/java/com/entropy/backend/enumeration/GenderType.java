@@ -1,5 +1,7 @@
 package com.entropy.backend.enumeration;
 
+import com.entropy.backend.constant.APIMessage;
+import com.entropy.backend.util.ResourceNotFoundExceptionHandler;
 import lombok.Getter;
 
 import java.util.Arrays;
@@ -25,6 +27,6 @@ public enum GenderType {
     public static GenderType findByValue(int value) {
         return Arrays.stream(GenderType.values())
                 .filter(genderType -> genderType.getValue() == value)
-                .findFirst().orElse(null);
+                .findFirst().orElseThrow(() -> new ResourceNotFoundExceptionHandler(APIMessage.GENDER_TYPE_INVALID));
     }
 }

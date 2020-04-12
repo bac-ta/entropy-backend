@@ -1,16 +1,24 @@
 package com.entropy.backend.model.entity;
 
-import com.entropy.backend.model.entity.base.Base;
 import com.entropy.backend.enumeration.ApproveType;
 import com.entropy.backend.enumeration.GenderType;
 import com.entropy.backend.enumeration.StatusType;
 import com.entropy.backend.enumeration.UserType;
+import com.entropy.backend.model.entity.base.Base;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import java.util.Date;
 
 /**
@@ -53,5 +61,5 @@ public class User extends Base {
     private ApproveType approveType = ApproveType.WAITING;
     @Column(name = "user_type", nullable = false)
     @Enumerated(value = EnumType.STRING)
-    private UserType userType;
+    private UserType userType = UserType.GUEST;
 }

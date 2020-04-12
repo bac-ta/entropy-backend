@@ -32,7 +32,9 @@ public class UserController {
             UserRegistrationResp resp = userService.regist(req);
             return new ResponseEntity<>(resp, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(new UserRegistrationResp(null, APIMessage.REGIST_USER_FAIL), HttpStatus.BAD_REQUEST);
+            UserRegistrationResp resp = new UserRegistrationResp();
+            resp.setMessage(APIMessage.REGIST_USER_FAIL);
+            return new ResponseEntity<>(resp, HttpStatus.BAD_REQUEST);
         }
     }
 

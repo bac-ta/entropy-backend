@@ -40,7 +40,7 @@ server:
 app:
   auth:
     tokenSecret: ZGltYWdlc2hhcmUtbGVnYWN5LWJhY2tlbmQtcHJvamVjdA==
-    tokenExpirationMsec: 360000
+    tokenExpirationMsec: 36000000
 
   file:
     upload-dir: /tmp/entropyb

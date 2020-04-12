@@ -4,6 +4,7 @@ package com.entropy.backend.constant;
  * @author bac-ta
  */
 public class APIMessage {
+    //Common
     public static final String PASSWORD_NOT_MATCH = "Password and confirm password not match";
     public static final String PASSWORD_NOT_BLANK = "Password must not blank";
     public static final String EMAIL_NOT_BLANK = "Email must not blank";
@@ -16,7 +17,7 @@ public class APIMessage {
     public static final String FILE_INVALID_PATH_SEQUENCE = "Sorry! Filename contains invalid path sequence ";
     public static final String FILE_NOT_STORE = "Could not store file &s . Please try again!";
     public static final String FILE_NOT_FOUND = "File not found &s";
-
+    public static final String STATUS_TYPE_INVALID = "Status type invalid";
 
     //Authenticate
     public static String RESOURCE_NOT_FOUND = "%s not found with %s : '%s'";
@@ -27,10 +28,19 @@ public class APIMessage {
     //User
     public static String REGIST_USER_SUCCESSFUL = "Regist user succesful";
     public static String REGIST_USER_FAIL = "Regist user fail";
+    public static String APPROVE_TYPE_INVALID = "Approve type invalid";
+    public static String GENDER_TYPE_INVALID = "Gender type invalid";
+    public static String USER_TYPE_INVALID = "User type invalid";
 
     //Post
     public static String POST_ID_INVALID = "Post id not valid";
-    public static String CREATE_POST_FAIL = "Create post fail";
+    public static String CREATE_POST_FAILURE = "Create post failure";
     public static String CREATE_POST_SUCCESSFUL = "Create post successful";
+    public static String PUBLISH_TYPE_INVALID = "Publish type invalid";
+
+    //Category
+    public static String CREATE_CATEGORY_SUCCESSFUL = "Create category successful";
+    public static String CREATE_CATEGORY_FAILURE = "Create category failure";
+    public static String CATEGORY_TYPE_INVALID = "Category type invalid";
 
 }

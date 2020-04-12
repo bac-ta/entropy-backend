@@ -1,5 +1,7 @@
 package com.entropy.backend.enumeration;
 
+import com.entropy.backend.constant.APIMessage;
+import com.entropy.backend.util.ResourceNotFoundExceptionHandler;
 import lombok.Getter;
 
 import java.util.Arrays;
@@ -21,6 +23,6 @@ public enum PublishStype {
     public static PublishStype findByValue(int value) {
         return Arrays.stream(PublishStype.values())
                 .filter(publishType -> publishType.getValue() == value)
-                .findFirst().orElse(null);
+                .findFirst().orElseThrow(() -> new ResourceNotFoundExceptionHandler(APIMessage.PUBLISH_TYPE_INVALID));
     }
 }
