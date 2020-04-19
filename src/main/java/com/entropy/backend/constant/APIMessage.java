@@ -18,6 +18,7 @@ public class APIMessage {
     public static final String FILE_NOT_STORE = "Could not store file &s . Please try again!";
     public static final String FILE_NOT_FOUND = "File not found &s";
     public static final String STATUS_TYPE_INVALID = "Status type invalid";
+    public static final String NOT_DETERMINE_FILE_TYPE = "Could not determine file type";
 
     //Authenticate
     public static String RESOURCE_NOT_FOUND = "%s not found with %s : '%s'";
