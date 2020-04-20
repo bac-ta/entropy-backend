@@ -1,8 +1,10 @@
 package com.entropy.backend.service;
 
 import com.entropy.backend.constant.APIMessage;
+import com.entropy.backend.enumeration.FileType;
 import com.entropy.backend.model.property.FileStorageProperties;
 import com.entropy.backend.util.ResourceNotFoundExceptionHandler;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -16,6 +18,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class FileService {
@@ -35,18 +39,24 @@ public class FileService {
     public String storeFile(MultipartFile file) {
         // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-
         try {
             // Check if the file's name contains invalid characters
-            if (fileName.contains("..")) {
+            if (fileName.contains(".."))
                 throw new ResourceNotFoundExceptionHandler(APIMessage.FILE_INVALID_PATH_SEQUENCE + fileName);
-            }
 
+            String fileTypeStr = FilenameUtils.getExtension(file.getOriginalFilename());
+
+            //Check file type
+            FileType.findByName(fileTypeStr);
+
+            UUID uuid = UUID.randomUUID();
+
+            String fileNameGen = uuid.toString().concat(".").concat(fileTypeStr);
             // Copy file to the target location (Replacing existing file with the same name)
-            Path targetLocation = this.fileStorageLocation.resolve(fileName);
+            Path targetLocation = fileStorageLocation.resolve(fileNameGen);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
-            return fileName;
+            return fileNameGen;
         } catch (IOException ex) {
             throw new ResourceNotFoundExceptionHandler(String.format(APIMessage.FILE_NOT_STORE, fileName), ex);
         }
