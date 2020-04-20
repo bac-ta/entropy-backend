@@ -5,6 +5,8 @@ import com.entropy.backend.enumeration.FileType;
 import com.entropy.backend.model.property.FileStorageProperties;
 import com.entropy.backend.util.ResourceNotFoundExceptionHandler;
 import org.apache.commons.io.FilenameUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -18,12 +20,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class FileService {
     private final Path fileStorageLocation;
+    private static final Logger logger = LoggerFactory.getLogger(FileService.class);
 
     @Autowired
     public FileService(FileStorageProperties fileStorageProperties) {
@@ -32,11 +34,13 @@ public class FileService {
         try {
             Files.createDirectories(this.fileStorageLocation);
         } catch (Exception e) {
+            logger.debug(e.getMessage());
             throw new ResourceNotFoundExceptionHandler(APIMessage.CREATE_FILEDIR_ERROR, e);
         }
     }
 
     public String storeFile(MultipartFile file) {
+        logger.info("Store file");
         // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         try {
@@ -50,6 +54,7 @@ public class FileService {
             FileType.findByName(fileTypeStr);
 
             UUID uuid = UUID.randomUUID();
+            logger.info("uuid:" + uuid.toString());
 
             String fileNameGen = uuid.toString().concat(".").concat(fileTypeStr);
             // Copy file to the target location (Replacing existing file with the same name)
@@ -58,11 +63,13 @@ public class FileService {
 
             return fileNameGen;
         } catch (IOException ex) {
+            logger.debug(ex.getMessage());
             throw new ResourceNotFoundExceptionHandler(String.format(APIMessage.FILE_NOT_STORE, fileName), ex);
         }
     }
 
     public Resource loadFileAsResource(String fileName) {
+        logger.info("Load file as resource");
         try {
             Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
             Resource resource = new UrlResource(filePath.toUri());
@@ -72,6 +79,7 @@ public class FileService {
                 throw new ResourceNotFoundExceptionHandler(String.format(APIMessage.FILE_NOT_FOUND, fileName));
             }
         } catch (MalformedURLException e) {
+            logger.debug(e.getMessage());
             throw new ResourceNotFoundExceptionHandler(String.format(APIMessage.FILE_NOT_FOUND, fileName), e);
         }
     }

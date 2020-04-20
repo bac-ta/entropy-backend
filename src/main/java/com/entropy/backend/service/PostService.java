@@ -48,8 +48,7 @@ public class PostService {
     public Optional<Post> findById(int id) {
         logger.debug("Find post by id: " + id);
 
-        Optional<Post> optionalPost = postRepo.findById(id);
-        return optionalPost;
+        return postRepo.findById(id);
     }
 
     public Post createPost(PostCreateReq postReq) {

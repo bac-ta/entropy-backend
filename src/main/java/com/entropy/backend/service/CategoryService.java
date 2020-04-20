@@ -3,7 +3,6 @@ package com.entropy.backend.service;
 import com.entropy.backend.model.entity.Category;
 import com.entropy.backend.model.rest.request.category.CategoryCreateReq;
 import com.entropy.backend.repository.CategoryRepository;
-import com.entropy.backend.security.entrypoint.JwtAuthenticationEntryPoint;
 import com.entropy.backend.util.ResourceNotFoundExceptionHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +14,7 @@ import java.util.List;
 @Service
 public class CategoryService {
     private CategoryRepository categoryRepository;
-    private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationEntryPoint.class);
+    private static final Logger logger = LoggerFactory.getLogger(CategoryService.class);
 
     @Autowired
     public CategoryService(CategoryRepository categoryRepository) {
