@@ -14,6 +14,9 @@ public class PostCreateReq {
     @NotBlank
     private String title;
     @NotBlank
+    @JsonProperty("image_title")
+    private String imageTitle;
+    @NotBlank
     private String content;
     @NotNull
     @JsonProperty("category_ids")
