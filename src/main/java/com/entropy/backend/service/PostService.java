@@ -57,9 +57,11 @@ public class PostService {
 
         String title = postReq.getTitle();
         String content = postReq.getContent();
+        String imageTitle = postReq.getImageTitle();
         //Save post
         Post post = new Post();
         post.setTitle(title);
+        post.setImageTitle(imageTitle);
         post.setContent(content);
         post.setPublishStype(PublishStype.findByValue(postReq.getPublishType()));
 

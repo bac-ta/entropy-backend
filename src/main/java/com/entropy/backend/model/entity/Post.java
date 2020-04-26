@@ -29,6 +29,8 @@ public class Post extends Base {
     private Integer id;
     @Column(nullable = false)
     private String title;
+    @Column(name = "image_title", nullable = false)
+    private String imageTitle;
     @Column(nullable = false, columnDefinition = "MEDIUMTEXT")
     private String content;
     @Column
