@@ -73,6 +73,8 @@ public class PostService {
 
         //Save post category
         List<Integer> categoryIds = postReq.getCategoryIds();
+        if (categoryIds.isEmpty())
+            return postCreated;
 
         List<PostCategory> postCategories = categoryIds.stream().map(categoryId -> {
             PostCategory postCategory = new PostCategory();

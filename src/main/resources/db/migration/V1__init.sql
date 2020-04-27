@@ -32,7 +32,8 @@ CREATE TABLE IF NOT EXISTS `post` (
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `user_id` int(11) NOT NULL,
   `postcol` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UK2jm25hjrq6iv4w8y1dhi0d9p4` (`title`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

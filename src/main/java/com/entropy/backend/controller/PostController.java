@@ -7,16 +7,10 @@ import com.entropy.backend.model.rest.request.post.PostCreateReq;
 import com.entropy.backend.model.rest.response.post.PostSaveResp;
 import com.entropy.backend.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -51,11 +45,16 @@ public class PostController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Object> createPost(@Valid @RequestBody PostCreateReq postReq) {
-        Post post = service.createPost(postReq);
-        if (post == null)
-            return new ResponseEntity<>(new Error(APIMessage.CREATE_POST_FAILURE), HttpStatus.BAD_REQUEST);
-        return new ResponseEntity<>(new PostSaveResp(post.getId(), APIMessage.CREATE_POST_SUCCESSFUL), HttpStatus.OK);
+    public ResponseEntity<PostSaveResp> createPost(@Valid @RequestBody PostCreateReq postReq) {
+        Post post = null;
+        try {
+            post = service.createPost(postReq);
+            if (post == null)
+                return new ResponseEntity<>(new PostSaveResp(0, APIMessage.CREATE_POST_FAILURE), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new PostSaveResp(post.getId(), APIMessage.CREATE_POST_SUCCESSFUL), HttpStatus.OK);
+        } catch (DataIntegrityViolationException e) {
+            return new ResponseEntity<>(new PostSaveResp(0, APIMessage.POST_TITLE_EXIST), HttpStatus.BAD_REQUEST);
+        }
 
     }
 

@@ -39,6 +39,7 @@ public class APIMessage {
     public static final String CREATE_POST_FAILURE = "Create post failure";
     public static final String CREATE_POST_SUCCESSFUL = "Create post successful";
     public static final String PUBLISH_TYPE_INVALID = "Publish type invalid";
+    public static final String POST_TITLE_EXIST = "Post title exist, please try again with other title";
 
     //Category
     public static final String CREATE_CATEGORY_SUCCESSFUL = "Create category successful";

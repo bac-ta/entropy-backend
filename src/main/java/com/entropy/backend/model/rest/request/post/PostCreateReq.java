@@ -12,16 +12,17 @@ import java.util.List;
 @ToString
 public class PostCreateReq {
     @NotBlank
+    @JsonProperty(required = true)
     private String title;
     @NotBlank
-    @JsonProperty("image_title")
+    @JsonProperty(value = "image_title", required = true)
     private String imageTitle;
     @NotBlank
+    @JsonProperty(required = true)
     private String content;
-    @NotNull
     @JsonProperty("category_ids")
     private List<Integer> categoryIds;
     @NotNull
-    @JsonProperty("publish_type")
+    @JsonProperty(value = "publish_type", required = true)
     private Integer publishType;
 }
