@@ -1,5 +1,7 @@
 package com.entropy.backend.service;
 
+import com.entropy.backend.enumeration.SortType;
+import com.entropy.backend.enumeration.StatusType;
 import com.entropy.backend.model.entity.Category;
 import com.entropy.backend.model.rest.request.category.CategoryCreateReq;
 import com.entropy.backend.repository.CategoryRepository;
@@ -30,8 +32,12 @@ public class CategoryService {
         return categoryRepository.save(categoryInput);
     }
 
-    public List<Category> findCategoryList() {
-        return categoryRepository.findAll();
+    public List<Category> findCategoryListEnable() {
+        return categoryRepository.findAllByStatusType(StatusType.ON.getName());
+    }
+
+    public List<Category> findCategories(int sort, int limit, int start) {
+        return categoryRepository.findCategories(SortType.findByValue(sort).getName(), limit, start);
     }
 
 }
