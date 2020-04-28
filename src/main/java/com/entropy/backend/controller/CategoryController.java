@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(APIEndpointBase.CATEGORY_ENDPOINT_BASE)
@@ -43,8 +42,7 @@ public class CategoryController {
 
     @GetMapping("/get-many")
     public ResponseEntity<List<CategoryGetResp>> findCategoryEnableList() {
-        List<CategoryGetResp> categoryGetResps = categoryService.findCategoryListEnable().stream().map(category ->
-                new CategoryGetResp(category.getId(), category.getCategoryType())).collect(Collectors.toList());
+        List<CategoryGetResp> categoryGetResps = categoryService.findCategoryListEnable();
         return new ResponseEntity<>(categoryGetResps, HttpStatus.OK);
     }
 
@@ -58,10 +56,7 @@ public class CategoryController {
 
         if (limit <= 0 || start <= 0)
             return new ResponseEntity<>(new ErrorResp(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
-        List<CategoryDTO> categoryDTOS = categoryService.findCategories(sort, limit, start).stream().
-                map(category -> new CategoryDTO(category.getId(), category.getCategoryType(),
-                        category.getUpdated().toString(), category.getStatusType().getName())).
-                collect(Collectors.toList());
+        List<CategoryDTO> categoryDTOS = categoryService.findCategories(sort, limit, start);
         return new ResponseEntity<>(categoryDTOS, HttpStatus.OK);
     }
 }
