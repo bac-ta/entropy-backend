@@ -41,14 +41,14 @@ public class CategoryController {
         }
     }
 
-    @GetMapping("/get-category-many")
+    @GetMapping("/get-many")
     public ResponseEntity<List<CategoryGetResp>> findCategoryEnableList() {
         List<CategoryGetResp> categoryGetResps = categoryService.findCategoryListEnable().stream().map(category ->
                 new CategoryGetResp(category.getId(), category.getCategoryType())).collect(Collectors.toList());
         return new ResponseEntity<>(categoryGetResps, HttpStatus.OK);
     }
 
-    @GetMapping("/get-categories")
+    @GetMapping("/get-list")
     public ResponseEntity<?> findCategoryList(@Param("sort") int sort, @Param("limit") int limit, @Param("start") int start) {
         try {
             SortType.findByValue(sort);
