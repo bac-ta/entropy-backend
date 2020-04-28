@@ -54,7 +54,7 @@ public class CategoryController {
             return new ResponseEntity<>(new ErrorResp(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
         }
 
-        if (limit <= 0 || start <= 0)
+        if (limit < 0 || start < 0)
             return new ResponseEntity<>(new ErrorResp(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
         List<CategoryDTO> categoryDTOS = categoryService.findCategories(sort, limit, start);
         return new ResponseEntity<>(categoryDTOS, HttpStatus.OK);
