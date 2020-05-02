@@ -16,7 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -68,9 +74,19 @@ public class CategoryController {
         } catch (ResourceNotFoundExceptionHandler e) {
             return new ResponseEntity<>(new ErrorResp(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
         }
-        if (id < 0)
+        if (id <= 0)
             return new ResponseEntity<>(new ErrorResp(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
         categoryService.changeStatusType(id, status);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<?> findCategory(@PathVariable("id") int id) {
+        if (id <= 0)
+            return new ResponseEntity<>(new ErrorResp(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
+        Category category = categoryService.findCategory(id);
+        if (category == null)
+            return new ResponseEntity<>(new ErrorResp(APIMessage.CATEGORY_ID_NOT_EXIST), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(category, HttpStatus.OK);
     }
 }

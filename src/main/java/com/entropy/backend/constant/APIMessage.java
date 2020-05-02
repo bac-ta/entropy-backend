@@ -20,7 +20,7 @@ public class APIMessage {
     public static final String STATUS_TYPE_INVALID = "Status type invalid";
     public static final String NOT_DETERMINE_FILE_TYPE = "Could not determine file type";
     public static final String FILE_TYPE_INVALID = "File type invalid";
-    public static final String PARAMS_INVALID ="Params invalid";
+    public static final String PARAMS_INVALID = "Params invalid";
 
 
     //Authenticate
@@ -47,5 +47,7 @@ public class APIMessage {
     public static final String CREATE_CATEGORY_SUCCESSFUL = "Create category successful";
     public static final String CREATE_CATEGORY_FAILURE = "Create category failure";
     public static final String CATEGORY_TYPE_INVALID = "Category type invalid";
+    public static final String CATEGORY_ID_NOT_EXIST = "Category Id not exist";
+
 
 }
