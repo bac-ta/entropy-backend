@@ -66,4 +66,8 @@ public class CategoryService {
                 .collect(Collectors.toList());
     }
 
+    public void changeStatusType(int id, int status) {
+        categoryRepository.changeStatusType(id, StatusType.findByValue(status));
+    }
+
 }

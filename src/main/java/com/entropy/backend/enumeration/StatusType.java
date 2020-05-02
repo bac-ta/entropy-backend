@@ -7,8 +7,8 @@ import lombok.Getter;
 import java.util.Arrays;
 
 public enum StatusType {
-    ON(0, "ON"),
-    OFF(1, "OFF");
+    ON(1, "ON"),
+    OFF(0, "OFF");
     @Getter
     private int value;
     @Getter

@@ -3,6 +3,7 @@ package com.entropy.backend.controller;
 import com.entropy.backend.constant.APIEndpointBase;
 import com.entropy.backend.constant.APIMessage;
 import com.entropy.backend.enumeration.SortType;
+import com.entropy.backend.enumeration.StatusType;
 import com.entropy.backend.model.dto.CategoryDTO;
 import com.entropy.backend.model.entity.Category;
 import com.entropy.backend.model.rest.request.category.CategoryCreateReq;
@@ -58,5 +59,18 @@ public class CategoryController {
             return new ResponseEntity<>(new ErrorResp(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
         List<CategoryDTO> categoryDTOS = categoryService.findCategories(sort, limit, start);
         return new ResponseEntity<>(categoryDTOS, HttpStatus.OK);
+    }
+
+    @PutMapping("/change-status/{id}/{status}")
+    public ResponseEntity<?> changeStatusType(@PathVariable("id") int id, @PathVariable("status") int status) {
+        try {
+            StatusType.findByValue(status);
+        } catch (ResourceNotFoundExceptionHandler e) {
+            return new ResponseEntity<>(new ErrorResp(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
+        }
+        if (id < 0)
+            return new ResponseEntity<>(new ErrorResp(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
+        categoryService.changeStatusType(id, status);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
