@@ -25,6 +25,7 @@ spring:
             client-secret: 5cffe0d9fcec3c4244df39a10ff7e8f62b7a6532
   flyway:
     baseline-on-migrate: true
+    validate-on-migrate: false
 
   servlet:
     multipart:
