@@ -5,6 +5,7 @@ import com.entropy.backend.enumeration.StatusType;
 import com.entropy.backend.model.dto.CategoryDTO;
 import com.entropy.backend.model.entity.Category;
 import com.entropy.backend.model.rest.request.category.CategoryCreateReq;
+import com.entropy.backend.model.rest.response.category.CategoryFetchResp;
 import com.entropy.backend.model.rest.response.category.CategoryGetResp;
 import com.entropy.backend.repository.CategoryRepository;
 import com.entropy.backend.util.ResourceNotFoundExceptionHandler;
@@ -47,7 +48,7 @@ public class CategoryService {
                 collect(Collectors.toList());
     }
 
-    public List<CategoryDTO> findCategories(int sort, int limit, int start) {
+    public CategoryFetchResp findCategories(int sort, int limit, int start) {
         logger.debug("Find categories");
         logger.info("start: " + start + ", limit: " + limit);
         Pageable pageable = null;
@@ -57,13 +58,18 @@ public class CategoryService {
         else if (SortType.findByValue(sort) == SortType.DESC)
             pageable = PageRequest.of(start, limit, Sort.by(Sort.Direction.DESC, "id"));
 
+        int count = categoryRepository.findAll().size();
+        if (count == 0)
+            return new CategoryFetchResp(0, new ArrayList<>());
+
         List<Category> categories = categoryRepository.findAll(pageable).getContent();
         if (categories.isEmpty())
-            return new ArrayList<>();
+            return new CategoryFetchResp(0, new ArrayList<>());
 
-        return categories.stream()
+        List<CategoryDTO> categoryDTOS = categories.stream()
                 .map(category -> new CategoryDTO(category.getId(), category.getCategoryType(), category.getUpdated().toString(), category.getStatusType().getName()))
                 .collect(Collectors.toList());
+        return new CategoryFetchResp(count, categoryDTOS);
     }
 
     public void changeStatusType(int id, int status) {

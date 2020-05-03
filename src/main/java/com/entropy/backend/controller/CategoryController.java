@@ -4,9 +4,9 @@ import com.entropy.backend.constant.APIEndpointBase;
 import com.entropy.backend.constant.APIMessage;
 import com.entropy.backend.enumeration.SortType;
 import com.entropy.backend.enumeration.StatusType;
-import com.entropy.backend.model.dto.CategoryDTO;
 import com.entropy.backend.model.entity.Category;
 import com.entropy.backend.model.rest.request.category.CategoryCreateReq;
+import com.entropy.backend.model.rest.response.category.CategoryFetchResp;
 import com.entropy.backend.model.rest.response.category.CategoryGetResp;
 import com.entropy.backend.model.rest.response.category.CategoryResp;
 import com.entropy.backend.model.rest.response.error.ErrorResp;
@@ -63,8 +63,8 @@ public class CategoryController {
 
         if (limit < 0 || start < 0)
             return new ResponseEntity<>(new ErrorResp(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
-        List<CategoryDTO> categoryDTOS = categoryService.findCategories(sort, limit, start);
-        return new ResponseEntity<>(categoryDTOS, HttpStatus.OK);
+        CategoryFetchResp fetchResp = categoryService.findCategories(sort, limit, start);
+        return new ResponseEntity<>(fetchResp, HttpStatus.OK);
     }
 
     @PutMapping("/change-status/{id}/{status}")
