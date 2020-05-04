@@ -9,6 +9,7 @@ import com.entropy.backend.model.rest.response.category.CategoryFetchResp;
 import com.entropy.backend.model.rest.response.category.CategoryGetResp;
 import com.entropy.backend.repository.CategoryRepository;
 import com.entropy.backend.util.ResourceNotFoundExceptionHandler;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +49,7 @@ public class CategoryService {
                 collect(Collectors.toList());
     }
 
-    public CategoryFetchResp findCategories(int sort, int limit, int start) {
+    public CategoryFetchResp findCategories(int sort, int limit, int start, String searchText) {
         logger.debug("Find categories");
         logger.info("start: " + start + ", limit: " + limit);
         Pageable pageable = null;
@@ -58,13 +59,21 @@ public class CategoryService {
         else if (SortType.findByValue(sort) == SortType.DESC)
             pageable = PageRequest.of(start, limit, Sort.by(Sort.Direction.DESC, "id"));
 
-        int count = categoryRepository.findAll().size();
-        if (count == 0)
-            return new CategoryFetchResp(0, new ArrayList<>());
+        int count = 0;
+        List<Category> categories = null;
 
-        List<Category> categories = categoryRepository.findAll(pageable).getContent();
-        if (categories.isEmpty())
-            return new CategoryFetchResp(0, new ArrayList<>());
+        if (StringUtils.isBlank(searchText)) {
+            count = categoryRepository.findAll().size();
+            if (count == 0)
+                return new CategoryFetchResp(0, new ArrayList<>());
+            categories = categoryRepository.findAll(pageable).getContent();
+        } else {
+            count = categoryRepository.findByCategoryTypeContainingIgnoreCase(searchText).size();
+            if (count == 0)
+                return new CategoryFetchResp(0, new ArrayList<>());
+
+            categories = categoryRepository.findByCategoryTypeContainingIgnoreCase(searchText, pageable);
+        }
 
         List<CategoryDTO> categoryDTOS = categories.stream()
                 .map(category -> new CategoryDTO(category.getId(), category.getCategoryType(), category.getUpdated().toString(), category.getStatusType().getName()))
