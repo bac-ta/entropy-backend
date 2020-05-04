@@ -59,8 +59,8 @@ public class CategoryService {
         else if (SortType.findByValue(sort) == SortType.DESC)
             pageable = PageRequest.of(start, limit, Sort.by(Sort.Direction.DESC, "id"));
 
-        int count = 0;
-        List<Category> categories = null;
+        int count;
+        List<Category> categories;
 
         if (StringUtils.isBlank(searchText)) {
             count = categoryRepository.findAll().size();
@@ -87,8 +87,6 @@ public class CategoryService {
 
     public Category findCategory(int id) {
         Optional<Category> optionalCategory = categoryRepository.findById(id);
-        if (optionalCategory.isPresent())
-            return optionalCategory.get();
-        return null;
+        return optionalCategory.orElse(null);
     }
 }
