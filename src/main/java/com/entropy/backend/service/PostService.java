@@ -1,13 +1,17 @@
 package com.entropy.backend.service;
 
 import com.entropy.backend.enumeration.PublishStype;
+import com.entropy.backend.enumeration.SortType;
 import com.entropy.backend.enumeration.StatusType;
+import com.entropy.backend.model.dto.PostDTO;
 import com.entropy.backend.model.entity.Post;
 import com.entropy.backend.model.entity.PostCategory;
 import com.entropy.backend.model.rest.request.post.PostCreateReq;
+import com.entropy.backend.model.rest.response.post.PostFetchResp;
 import com.entropy.backend.repository.PostCategoryRepository;
 import com.entropy.backend.repository.PostRepository;
 import com.entropy.backend.security.jwt.AccountPrincipal;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -37,12 +42,37 @@ public class PostService {
         this.postCategoryRepo = postCategoryRepo;
     }
 
-    public List<Post> findPosts(int start, int limit) {
+    public PostFetchResp findPosts(int sort, int start, int limit, String searchText) {
         logger.debug("Find posts");
-        logger.info("start: " + start + ", limit: " + limit);
+        logger.info("sort: " + sort + ", start: " + start + ", limit: " + limit + ", search text: " + searchText);
+        Pageable pageable = null;
 
-        Pageable pageable = PageRequest.of(start, limit, Sort.by(Sort.Direction.DESC, "created"));
-        return (List<Post>) postRepo.findAll(pageable);
+        if (SortType.findByValue(sort) == SortType.ASC)
+            pageable = PageRequest.of(start, limit, Sort.by(Sort.Direction.ASC, "id"));
+        else if (SortType.findByValue(sort) == SortType.DESC)
+            pageable = PageRequest.of(start, limit, Sort.by(Sort.Direction.DESC, "id"));
+
+        int count;
+        List<Post> posts;
+
+        if (StringUtils.isBlank(searchText)) {
+            count = postRepo.findAll().size();
+            if (count == 0)
+                return new PostFetchResp(0, new ArrayList<>());
+            posts = postRepo.findAll(pageable).getContent();
+        } else {
+            count = postRepo.findByTitleContainingIgnoreCaseOrContentContainingIgnoreCase(searchText).size();
+            if (count == 0)
+                return new PostFetchResp(0, new ArrayList<>());
+
+            posts = postRepo.findByTitleContainingIgnoreCaseOrContentContainingIgnoreCase(searchText, pageable);
+        }
+
+        List<PostDTO> postDTOS = posts.stream()
+                .map(post -> new PostDTO(post.getId(), post.getUpdated().toString(), post.getAuthor(), post.getImageTitle(),
+                        post.getTitle(), post.getPublishStype().getName(), post.getStatusType().getName()))
+                .collect(Collectors.toList());
+        return new PostFetchResp(count, postDTOS);
     }
 
     public Optional<Post> findById(int id) {

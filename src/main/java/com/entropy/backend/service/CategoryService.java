@@ -51,7 +51,7 @@ public class CategoryService {
 
     public CategoryFetchResp findCategories(int sort, int limit, int start, String searchText) {
         logger.debug("Find categories");
-        logger.info("start: " + start + ", limit: " + limit);
+        logger.info("sort: " + sort + ", start: " + start + ", limit: " + limit + ", search text: " + searchText);
         Pageable pageable = null;
 
         if (SortType.findByValue(sort) == SortType.ASC)

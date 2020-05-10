@@ -9,6 +9,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class CategoryFetchResp {
-    private Integer count;
+    private int count;
     private List<CategoryDTO> categories;
 }
