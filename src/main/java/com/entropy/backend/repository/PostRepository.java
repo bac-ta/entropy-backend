@@ -16,7 +16,7 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
     @Query("UPDATE Post SET statusType=:statusType WHERE id=:id")
     void updatePostStatus(int id, StatusType statusType);
 
-    List<Post> findByTitleContainingIgnoreCaseOrContentContainingIgnoreCase(String searchText, Pageable pageable);
+    List<Post> findByTitleContainingIgnoreCase(String searchText, Pageable pageable);
 
-    List<Post> findByTitleContainingIgnoreCaseOrContentContainingIgnoreCase(String searchText);
+    List<Post> findByTitleContainingIgnoreCase(String searchText);
 }
