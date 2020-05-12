@@ -66,7 +66,7 @@ public class PostController {
 
     @PostMapping("/create")
     public ResponseEntity<PostSaveResp> createPost(@Valid @RequestBody PostCreateReq postReq) {
-        Post post = null;
+        Post post;
         try {
             post = service.createPost(postReq);
             if (post == null)
