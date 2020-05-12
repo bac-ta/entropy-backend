@@ -1,7 +1,9 @@
 package com.entropy.backend.model.entity;
 
+import com.entropy.backend.constant.QueryName;
 import com.entropy.backend.enumeration.PublishStype;
 import com.entropy.backend.enumeration.StatusType;
+import com.entropy.backend.model.dto.PostDTO;
 import com.entropy.backend.model.entity.base.Base;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,6 +17,15 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"title"}))
+
+@SqlResultSetMapping(name = QueryName.QUERY_POST, classes = {
+        @ConstructorResult(targetClass = PostDTO.class,
+                columns = {@ColumnResult(name = "post.id"), @ColumnResult(name = "post.updated", type = String.class),
+                        @ColumnResult(name = "post.author", type = String.class), @ColumnResult(name = "post.image_title", type = String.class),
+                        @ColumnResult(name = "post.title", type = String.class), @ColumnResult(name = "post.publish_type", type = String.class),
+                        @ColumnResult(name = "post.status_type", type = String.class),
+                })
+})
 public class Post extends Base {
     @Id
     @Column

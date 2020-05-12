@@ -1,4 +1,4 @@
-package com.entropy.backend.security.entrypoint;
+package com.entropy.backend.middleware.entrypoint;
 
 import com.entropy.backend.constant.APIMessage;
 import org.slf4j.Logger;
@@ -7,7 +7,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

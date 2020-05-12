@@ -41,7 +41,7 @@ public class PostController {
     }
 
     @GetMapping("/get-list")
-    public ResponseEntity<?> findCategoryList(@RequestParam("sort") int sort, @RequestParam("limit") int limit, @RequestParam("start") int start,
+    public ResponseEntity<?> findCategoryList(@RequestParam("sort") int sort, @RequestParam("start") int start, @RequestParam("limit") int limit,
                                               @RequestParam(name = "status_type", required = false) Integer statusType, @RequestParam(name = "publish_type", required = false) Integer publishType,
                                               @RequestParam(name = "category_id", required = false) Integer categoryId, @RequestParam(name = "search_text", required = false) String searchText) {
         try {
@@ -52,7 +52,7 @@ public class PostController {
 
         if (limit < 0 || start < 0)
             return new ResponseEntity<>(new ErrorResp(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
-        PostFetchResp fetchResp = service.findPosts(sort, limit, start, statusType, publishType, categoryId, searchText);
+        PostFetchResp fetchResp = service.findPosts(sort, start, limit, statusType, publishType, categoryId, searchText);
         return new ResponseEntity<>(fetchResp, HttpStatus.OK);
     }
 

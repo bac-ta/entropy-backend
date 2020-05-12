@@ -9,7 +9,7 @@ import com.entropy.backend.model.rest.request.post.PostCreateReq;
 import com.entropy.backend.model.rest.response.post.PostFetchResp;
 import com.entropy.backend.repository.PostCategoryRepository;
 import com.entropy.backend.repository.PostRepository;
-import com.entropy.backend.security.jwt.AccountPrincipal;
+import com.entropy.backend.middleware.jwt.AccountPrincipal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

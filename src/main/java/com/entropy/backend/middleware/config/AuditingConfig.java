@@ -1,6 +1,6 @@
-package com.entropy.backend.security.config;
+package com.entropy.backend.middleware.config;
 
-import com.entropy.backend.security.jwt.AccountPrincipal;
+import com.entropy.backend.middleware.jwt.AccountPrincipal;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
