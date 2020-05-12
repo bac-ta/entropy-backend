@@ -1,7 +1,6 @@
 package com.entropy.backend.service;
 
 import com.entropy.backend.enumeration.PublishStype;
-import com.entropy.backend.enumeration.SortType;
 import com.entropy.backend.enumeration.StatusType;
 import com.entropy.backend.model.dto.PostDTO;
 import com.entropy.backend.model.entity.Post;
@@ -11,17 +10,13 @@ import com.entropy.backend.model.rest.response.post.PostFetchResp;
 import com.entropy.backend.repository.PostCategoryRepository;
 import com.entropy.backend.repository.PostRepository;
 import com.entropy.backend.security.jwt.AccountPrincipal;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -42,37 +37,16 @@ public class PostService {
         this.postCategoryRepo = postCategoryRepo;
     }
 
-    public PostFetchResp findPosts(int sort, int start, int limit, String searchText) {
+    public PostFetchResp findPosts(int sort, int start, int limit, Integer statusType, Integer publishType, Integer categoryId, String searchText) {
         logger.debug("Find posts");
-        logger.info("sort: " + sort + ", start: " + start + ", limit: " + limit + ", search text: " + searchText);
-        Pageable pageable = null;
+        logger.info("sort: " + sort + ", start: " + start + ", limit: " + limit + ", status type: " + statusType +
+                ", publish type: " + publishType + ", category id: " + categoryId + ", search text: " + searchText);
 
-        if (SortType.findByValue(sort) == SortType.ASC)
-            pageable = PageRequest.of(start, limit, Sort.by(Sort.Direction.ASC, "id"));
-        else if (SortType.findByValue(sort) == SortType.DESC)
-            pageable = PageRequest.of(start, limit, Sort.by(Sort.Direction.DESC, "id"));
-
-        int count;
-        List<Post> posts;
-
-        if (StringUtils.isBlank(searchText)) {
-            count = postRepo.findAll().size();
-            if (count == 0)
-                return new PostFetchResp(0, new ArrayList<>());
-            posts = postRepo.findAll(pageable).getContent();
-        } else {
-            count = postRepo.findByTitleContainingIgnoreCaseOrContentContainingIgnoreCase(searchText).size();
-            if (count == 0)
-                return new PostFetchResp(0, new ArrayList<>());
-
-            posts = postRepo.findByTitleContainingIgnoreCaseOrContentContainingIgnoreCase(searchText, pageable);
-        }
-
-        List<PostDTO> postDTOS = posts.stream()
-                .map(post -> new PostDTO(post.getId(), post.getUpdated().toString(), post.getAuthor(), post.getImageTitle(),
-                        post.getTitle(), post.getPublishStype().getName(), post.getStatusType().getName()))
-                .collect(Collectors.toList());
-        return new PostFetchResp(count, postDTOS);
+        Map<Integer, List<PostDTO>> map = postRepo.findPosts(sort, start, limit, statusType, publishType, categoryId, searchText);
+        Map.Entry<Integer, List<PostDTO>> entry = map.entrySet().iterator().next();
+        Integer count = entry.getKey();
+        List<PostDTO> postDTOList = entry.getValue();
+        return new PostFetchResp(count, postDTOList);
     }
 
     public Optional<Post> findById(int id) {

@@ -2,6 +2,7 @@ package com.entropy.backend.repository;
 
 import com.entropy.backend.enumeration.StatusType;
 import com.entropy.backend.model.entity.Post;
+import com.entropy.backend.repository.custom.PostRepositoryCustom;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -9,7 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 import java.util.Optional;
 
-public interface PostRepository extends JpaRepository<Post, Integer> {
+public interface PostRepository extends JpaRepository<Post, Integer>, PostRepositoryCustom {
 
     Optional<Post> findById(int id);
 
