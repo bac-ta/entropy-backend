@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Comment extends Base {
+public class Reply extends Base {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
@@ -28,9 +28,11 @@ public class Comment extends Base {
     private String content;
     @Column(name = "file_url")
     private String fileUrl;
-    @Column(name = "user_comment_id")
-    private Long userCommentId;
-    @Column(name = "status_type")
+    @Column(name = "comment_id")
+    private String commentId;
+    @Column(name = "user_reply_id")
+    private Long userReplyId;
     @Enumerated(value = EnumType.STRING)
+    @Column(name = "status_type")
     private StatusType statusType = StatusType.ON;
 }
