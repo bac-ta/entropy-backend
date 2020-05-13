@@ -3,6 +3,7 @@ package com.entropy.backend.controller;
 import com.entropy.backend.constant.APIEndpointBase;
 import com.entropy.backend.constant.APIMessage;
 import com.entropy.backend.enumeration.SortType;
+import com.entropy.backend.enumeration.StatusType;
 import com.entropy.backend.model.entity.Post;
 import com.entropy.backend.model.rest.request.post.PostCreateReq;
 import com.entropy.backend.model.rest.response.error.ErrorResp;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -81,6 +83,19 @@ public class PostController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deletePost(@PathVariable("id") int id) {
         service.deletePost(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("/change-status/{id}/{status}")
+    public ResponseEntity<?> changeStatusType(@PathVariable("id") int id, @PathVariable("status") int status) {
+        try {
+            StatusType.findByValue(status);
+        } catch (ResourceNotFoundExceptionHandler e) {
+            return new ResponseEntity<>(new ErrorResp(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
+        }
+        if (id <= 0)
+            return new ResponseEntity<>(new ErrorResp(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
+        service.changeStatusType(id, status);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

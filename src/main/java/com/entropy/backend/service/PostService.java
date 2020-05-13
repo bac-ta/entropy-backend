@@ -2,6 +2,7 @@ package com.entropy.backend.service;
 
 import com.entropy.backend.enumeration.PublishStype;
 import com.entropy.backend.enumeration.StatusType;
+import com.entropy.backend.middleware.jwt.AccountPrincipal;
 import com.entropy.backend.model.dto.PostDTO;
 import com.entropy.backend.model.entity.Post;
 import com.entropy.backend.model.entity.PostCategory;
@@ -9,7 +10,6 @@ import com.entropy.backend.model.rest.request.post.PostCreateReq;
 import com.entropy.backend.model.rest.response.post.PostFetchResp;
 import com.entropy.backend.repository.PostCategoryRepository;
 import com.entropy.backend.repository.PostRepository;
-import com.entropy.backend.middleware.jwt.AccountPrincipal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,5 +98,10 @@ public class PostService {
         Optional<Post> optionalPost = findById(id);
         if (!optionalPost.isPresent())
             postRepo.updatePostStatus(id, StatusType.OFF);
+    }
+
+    public void changeStatusType(int id, int status) {
+        logger.debug("Change post status type by id: " + id);
+        postRepo.changeStatusType(id, StatusType.findByValue(status));
     }
 }
