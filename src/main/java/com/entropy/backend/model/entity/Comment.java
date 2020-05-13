@@ -28,8 +28,10 @@ public class Comment extends Base {
     private String content;
     @Column(name = "file_url")
     private String fileUrl;
-    @Column(name = "user_comment_id")
-    private Long userCommentId;
+    @Column(name = "user_id")
+    private Long userId;
+    @Column(name = "post_id")
+    private Integer postId;
     @Column(name = "status_type")
     @Enumerated(value = EnumType.STRING)
     private StatusType statusType = StatusType.ON;

@@ -7,7 +7,8 @@ CREATE TABLE IF NOT EXISTS `comment`
     `updated_by`    varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
     `content`       varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
     `file_url`      varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-    `user_comment_id` varchar(45)                        NOT NULL,
+    `user_id`       varchar(45)                          NOT NULL,
+    `post_id`       int(11)                              NOT NULL,
     `status_type`   varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'ON',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
@@ -25,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `reply`
     `content`       varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
     `comment_id`    varchar(45)                          NOT NULL,
     `file_url`      varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-    `user_reply_id` varchar(45)                          NOT NULL,
+    `user_id` varchar(45)                                NOT NULL,
     `status_type`   varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'ON',
     PRIMARY KEY (`id`)
 )
