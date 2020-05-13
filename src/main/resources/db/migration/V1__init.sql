@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS `category`
     `updated`       datetime                             DEFAULT NULL,
     `updated_by`    varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
     `category_type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-    `status_type`   varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+    `status_type`   varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'ON',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8
@@ -153,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `user`
     `last_name`     varchar(255) COLLATE utf8_unicode_ci NOT NULL,
     `password`      varchar(255) COLLATE utf8_unicode_ci NOT NULL,
     `phone_number`  varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-    `status_type`   varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+    `status_type`   varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'ON',
     `user_name`     varchar(255) COLLATE utf8_unicode_ci NOT NULL,
     `user_type`     varchar(255) COLLATE utf8_unicode_ci NOT NULL,
     PRIMARY KEY (`id`),
