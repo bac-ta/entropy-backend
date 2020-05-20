@@ -76,7 +76,7 @@ public class PostRepositoryCustomImpl implements PostRepositoryCustom {
 
         }
         String sortType = SortType.findByValue(sort).getName();
-        queryBuilder.append("ORDER BY post.id, post.updated ").append(sortType).append(" LIMIT ").
+        queryBuilder.append("ORDER BY post.id ").append(sortType).append(", post.updated ").append(sortType).append(" LIMIT ").
                 append(start).append(",").append(limit);
         Query query = entityManager.createNativeQuery(queryBuilder.toString(), QueryName.QUERY_POST);
 
