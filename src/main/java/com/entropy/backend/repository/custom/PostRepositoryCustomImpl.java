@@ -27,7 +27,7 @@ public class PostRepositoryCustomImpl implements PostRepositoryCustom {
 
         Map<Integer, List<PostDTO>> map = new HashMap<>();
         StringBuilder queryBuilder = new StringBuilder();
-        queryBuilder.append("SELECT post.id, post.updated, post.author, post.image_title, post.title, post.publish_type, post.status_type FROM post ");
+        queryBuilder.append("SELECT post.id, post.updated, post.author, post.title, post.publish_type, post.status_type FROM post ");
 
         StringBuilder queryCountBuilder = new StringBuilder();
         queryCountBuilder.append("SELECT COUNT(post.id) FROM post ");

@@ -10,8 +10,6 @@ public class PostDTO {
     private int id;
     private String updated;
     private String author;
-    @JsonProperty("image_title")
-    private String imageTitle;
     private String title;
     @JsonProperty("publish_type")
     private String publishType;

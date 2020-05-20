@@ -43,7 +43,7 @@ public class PostController {
     }
 
     @GetMapping("/get-list")
-    public ResponseEntity<?> findCategoryList(@RequestParam("sort") int sort, @RequestParam("start") int start, @RequestParam("limit") int limit,
+    public ResponseEntity<?> findPostList(@RequestParam("sort") int sort, @RequestParam("start") int start, @RequestParam("limit") int limit,
                                               @RequestParam(name = "status_type", required = false) Integer statusType, @RequestParam(name = "publish_type", required = false) Integer publishType,
                                               @RequestParam(name = "category_id", required = false) Integer categoryId, @RequestParam(name = "search_text", required = false) String searchText) {
         try {

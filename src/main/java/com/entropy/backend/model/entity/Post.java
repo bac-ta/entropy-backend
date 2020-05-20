@@ -21,9 +21,8 @@ import javax.persistence.*;
 @SqlResultSetMapping(name = QueryName.QUERY_POST, classes = {
         @ConstructorResult(targetClass = PostDTO.class,
                 columns = {@ColumnResult(name = "post.id"), @ColumnResult(name = "post.updated", type = String.class),
-                        @ColumnResult(name = "post.author", type = String.class), @ColumnResult(name = "post.image_title", type = String.class),
-                        @ColumnResult(name = "post.title", type = String.class), @ColumnResult(name = "post.publish_type", type = String.class),
-                        @ColumnResult(name = "post.status_type", type = String.class),
+                        @ColumnResult(name = "post.author", type = String.class), @ColumnResult(name = "post.title", type = String.class),
+                        @ColumnResult(name = "post.publish_type", type = String.class), @ColumnResult(name = "post.status_type", type = String.class)
                 })
 })
 public class Post extends Base {
