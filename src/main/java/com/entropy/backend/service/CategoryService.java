@@ -49,7 +49,7 @@ public class CategoryService {
                 collect(Collectors.toList());
     }
 
-    public CategoryFetchResp findCategories(int sort, int limit, int start, String searchText) {
+    public CategoryFetchResp findCategories(int sort, int limit, int start, Integer statusType, String searchText) {
         logger.debug("Find categories");
         logger.info("sort: " + sort + ", start: " + start + ", limit: " + limit + ", search text: " + searchText);
         Pageable pageable = null;
@@ -59,20 +59,32 @@ public class CategoryService {
         else if (SortType.findByValue(sort) == SortType.DESC)
             pageable = PageRequest.of(start, limit, Sort.by(Sort.Direction.DESC, "id"));
 
-        int count;
-        List<Category> categories;
+        int count = 0;
+        List<Category> categories = null;
 
-        if (StringUtils.isBlank(searchText)) {
+        if (StringUtils.isBlank(searchText) && statusType == null) {
             count = categoryRepository.findAll().size();
             if (count == 0)
                 return new CategoryFetchResp(0, new ArrayList<>());
             categories = categoryRepository.findAll(pageable).getContent();
         } else {
-            count = categoryRepository.findByCategoryTypeContainingIgnoreCase(searchText).size();
-            if (count == 0)
-                return new CategoryFetchResp(0, new ArrayList<>());
-
-            categories = categoryRepository.findByCategoryTypeContainingIgnoreCase(searchText, pageable);
+            if (!StringUtils.isBlank(searchText) && statusType == null) {
+                count = categoryRepository.findByCategoryTypeContainingIgnoreCase(searchText).size();
+                if (count == 0)
+                    return new CategoryFetchResp(0, new ArrayList<>());
+                categories = categoryRepository.findByCategoryTypeContainingIgnoreCase(searchText, pageable);
+            }
+            if (StringUtils.isBlank(searchText) && statusType != null) {
+                count = categoryRepository.findByStatusType(StatusType.findByValue(statusType)).size();
+                if (count == 0)
+                    return new CategoryFetchResp(0, new ArrayList<>());
+                categories = categoryRepository.findByStatusType(StatusType.findByValue(statusType), pageable);
+            } else {
+                count = categoryRepository.findByCategoryTypeContainingIgnoreCaseAndStatusType(searchText, StatusType.findByValue(statusType)).size();
+                if (count == 0)
+                    return new CategoryFetchResp(0, new ArrayList<>());
+                categories = categoryRepository.findByCategoryTypeContainingIgnoreCaseAndStatusType(searchText, StatusType.findByValue(statusType), pageable);
+            }
         }
 
         List<CategoryDTO> categoryDTOS = categories.stream()
