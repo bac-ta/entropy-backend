@@ -51,7 +51,7 @@ public class CategoryService {
 
     public CategoryFetchResp findCategories(int sort, int limit, int start, Integer statusType, String searchText) {
         logger.debug("Find categories");
-        logger.info("sort: " + sort + ", start: " + start + ", limit: " + limit + ", search text: " + searchText);
+        logger.info("sort: " + sort + ", start: " + start + ", limit: " + limit + ", status type: " + statusType + ", search text: " + searchText);
         Pageable pageable = null;
 
         if (SortType.findByValue(sort) == SortType.ASC)
@@ -59,8 +59,8 @@ public class CategoryService {
         else if (SortType.findByValue(sort) == SortType.DESC)
             pageable = PageRequest.of(start, limit, Sort.by(Sort.Direction.DESC, "id"));
 
-        int count = 0;
-        List<Category> categories = null;
+        int count;
+        List<Category> categories;
 
         if (StringUtils.isBlank(searchText) && statusType == null) {
             count = categoryRepository.findAll().size();
@@ -69,12 +69,12 @@ public class CategoryService {
             categories = categoryRepository.findAll(pageable).getContent();
         } else {
             if (!StringUtils.isBlank(searchText) && statusType == null) {
+                System.out.println("vafaf");
                 count = categoryRepository.findByCategoryTypeContainingIgnoreCase(searchText).size();
                 if (count == 0)
                     return new CategoryFetchResp(0, new ArrayList<>());
                 categories = categoryRepository.findByCategoryTypeContainingIgnoreCase(searchText, pageable);
-            }
-            if (StringUtils.isBlank(searchText) && statusType != null) {
+            } else if (StringUtils.isBlank(searchText) && statusType != null) {
                 count = categoryRepository.findByStatusType(StatusType.findByValue(statusType)).size();
                 if (count == 0)
                     return new CategoryFetchResp(0, new ArrayList<>());
