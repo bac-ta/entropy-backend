@@ -35,6 +35,7 @@ public class APIMessage {
     public static final String APPROVE_TYPE_INVALID = "Approve type invalid";
     public static final String GENDER_TYPE_INVALID = "Gender type invalid";
     public static final String USER_TYPE_INVALID = "User type invalid";
+    public static final String OAUTH2_TYPE_INVALID ="OAuth2 type invalid";
 
     //Post
     public static final String POST_ID_INVALID = "Post id not valid";

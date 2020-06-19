@@ -1,7 +1,7 @@
 package com.entropy.backend.service;
 
 import com.entropy.backend.constant.APIMessage;
-import com.entropy.backend.factory.JwtTokenProviderFactory;
+import com.entropy.backend.middleware.pattern.factory.JwtTokenProviderFactory;
 import com.entropy.backend.model.rest.request.auth.LoginInfoReq;
 import com.entropy.backend.model.rest.response.auth.LoginInfoResp;
 import com.entropy.backend.middleware.jwt.AccountPrincipal;
@@ -46,5 +46,6 @@ public class AuthenticationService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return (AccountPrincipal) authentication.getPrincipal();
     }
+
 
 }
