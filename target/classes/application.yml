@@ -43,8 +43,13 @@ server:
 
 app:
   auth:
-    tokenSecret: ZGltYWdlc2hhcmUtbGVnYWN5LWJhY2tlbmQtcHJvamVjdA==
-    tokenExpirationMsec: 36000000
+    token-secret: ZGltYWdlc2hhcmUtbGVnYWN5LWJhY2tlbmQtcHJvamVjdA==
+    token-expiration-msec: 36000000
+
+  oauth2:
+    authRequestCookieName: oauth2_auth_request
+    redirectUriParamCookieName: redirect_uri
+    cookieExpireSeconds: 120
 
   file:
     upload-dir: /tmp/entropyb

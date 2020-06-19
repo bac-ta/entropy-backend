@@ -26,9 +26,9 @@ import java.util.Map;
 public class JwtTokenProvider implements JwtTokenProviderFactory {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
-    @Value("${app.auth.tokenSecret}")
+    @Value("${app.auth.token-secret}")
     private String clientSecrectKey;
-    @Value("${app.auth.tokenExpirationMsec}")
+    @Value("${app.auth.token-expiration-msec}")
     private int expirationInMs;
 
     @Override
