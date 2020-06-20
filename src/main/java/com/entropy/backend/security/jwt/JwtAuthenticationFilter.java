@@ -23,10 +23,15 @@ import java.io.IOException;
 @NoArgsConstructor
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-    @Autowired
+
     private JwtTokenProvider tokenProvider;
-    @Autowired
     private UserDetailsImplService authService;
+
+    @Autowired
+    public JwtAuthenticationFilter(JwtTokenProvider tokenProvider, UserDetailsImplService authService) {
+        this.tokenProvider = tokenProvider;
+        this.authService = authService;
+    }
 
 
     @Override

@@ -1,6 +1,7 @@
 package com.entropy.backend.security.config;
 
 import com.entropy.backend.enumeration.UserType;
+import com.entropy.backend.repository.HttpCookieOAuth2AuthorizationRequestRepository;
 import com.entropy.backend.security.entrypoint.JwtAuthenticationEntryPoint;
 import com.entropy.backend.security.jwt.JwtAuthenticationFilter;
 import com.entropy.backend.service.UserDetailsImplService;
@@ -83,6 +84,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
+    }
+
+    @Bean
+    public HttpCookieOAuth2AuthorizationRequestRepository cookieAuthorizationRequestRepository() {
+        return new HttpCookieOAuth2AuthorizationRequestRepository();
     }
 
 }
