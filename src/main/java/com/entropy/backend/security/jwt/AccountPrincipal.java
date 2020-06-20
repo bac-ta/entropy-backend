@@ -1,4 +1,4 @@
-package com.entropy.backend.middleware.jwt;
+package com.entropy.backend.security.jwt;
 
 import com.entropy.backend.model.entity.User;
 import lombok.AllArgsConstructor;

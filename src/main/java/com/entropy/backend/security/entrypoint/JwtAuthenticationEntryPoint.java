@@ -1,4 +1,4 @@
-package com.entropy.backend.middleware.entrypoint;
+package com.entropy.backend.security.entrypoint;
 
 import com.entropy.backend.constant.APIMessage;
 import org.slf4j.Logger;

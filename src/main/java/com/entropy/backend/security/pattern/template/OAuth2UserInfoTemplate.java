@@ -1,4 +1,4 @@
-package com.entropy.backend.middleware.pattern.template;
+package com.entropy.backend.security.pattern.template;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

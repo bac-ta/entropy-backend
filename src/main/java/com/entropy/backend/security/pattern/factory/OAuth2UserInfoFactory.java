@@ -1,10 +1,10 @@
-package com.entropy.backend.middleware.pattern.factory;
+package com.entropy.backend.security.pattern.factory;
 
 import com.entropy.backend.enumeration.OAuth2Type;
-import com.entropy.backend.middleware.oauth2.FacebookOAuth2UserInfo;
-import com.entropy.backend.middleware.oauth2.GithubOAuth2UserInfo;
-import com.entropy.backend.middleware.oauth2.GoogleOAuth2UserInfo;
-import com.entropy.backend.middleware.pattern.template.OAuth2UserInfoTemplate;
+import com.entropy.backend.security.oauth2.FacebookOAuth2UserInfo;
+import com.entropy.backend.security.oauth2.GithubOAuth2UserInfo;
+import com.entropy.backend.security.oauth2.GoogleOAuth2UserInfo;
+import com.entropy.backend.security.pattern.template.OAuth2UserInfoTemplate;
 import com.entropy.backend.util.ResourceNotFoundExceptionHandler;
 
 import java.util.Map;

@@ -1,8 +1,8 @@
-package com.entropy.backend.middleware.config;
+package com.entropy.backend.security.config;
 
 import com.entropy.backend.enumeration.UserType;
-import com.entropy.backend.middleware.entrypoint.JwtAuthenticationEntryPoint;
-import com.entropy.backend.middleware.jwt.JwtAuthenticationFilter;
+import com.entropy.backend.security.entrypoint.JwtAuthenticationEntryPoint;
+import com.entropy.backend.security.jwt.JwtAuthenticationFilter;
 import com.entropy.backend.service.UserDetailsImplService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

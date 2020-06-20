@@ -5,7 +5,7 @@ import com.entropy.backend.enumeration.ApproveType;
 import com.entropy.backend.enumeration.StatusType;
 import com.entropy.backend.enumeration.UserType;
 import com.entropy.backend.repository.UserRepository;
-import com.entropy.backend.middleware.jwt.AccountPrincipal;
+import com.entropy.backend.security.jwt.AccountPrincipal;
 import com.entropy.backend.util.ResourceNotFoundExceptionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

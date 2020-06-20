@@ -2,7 +2,7 @@ package com.entropy.backend.service;
 
 import com.entropy.backend.enumeration.PublishStype;
 import com.entropy.backend.enumeration.StatusType;
-import com.entropy.backend.middleware.jwt.AccountPrincipal;
+import com.entropy.backend.security.jwt.AccountPrincipal;
 import com.entropy.backend.model.dto.PostDTO;
 import com.entropy.backend.model.entity.Post;
 import com.entropy.backend.model.entity.PostCategory;

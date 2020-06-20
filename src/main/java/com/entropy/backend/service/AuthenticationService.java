@@ -1,10 +1,10 @@
 package com.entropy.backend.service;
 
 import com.entropy.backend.constant.APIMessage;
-import com.entropy.backend.middleware.pattern.factory.JwtTokenProviderFactory;
+import com.entropy.backend.security.pattern.factory.JwtTokenProviderFactory;
 import com.entropy.backend.model.rest.request.auth.LoginInfoReq;
 import com.entropy.backend.model.rest.response.auth.LoginInfoResp;
-import com.entropy.backend.middleware.jwt.AccountPrincipal;
+import com.entropy.backend.security.jwt.AccountPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

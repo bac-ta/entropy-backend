@@ -1,4 +1,4 @@
-package com.entropy.backend.middleware.pattern.factory;
+package com.entropy.backend.security.pattern.factory;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.entropy.backend.middleware.config;
+package com.entropy.backend.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
