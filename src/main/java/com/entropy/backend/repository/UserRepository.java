@@ -16,8 +16,8 @@ import java.util.Optional;
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    @Query("FROM User WHERE email=:email OR userName=:username AND approveType=:approveType AND statusType=:statusType AND userType=:userType")
-    User findUser(String email, String username, ApproveType approveType, StatusType statusType, UserType userType);
+    @Query("FROM User WHERE email=:emailOrUsername OR userName=:emailOrUsername AND approveType=:approveType AND statusType=:statusType AND userType=:userType")
+    User findUser(String emailOrUsername, ApproveType approveType, StatusType statusType, UserType userType);
 
     Optional<User> findById(Long id);
 
