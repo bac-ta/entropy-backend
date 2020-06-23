@@ -79,6 +79,7 @@ public class OAuth2UserCustomService extends DefaultOAuth2UserService {
         profile.setOauth2Avatar(template.getImageUrl());
         profile.setOauth2UserId(oAuth2UserEntitySaved.getId());
         profileRepository.save(profile);
+
         return oAuth2UserEntitySaved;
     }
 
@@ -92,6 +93,7 @@ public class OAuth2UserCustomService extends DefaultOAuth2UserService {
                 profileRepository.save(profile);
             }
         }
+
         return oAuth2UserRepository.save(oAuth2UserEntity);
     }
 }
