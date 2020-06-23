@@ -7,10 +7,8 @@ import lombok.Getter;
 import java.util.Arrays;
 
 public enum OAuth2Type {
-
-    GOOGLE(0, "google"),
-    FACEBOOK(1, "facebook"),
-    GITHUB(2, "github");
+    FACEBOOK(0, "facebook"),
+    GITHUB(1, "github");
     @Getter
     private int value;
     @Getter

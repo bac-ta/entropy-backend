@@ -29,16 +29,16 @@ spring:
               - read:user
 
           google:
-            client-id:
-            client-secrect:
+            client-id: 5014057553-8gm9um6vnli3cle5rgigcdjpdrid14m9.apps.googleusercontent.com
+            client-secret: tWZKVLxaD_ARWsriiiUFYoIk
             redirect-uri: "{baseUrl}/oauth2/callback/{registrationId}"
             scope:
               - email
               - profile
 
           facebook:
-            client-id:
-            client-secrect:
+            client-id: 121189305185277
+            client-secret: 42ffe5aa7379e8326387e0fe16f34132
             redirect-uri: "{baseUrl}/oauth2/callback/{registrationId}"
             scope:
               - email
@@ -72,9 +72,9 @@ app:
     redirect-uri-param-cookie-name: redirect_uri
     cookie-expire-seconds: 120
     authorized-redirect-uris:
-      - http://localhost:3000/oauth2/redirect
-      - myandroidapp://oauth2/redirect
-      - myiosapp://oauth2/redirect
+      http://localhost:3000/oauth2/redirect,
+      myandroidapp://oauth2/redirect,
+      myiosapp://oauth2/redirect
 
   file:
     upload-dir: /tmp/entropyb
