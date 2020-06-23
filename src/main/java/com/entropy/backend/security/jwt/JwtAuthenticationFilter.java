@@ -23,16 +23,10 @@ import java.io.IOException;
 @NoArgsConstructor
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-
-    private JwtTokenProvider tokenProvider;
-    private UserDetailsImplService authService;
-
     @Autowired
-    public JwtAuthenticationFilter(JwtTokenProvider tokenProvider, UserDetailsImplService authService) {
-        this.tokenProvider = tokenProvider;
-        this.authService = authService;
-    }
-
+    private JwtTokenProvider tokenProvider;
+    @Autowired
+    private UserDetailsImplService authService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
