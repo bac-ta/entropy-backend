@@ -23,6 +23,27 @@ spring:
           github:
             client-id: dc5f322981574f18b6aa
             client-secret: 5cffe0d9fcec3c4244df39a10ff7e8f62b7a6532
+            redirect-uri: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - user:email
+              - read:user
+
+          google:
+            client-id:
+            client-secrect:
+            redirect-uri: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - email
+              - profile
+
+          facebook:
+            client-id:
+            client-secrect:
+            redirect-uri: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - email
+              - public_profile
+
   flyway:
     baseline-on-migrate: true
     validate-on-migrate: false
@@ -47,9 +68,13 @@ app:
     token-expiration-msec: 36000000
 
   oauth2:
-    authRequestCookieName: oauth2_auth_request
-    redirectUriParamCookieName: redirect_uri
-    cookieExpireSeconds: 120
+    auth-request-cookie-name: oauth2_auth_request
+    redirect-uri-param-cookie-name: redirect_uri
+    cookie-expire-seconds: 120
+    authorized-redirect-uris:
+      - http://localhost:3000/oauth2/redirect
+      - myandroidapp://oauth2/redirect
+      - myiosapp://oauth2/redirect
 
   file:
     upload-dir: /tmp/entropyb

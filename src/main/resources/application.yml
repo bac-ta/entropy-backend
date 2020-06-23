@@ -66,16 +66,15 @@ app:
   auth:
     token-secret: ZGltYWdlc2hhcmUtbGVnYWN5LWJhY2tlbmQtcHJvamVjdA==
     token-expiration-msec: 36000000
-    cors-max-age: 3600
 
   oauth2:
     auth-request-cookie-name: oauth2_auth_request
     redirect-uri-param-cookie-name: redirect_uri
     cookie-expire-seconds: 120
     authorized-redirect-uris:
-      - http://localhost:3000/oauth2/redirect
-      - myandroidapp://oauth2/redirect
-      - myiosapp://oauth2/redirect
+      http://localhost:3000/oauth2/redirect,
+      myandroidapp://oauth2/redirect,
+      myiosapp://oauth2/redirect,
 
   file:
     upload-dir: /tmp/entropyb

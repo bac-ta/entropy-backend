@@ -34,21 +34,20 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 )
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private UserDetailsImplService userDetailsService;
-    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-    private OAuth2UserCustomService oAuth2UserCustomService;
+    private final UserDetailsImplService userDetailsService;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final OAuth2UserCustomService oAuth2UserCustomService;
+    @Autowired
     private OAuth2AuthenticationSuccessHandler successHandler;
+    @Autowired
     private OAuth2AuthenticationFailureHandler failureHandler;
 
     @Autowired
     public SecurityConfiguration(UserDetailsImplService userDetailsService, JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
-                                 OAuth2UserCustomService oAuth2UserCustomService, OAuth2AuthenticationSuccessHandler successHandler,
-                                 OAuth2AuthenticationFailureHandler failureHandler) {
+                                 OAuth2UserCustomService oAuth2UserCustomService) {
         this.userDetailsService = userDetailsService;
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
         this.oAuth2UserCustomService = oAuth2UserCustomService;
-        this.successHandler = successHandler;
-        this.failureHandler = failureHandler;
     }
 
     @Bean
