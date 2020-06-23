@@ -29,7 +29,7 @@ public class UserDetailsImplService implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String emailOrUsername) throws UsernameNotFoundException {
-        User user = userRepository.findUser(emailOrUsername, emailOrUsername, ApproveType.ACCEPTED, StatusType.ON, UserType.ADMINITRATOR);
+        User user = userRepository.findUser(emailOrUsername, ApproveType.ACCEPTED, StatusType.ON, UserType.ADMINITRATOR);
         return AccountPrincipal.create(user);
     }
 
@@ -38,5 +38,4 @@ public class UserDetailsImplService implements UserDetailsService {
         User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundExceptionHandler("Account", "id", id));
         return AccountPrincipal.create(user);
     }
-
 }

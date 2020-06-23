@@ -7,14 +7,12 @@ import lombok.Getter;
 import java.util.Arrays;
 
 public enum OAuth2Type {
-
-    GOOGLE(0, "google"),
-    FACEBOOK(1, "facebook"),
-    GITHUB(2, "github");
+    FACEBOOK(0, "facebook"),
+    GITHUB(1, "github");
     @Getter
-    private int value;
+    private final int value;
     @Getter
-    private String name;
+    private final String name;
 
     OAuth2Type(int value, final String name) {
         this.value = value;

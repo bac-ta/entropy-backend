@@ -25,6 +25,10 @@ public class Profile {
     private String avatar;
     @Column
     private String description;
-    @Column(name = "user_id", nullable = false)
+    @Column(name = "user_id")
     private Long userId;
+    @Column(name = "oauth2_user_id")
+    private Long oauth2UserId;
+    @Column(name = "oauth2_avatar")
+    private String oauth2Avatar;
 }

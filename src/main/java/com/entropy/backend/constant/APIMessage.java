@@ -28,6 +28,7 @@ public class APIMessage {
     public static String LOGIN_SUCCESSFUL = "Login successful";
     public static String ENDTRY_POINT_UNAUTHORIZED = "Responding with unauthorized error. Message - {}";
     public static String ACCOUNT_INVALID = "Account invalid, please try again !";
+    public static String OAUTH2_UNAUTHORIZED = "Sorry! We've got an Unauthorized Redirect URI and can't proceed with the authentication";
 
     //User
     public static final String REGIST_USER_SUCCESSFUL = "Regist user succesful";
@@ -35,7 +36,7 @@ public class APIMessage {
     public static final String APPROVE_TYPE_INVALID = "Approve type invalid";
     public static final String GENDER_TYPE_INVALID = "Gender type invalid";
     public static final String USER_TYPE_INVALID = "User type invalid";
-    public static final String OAUTH2_TYPE_INVALID ="OAuth2 type invalid";
+    public static final String OAUTH2_TYPE_INVALID = "OAuth2 type invalid";
 
     //Post
     public static final String POST_ID_INVALID = "Post id not valid";
