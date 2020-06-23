@@ -1,7 +1,7 @@
 package com.entropy.backend.repository.custom;
 
 import com.entropy.backend.constant.QueryName;
-import com.entropy.backend.enumeration.PublishStype;
+import com.entropy.backend.enumeration.PublishType;
 import com.entropy.backend.enumeration.SortType;
 import com.entropy.backend.enumeration.StatusType;
 import com.entropy.backend.model.dto.PostDTO;
@@ -55,7 +55,7 @@ public class PostRepositoryCustomImpl implements PostRepositoryCustom {
                     queryBuilder.append(" AND ");
                     queryCountBuilder.append(" AND ");
                 }
-                String publishTypeStr = PublishStype.findByValue(publishType).getName();
+                String publishTypeStr = PublishType.findByValue(publishType).getName();
                 queryBuilder.append("publish_type='").append(publishTypeStr).append("' ");
 
                 queryCountBuilder.append("publish_type='").append(publishTypeStr).append("' ");

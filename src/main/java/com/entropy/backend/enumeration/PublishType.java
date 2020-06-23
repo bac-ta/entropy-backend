@@ -6,7 +6,7 @@ import lombok.Getter;
 
 import java.util.Arrays;
 
-public enum PublishStype {
+public enum PublishType {
     WAITTING(0, "WAITTING"),
     PUBLISH(1, "PUBLISH");
     @Getter
@@ -14,14 +14,14 @@ public enum PublishStype {
     @Getter
     private String name;
 
-    PublishStype(int value, final String name) {
+    PublishType(int value, final String name) {
         this.value = value;
         this.name = name;
     }
 
 
-    public static PublishStype findByValue(int value) {
-        return Arrays.stream(PublishStype.values())
+    public static PublishType findByValue(int value) {
+        return Arrays.stream(PublishType.values())
                 .filter(publishType -> publishType.getValue() == value)
                 .findFirst().orElseThrow(() -> new ResourceNotFoundExceptionHandler(APIMessage.PUBLISH_TYPE_INVALID));
     }

@@ -1,6 +1,6 @@
 package com.entropy.backend.service;
 
-import com.entropy.backend.enumeration.PublishStype;
+import com.entropy.backend.enumeration.PublishType;
 import com.entropy.backend.enumeration.StatusType;
 import com.entropy.backend.security.jwt.AccountPrincipal;
 import com.entropy.backend.model.dto.PostDTO;
@@ -67,7 +67,7 @@ public class PostService {
         post.setTitle(title);
         post.setImageTitle(imageTitle);
         post.setContent(content);
-        post.setPublishStype(PublishStype.findByValue(postReq.getPublishType()));
+        post.setPublishType(PublishType.findByValue(postReq.getPublishType()));
 
         AccountPrincipal principal = authService.getCurrentPrincipal();
         post.setAuthor(principal.getUsername());
