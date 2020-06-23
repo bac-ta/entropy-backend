@@ -4,6 +4,9 @@ import com.entropy.backend.enumeration.UserType;
 import com.entropy.backend.repository.HttpCookieOAuth2AuthorizationRequestRepository;
 import com.entropy.backend.security.entrypoint.JwtAuthenticationEntryPoint;
 import com.entropy.backend.security.jwt.JwtAuthenticationFilter;
+import com.entropy.backend.security.oauth2.OAuth2AuthenticationFailureHandler;
+import com.entropy.backend.security.oauth2.OAuth2AuthenticationSuccessHandler;
+import com.entropy.backend.service.OAuth2UserCustomService;
 import com.entropy.backend.service.UserDetailsImplService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -33,11 +36,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private UserDetailsImplService userDetailsService;
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private OAuth2UserCustomService oAuth2UserCustomService;
+    private OAuth2AuthenticationSuccessHandler successHandler;
+    private OAuth2AuthenticationFailureHandler failureHandler;
 
     @Autowired
-    public SecurityConfiguration(UserDetailsImplService userDetailsService, JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint) {
+    public SecurityConfiguration(UserDetailsImplService userDetailsService, JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
+                                 OAuth2UserCustomService oAuth2UserCustomService, OAuth2AuthenticationSuccessHandler successHandler,
+                                 OAuth2AuthenticationFailureHandler failureHandler) {
         this.userDetailsService = userDetailsService;
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
+        this.oAuth2UserCustomService = oAuth2UserCustomService;
+        this.successHandler = successHandler;
+        this.failureHandler = failureHandler;
     }
 
     @Bean
@@ -73,7 +84,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .baseUri("/oauth2/callback/*")
                 .and()
                 .userInfoEndpoint()
-                .userService();
+                .userService(oAuth2UserCustomService)
+                .and()
+                .successHandler(successHandler).failureHandler(failureHandler);
         // Add our custom JWT security filter
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }

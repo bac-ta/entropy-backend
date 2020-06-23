@@ -29,4 +29,6 @@ public class Profile {
     private Long userId;
     @Column(name = "oauth2_user_id")
     private Long oauth2UserId;
+    @Column(name = "oauth2_avatar")
+    private String oauth2Avatar;
 }

@@ -17,9 +17,11 @@ import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserServ
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class OAuth2UserCustomService extends DefaultOAuth2UserService {
     private OAuth2UserRepository oAuth2UserRepository;
     private ProfileRepository profileRepository;
@@ -74,7 +76,7 @@ public class OAuth2UserCustomService extends DefaultOAuth2UserService {
         oAuth2UserEntity.setOAuth2Type(OAuth2Type.valueOf(request.getClientRegistration().getRegistrationId()));
         com.entropy.backend.model.entity.OAuth2User oAuth2UserEntitySaved = oAuth2UserRepository.save(oAuth2UserEntity);
         Profile profile = new Profile();
-        profile.setAvatar(template.getImageUrl());
+        profile.setOauth2Avatar(template.getImageUrl());
         profile.setOauth2UserId(oAuth2UserEntitySaved.getId());
         profileRepository.save(profile);
         return oAuth2UserEntitySaved;
@@ -86,7 +88,7 @@ public class OAuth2UserCustomService extends DefaultOAuth2UserService {
             Optional<Profile> profileOptional = profileRepository.findByOauth2UserId(oAuth2UserEntity.getId());
             if (profileOptional.isPresent()) {
                 Profile profile = profileOptional.get();
-                profile.setAvatar(template.getImageUrl());
+                profile.setOauth2Avatar(template.getImageUrl());
                 profileRepository.save(profile);
             }
         }
