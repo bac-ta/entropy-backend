@@ -4,7 +4,7 @@ import com.entropy.backend.enumeration.OAuth2Type;
 import com.entropy.backend.security.oauth2.FacebookOAuth2UserInfo;
 import com.entropy.backend.security.oauth2.GithubOAuth2UserInfo;
 import com.entropy.backend.security.pattern.template.OAuth2UserInfoTemplate;
-import com.entropy.backend.util.ResourceNotFoundExceptionHandler;
+import com.entropy.backend.util.OAuth2AuthenticationProcessingException;
 
 import java.util.Map;
 
@@ -15,7 +15,7 @@ public class OAuth2UserInfoFactory {
         else if (registrationId.equalsIgnoreCase(OAuth2Type.GITHUB.name()))
             return new GithubOAuth2UserInfo(attributes);
         else {
-            throw new ResourceNotFoundExceptionHandler("Sorry! Login with " + registrationId + " is not supported yet.");
+            throw new OAuth2AuthenticationProcessingException("Sorry! Login with " + registrationId + " is not supported yet.");
         }
     }
 }

@@ -8,7 +8,7 @@ import com.entropy.backend.repository.ProfileRepository;
 import com.entropy.backend.security.jwt.AccountPrincipal;
 import com.entropy.backend.security.pattern.factory.OAuth2UserInfoFactory;
 import com.entropy.backend.security.pattern.template.OAuth2UserInfoTemplate;
-import com.entropy.backend.util.ResourceNotFoundExceptionHandler;
+import com.entropy.backend.util.OAuth2AuthenticationProcessingException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
@@ -23,8 +23,8 @@ import java.util.Optional;
 
 @Service
 public class OAuth2UserCustomService extends DefaultOAuth2UserService {
-    private OAuth2UserRepository oAuth2UserRepository;
-    private ProfileRepository profileRepository;
+    private final OAuth2UserRepository oAuth2UserRepository;
+    private final ProfileRepository profileRepository;
 
     @Autowired
     public OAuth2UserCustomService(OAuth2UserRepository oAuth2UserRepository, ProfileRepository profileRepository) {
@@ -51,7 +51,7 @@ public class OAuth2UserCustomService extends DefaultOAuth2UserService {
 
         String email = template.getEmail();
         if (StringUtils.isEmpty(email))
-            throw new ResourceNotFoundExceptionHandler(ExceptionMessage.EMAIL_NOT_FOUND_FROM_PROVIDER);
+            throw new OAuth2AuthenticationProcessingException(ExceptionMessage.EMAIL_NOT_FOUND_FROM_PROVIDER);
 
         com.entropy.backend.model.entity.OAuth2User oAuth2UserEntity;
         Optional<com.entropy.backend.model.entity.OAuth2User> optionalOAuth2User = oAuth2UserRepository.findByEmail(email);
@@ -59,7 +59,7 @@ public class OAuth2UserCustomService extends DefaultOAuth2UserService {
         if (optionalOAuth2User.isPresent()) {
             oAuth2UserEntity = optionalOAuth2User.get();
             if (!OAuth2Type.valueOf(registrationId).equals(oAuth2UserEntity.getOAuth2Type()))
-                throw new ResourceNotFoundExceptionHandler("Looks like you're signed up with " +
+                throw new OAuth2AuthenticationProcessingException("Looks like you're signed up with " +
                         oAuth2UserEntity.getOAuth2Type() + " account. Please use your " + oAuth2UserEntity.getOAuth2Type() +
                         " account to login.");
             oAuth2UserEntity = updateExisting(oAuth2UserEntity, template);
