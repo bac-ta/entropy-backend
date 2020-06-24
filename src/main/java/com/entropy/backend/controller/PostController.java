@@ -4,6 +4,7 @@ import com.entropy.backend.constant.APIEndpointBase;
 import com.entropy.backend.constant.APIMessage;
 import com.entropy.backend.enumeration.SortType;
 import com.entropy.backend.enumeration.StatusType;
+import com.entropy.backend.model.dto.PostFetchByIdDTO;
 import com.entropy.backend.model.entity.Post;
 import com.entropy.backend.model.rest.request.post.PostCreateReq;
 import com.entropy.backend.model.rest.response.error.ErrorResp;
@@ -44,8 +45,8 @@ public class PostController {
 
     @GetMapping("/get-list")
     public ResponseEntity<?> findPostList(@RequestParam("sort") int sort, @RequestParam("start") int start, @RequestParam("limit") int limit,
-                                              @RequestParam(name = "status_type", required = false) Integer statusType, @RequestParam(name = "publish_type", required = false) Integer publishType,
-                                              @RequestParam(name = "category_id", required = false) Integer categoryId, @RequestParam(name = "search_text", required = false) String searchText) {
+                                          @RequestParam(name = "status_type", required = false) Integer statusType, @RequestParam(name = "publish_type", required = false) Integer publishType,
+                                          @RequestParam(name = "category_id", required = false) Integer categoryId, @RequestParam(name = "search_text", required = false) String searchText) {
         try {
             SortType.findByValue(sort);
         } catch (ResourceNotFoundExceptionHandler e) {
@@ -59,11 +60,8 @@ public class PostController {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Object> findPostById(@PathVariable("id") int id) {
-        Optional<Post> optionalPost = service.findById(id);
-        if (optionalPost.isPresent())
-            return new ResponseEntity<>(optionalPost.get(), HttpStatus.OK);
-        return new ResponseEntity<>(new Error(APIMessage.POST_ID_INVALID), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<PostFetchByIdDTO> findPostById(@PathVariable("id") int id) {
+        return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
 
     @PostMapping("/create")

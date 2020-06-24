@@ -34,4 +34,6 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
     List<Category> findByCategoryTypeContainingIgnoreCaseAndStatusType(String categoryType, StatusType statusType);
 
     List<Category> findByCategoryTypeContainingIgnoreCaseAndStatusType(String categoryType, StatusType statusType, Pageable pageable);
+
+    List<Category> findByIdIn(List<Integer> ids);
 }
