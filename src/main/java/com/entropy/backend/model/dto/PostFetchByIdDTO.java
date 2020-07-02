@@ -10,6 +10,8 @@ import java.util.List;
 @Data
 public class PostFetchByIdDTO extends PostDTO {
     private String content;
+    @JsonProperty("image_title")
+    private String imageTitle;
     @JsonProperty("category_info_list")
     private List<CategoryDTO> categoryDTOInfoList;
 

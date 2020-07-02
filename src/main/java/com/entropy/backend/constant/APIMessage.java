@@ -15,8 +15,8 @@ public class APIMessage {
     public static final String USER_NAME_NOT_BLANK = "User name must not blank";
     public static final String CREATE_FILEDIR_ERROR = "Could not create the directory where the uploaded files will be stored.";
     public static final String FILE_INVALID_PATH_SEQUENCE = "Sorry! Filename contains invalid path sequence ";
-    public static final String FILE_NOT_STORE = "Could not store file &s . Please try again!";
-    public static final String FILE_NOT_FOUND = "File not found &s";
+    public static final String FILE_NOT_STORE = "Could not store file %s . Please try again!";
+    public static final String FILE_NOT_FOUND = "File not found %s";
     public static final String STATUS_TYPE_INVALID = "Status type invalid";
     public static final String NOT_DETERMINE_FILE_TYPE = "Could not determine file type";
     public static final String FILE_TYPE_INVALID = "File type invalid";

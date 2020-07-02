@@ -73,6 +73,7 @@ public class PostService {
         postDTO.setUpdated(post.getUpdated().toString());
         postDTO.setPublishType(post.getPublishType().name());
         postDTO.setStatusType(post.getStatusType().name());
+        postDTO.setImageTitle(post.getImageTitle());
 
         List<PostCategory> postCategories = postCategoryRepo.findByPostId(post.getId());
         List<Integer> categoryIds = postCategories.stream().map(PostCategory::getCategoryId).collect(Collectors.toList());
