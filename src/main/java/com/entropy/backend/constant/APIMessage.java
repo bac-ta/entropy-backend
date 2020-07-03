@@ -42,6 +42,8 @@ public class APIMessage {
     public static final String POST_ID_INVALID = "Post id not valid";
     public static final String CREATE_POST_FAILURE = "Create post failure";
     public static final String CREATE_POST_SUCCESSFUL = "Create post successful";
+    public static final String UPDATE_POST_FAILURE = "Update post failure";
+    public static final String UPDATE_POST_SUCCESSFUL = "Update post successful";
     public static final String PUBLISH_TYPE_INVALID = "Publish type invalid";
     public static final String POST_TITLE_EXIST = "Post title exist, please try again with other title";
     public static final String POST_NOT_FOUND = "Post not found";

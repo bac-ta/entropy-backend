@@ -7,6 +7,7 @@ import com.entropy.backend.enumeration.StatusType;
 import com.entropy.backend.model.dto.PostFetchByIdDTO;
 import com.entropy.backend.model.entity.Post;
 import com.entropy.backend.model.rest.request.post.PostCreateReq;
+import com.entropy.backend.model.rest.request.post.PostUpdateReq;
 import com.entropy.backend.model.rest.response.error.ErrorResp;
 import com.entropy.backend.model.rest.response.post.PostFetchResp;
 import com.entropy.backend.model.rest.response.post.PostSaveResp;
@@ -27,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 /**
  * @author bac-ta
@@ -95,5 +95,11 @@ public class PostController {
             return new ResponseEntity<>(new ErrorResp(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
         service.changeStatusType(id, status);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<PostSaveResp> updatePost(@PathVariable("id") int id, @Valid @RequestBody PostUpdateReq postReq) {
+        PostSaveResp saveResp = service.updatePost(id, postReq);
+        return new ResponseEntity<>(saveResp, HttpStatus.OK);
     }
 }

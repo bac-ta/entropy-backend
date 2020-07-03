@@ -6,6 +6,8 @@ import com.entropy.backend.enumeration.StatusType;
 import com.entropy.backend.model.dto.CategoryDTO;
 import com.entropy.backend.model.dto.PostFetchByIdDTO;
 import com.entropy.backend.model.entity.Category;
+import com.entropy.backend.model.rest.request.post.PostUpdateReq;
+import com.entropy.backend.model.rest.response.post.PostSaveResp;
 import com.entropy.backend.repository.CategoryRepository;
 import com.entropy.backend.security.jwt.AccountPrincipal;
 import com.entropy.backend.model.dto.PostDTO;
@@ -120,6 +122,60 @@ public class PostService {
         postCategoryRepo.saveAll(postCategories);
 
         return postCreated;
+    }
+
+    public PostSaveResp updatePost(int id, PostUpdateReq req) {
+        logger.debug("Update post");
+        logger.debug(req.toString());
+
+        //Update post
+        String title = req.getTitle();
+        String imageTitle = req.getImageTitle();
+        String content = req.getContent();
+        PublishType publishType = PublishType.findByValue(req.getPublishType());
+        StatusType statusType = StatusType.findByValue(req.getStatusType());
+
+        Optional<Post> postOptional = postRepo.findById(id);
+        if (!postOptional.isPresent())
+            throw new ResourceNotFoundExceptionHandler(APIMessage.POST_NOT_FOUND);
+        Post post = postOptional.get();
+        post.setTitle(title);
+        post.setImageTitle(imageTitle);
+        post.setContent(content);
+        post.setPublishType(publishType);
+        post.setStatusType(statusType);
+
+        List<Integer> categoryUseIds = req.getCategoryUseIds();
+        if (categoryUseIds.isEmpty())
+            return new PostSaveResp(id, APIMessage.UPDATE_POST_SUCCESSFUL);
+
+        List<PostCategory> postCategoriesStore = postCategoryRepo.findByPostId(id);
+        List<Integer> categoryStoreNotUseIds = postCategoriesStore.stream().filter(postCategory ->
+                !categoryUseIds.contains(postCategory.getCategoryId())
+        ).map(postCategory -> postCategory.getCategoryId()).collect(Collectors.toList());
+
+        if (!categoryStoreNotUseIds.isEmpty()) {
+            //delete post category not use
+            postCategoryRepo.deleteByPostIdAndCategoryIdIn(id, categoryStoreNotUseIds);
+        }
+        List<Integer> categoryStoreUseIds = postCategoriesStore.stream().filter(postCategory ->
+                categoryUseIds.contains(postCategory.getCategoryId()))
+                .map(postCategory -> postCategory.getCategoryId()).collect(Collectors.toList());
+
+        //Remove
+        categoryUseIds.removeAll(categoryStoreUseIds);
+        //save new
+
+        List<PostCategory> postCategoriesNewUse = categoryUseIds.stream().map(categoryId -> {
+            PostCategory postCategory = new PostCategory();
+            postCategory.setPostId(id);
+            postCategory.setCategoryId(categoryId);
+            return postCategory;
+        }).collect(Collectors.toList());
+
+        postCategoryRepo.saveAll(postCategoriesNewUse);
+
+        return new PostSaveResp(id, APIMessage.UPDATE_POST_SUCCESSFUL);
     }
 
     public void deletePost(int id) {
