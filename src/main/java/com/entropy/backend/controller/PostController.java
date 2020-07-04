@@ -98,7 +98,7 @@ public class PostController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<PostSaveResp> updatePost(@PathVariable("id") int id, @Valid @RequestBody PostUpdateReq postReq) {
+    public ResponseEntity<PostSaveResp> updatePost(@PathVariable("id") int id, @Valid @RequestBody PostUpdateReq postReq) throws ResourceNotFoundExceptionHandler {
         PostSaveResp saveResp = service.updatePost(id, postReq);
         return new ResponseEntity<>(saveResp, HttpStatus.OK);
     }

@@ -136,8 +136,6 @@ public class PostService {
         StatusType statusType = StatusType.findByValue(req.getStatusType());
 
         Optional<Post> postOptional = postRepo.findById(id);
-        if (!postOptional.isPresent())
-            throw new ResourceNotFoundExceptionHandler(APIMessage.POST_NOT_FOUND);
         Post post = postOptional.get();
         post.setTitle(title);
         post.setImageTitle(imageTitle);
