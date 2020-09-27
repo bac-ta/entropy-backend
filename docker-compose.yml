@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile
     expose:
-      - "8080"
+      - "1109"
     ports:
-      - "8080:8080"
+      - "1109:8080"
     restart: always
