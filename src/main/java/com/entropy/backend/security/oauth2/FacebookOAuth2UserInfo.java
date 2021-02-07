@@ -1,7 +1,7 @@
 package com.entropy.backend.security.oauth2;
 
 
-import com.entropy.backend.security.pattern.template.OAuth2UserInfoTemplate;
+import com.entropy.backend.pattern.template.OAuth2UserInfoTemplate;
 
 import java.util.Map;
 

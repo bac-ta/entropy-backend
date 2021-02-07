@@ -1,8 +1,8 @@
 package com.entropy.backend.model.rest.request.user;
 
-import com.entropy.backend.anonation.FieldMatch;
-import com.entropy.backend.anonation.PasswordVerifier;
-import com.entropy.backend.constant.APIMessage;
+import com.entropy.backend.model.anonation.FieldMatch;
+import com.entropy.backend.model.anonation.PasswordVerifier;
+import com.entropy.backend.common.constant.APIMessage;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

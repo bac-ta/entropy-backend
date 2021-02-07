@@ -6,8 +6,8 @@ import com.entropy.backend.security.entrypoint.JwtAuthenticationEntryPoint;
 import com.entropy.backend.security.jwt.JwtAuthenticationFilter;
 import com.entropy.backend.security.oauth2.OAuth2AuthenticationFailureHandler;
 import com.entropy.backend.security.oauth2.OAuth2AuthenticationSuccessHandler;
-import com.entropy.backend.service.OAuth2UserCustomService;
-import com.entropy.backend.service.UserDetailsImplService;
+import com.entropy.backend.service.impl.OAuth2UserCustomServiceImpl;
+import com.entropy.backend.service.impl.UserDetailsImplServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,17 +34,17 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 )
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private final UserDetailsImplService userDetailsService;
+    private final UserDetailsImplServiceImpl userDetailsService;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-    private final OAuth2UserCustomService oAuth2UserCustomService;
+    private final OAuth2UserCustomServiceImpl oAuth2UserCustomService;
     @Autowired
     private OAuth2AuthenticationSuccessHandler successHandler;
     @Autowired
     private OAuth2AuthenticationFailureHandler failureHandler;
 
     @Autowired
-    public SecurityConfiguration(UserDetailsImplService userDetailsService, JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
-                                 OAuth2UserCustomService oAuth2UserCustomService) {
+    public SecurityConfiguration(UserDetailsImplServiceImpl userDetailsService, JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
+                                 OAuth2UserCustomServiceImpl oAuth2UserCustomService) {
         this.userDetailsService = userDetailsService;
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
         this.oAuth2UserCustomService = oAuth2UserCustomService;

@@ -1,6 +1,6 @@
 package com.entropy.backend.security.entrypoint;
 
-import com.entropy.backend.constant.APIMessage;
+import com.entropy.backend.common.constant.APIMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.AuthenticationException;

@@ -1,7 +1,7 @@
 package com.entropy.backend.controller;
 
-import com.entropy.backend.constant.APIEndpointBase;
-import com.entropy.backend.constant.APIMessage;
+import com.entropy.backend.common.constant.APIEndpointBase;
+import com.entropy.backend.common.constant.APIMessage;
 import com.entropy.backend.enumeration.SortType;
 import com.entropy.backend.enumeration.StatusType;
 import com.entropy.backend.model.entity.Category;
@@ -11,6 +11,7 @@ import com.entropy.backend.model.rest.response.category.CategoryGetResp;
 import com.entropy.backend.model.rest.response.category.CategoryResp;
 import com.entropy.backend.model.rest.response.error.ErrorResp;
 import com.entropy.backend.service.CategoryService;
+import com.entropy.backend.service.impl.CategoryServiceImpl;
 import com.entropy.backend.util.ResourceNotFoundExceptionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,10 +31,10 @@ import java.util.List;
 @RestController
 @RequestMapping(APIEndpointBase.CATEGORY_ENDPOINT_BASE)
 public class CategoryController {
-    private CategoryService categoryService;
+    private final CategoryService categoryService;
 
     @Autowired
-    public CategoryController(CategoryService categoryService) {
+    public CategoryController(CategoryServiceImpl categoryService) {
         this.categoryService = categoryService;
     }
 

@@ -1,12 +1,13 @@
-package com.entropy.backend.security.pattern.factory;
+package com.entropy.backend.pattern.factory;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 /**
  * @author bac-ta
  */
-@Service
+@Component
 public interface JwtTokenProviderFactory {
     String generateToken(Authentication authentication);
 

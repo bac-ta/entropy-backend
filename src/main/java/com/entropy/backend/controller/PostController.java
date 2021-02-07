@@ -1,7 +1,7 @@
 package com.entropy.backend.controller;
 
-import com.entropy.backend.constant.APIEndpointBase;
-import com.entropy.backend.constant.APIMessage;
+import com.entropy.backend.common.constant.APIEndpointBase;
+import com.entropy.backend.common.constant.APIMessage;
 import com.entropy.backend.enumeration.SortType;
 import com.entropy.backend.enumeration.StatusType;
 import com.entropy.backend.model.dto.PostFetchByIdDTO;
@@ -12,6 +12,7 @@ import com.entropy.backend.model.rest.response.error.ErrorResp;
 import com.entropy.backend.model.rest.response.post.PostFetchResp;
 import com.entropy.backend.model.rest.response.post.PostSaveResp;
 import com.entropy.backend.service.PostService;
+import com.entropy.backend.service.impl.PostServiceImpl;
 import com.entropy.backend.util.ResourceNotFoundExceptionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -36,10 +37,10 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping(APIEndpointBase.POST_ENDPOINT_BASE)
 public class PostController {
-    private PostService service;
+    private final PostService service;
 
     @Autowired
-    public PostController(PostService service) {
+    public PostController(PostServiceImpl service) {
         this.service = service;
     }
 

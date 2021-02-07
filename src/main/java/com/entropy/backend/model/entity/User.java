@@ -19,7 +19,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * @author bac-ta
@@ -45,7 +45,7 @@ public class User extends Base {
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
     @Column(name = "date_of_birth", nullable = false)
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     @Column(name = "gender_type", nullable = false)
     @Enumerated(value = EnumType.STRING)
     private GenderType genderType;

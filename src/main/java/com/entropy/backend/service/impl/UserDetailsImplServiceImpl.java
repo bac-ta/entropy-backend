@@ -1,4 +1,4 @@
-package com.entropy.backend.service;
+package com.entropy.backend.service.impl;
 
 import com.entropy.backend.model.entity.User;
 import com.entropy.backend.enumeration.ApproveType;
@@ -18,11 +18,11 @@ import org.springframework.transaction.annotation.Transactional;
  * @author bac-ta
  */
 @Service
-public class UserDetailsImplService implements UserDetailsService {
+public class UserDetailsImplServiceImpl implements UserDetailsService {
     private UserRepository userRepository;
 
     @Autowired
-    public UserDetailsImplService(UserRepository userRepository) {
+    public UserDetailsImplServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

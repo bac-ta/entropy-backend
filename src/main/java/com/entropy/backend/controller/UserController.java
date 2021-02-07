@@ -1,10 +1,11 @@
 package com.entropy.backend.controller;
 
-import com.entropy.backend.constant.APIEndpointBase;
-import com.entropy.backend.constant.APIMessage;
+import com.entropy.backend.common.constant.APIEndpointBase;
+import com.entropy.backend.common.constant.APIMessage;
 import com.entropy.backend.model.rest.request.user.UserRegistrationReq;
 import com.entropy.backend.model.rest.response.user.UserRegistrationResp;
 import com.entropy.backend.service.UserService;
+import com.entropy.backend.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +20,10 @@ import java.util.List;
 @RestController
 @RequestMapping(APIEndpointBase.USER_ENDPOINT_BASE)
 public class UserController {
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserServiceImpl userService) {
         this.userService = userService;
     }
 

@@ -1,6 +1,6 @@
 package com.entropy.backend.repository.custom;
 
-import com.entropy.backend.constant.QueryName;
+import com.entropy.backend.common.constant.QueryName;
 import com.entropy.backend.enumeration.PublishType;
 import com.entropy.backend.enumeration.SortType;
 import com.entropy.backend.enumeration.StatusType;
