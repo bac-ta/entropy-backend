@@ -10,7 +10,7 @@ spring:
     database: mysql
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
     properties:
       hibernate:
@@ -52,7 +52,6 @@ spring:
   servlet:
     multipart:
       enabled: true
-      file-size-threshold: 2KB
       max-file-size: 100MB
       max-request-size: 100MB
 

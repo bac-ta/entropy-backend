@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
         user.setUserName(registration.getUsername());
         user.setPhoneNumber(registration.getPhoneNumber());
         user.setGenderType(GenderType.findByValue(registration.getGenderType()));
-        user.setDateOfBirth(TimeUtil.toDate(registration.getDateOfBirth()));
+        user.setDateOfBirth(TimeUtil.toDateTime(registration.getDateOfBirth()));
 
         User userSave = userRepository.save(user);
         Long id = userSave.getId();

@@ -11,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * @author bac-ta
@@ -21,10 +22,10 @@ import java.time.LocalDate;
 public class Base {
     @Column
     @CreatedDate
-    private LocalDate created;
+    private LocalDateTime created;
     @Column
     @LastModifiedDate
-    private LocalDate updated;
+    private LocalDateTime updated;
     @Column(name = "created_by")
     @CreatedBy
     private String createdBy;
