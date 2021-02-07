@@ -1,13 +1,13 @@
-package com.entropy.backend.service;
+package com.entropy.backend.service.impl;
 
-import com.entropy.backend.constant.ExceptionMessage;
+import com.entropy.backend.common.constant.ExceptionMessage;
 import com.entropy.backend.enumeration.OAuth2Type;
 import com.entropy.backend.model.entity.Profile;
+import com.entropy.backend.pattern.factory.OAuth2UserInfoFactory;
+import com.entropy.backend.pattern.template.OAuth2UserInfoTemplate;
 import com.entropy.backend.repository.OAuth2UserRepository;
 import com.entropy.backend.repository.ProfileRepository;
 import com.entropy.backend.security.jwt.AccountPrincipal;
-import com.entropy.backend.security.pattern.factory.OAuth2UserInfoFactory;
-import com.entropy.backend.security.pattern.template.OAuth2UserInfoTemplate;
 import com.entropy.backend.util.OAuth2AuthenticationProcessingException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +22,12 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class OAuth2UserCustomService extends DefaultOAuth2UserService {
+public class OAuth2UserCustomServiceImpl extends DefaultOAuth2UserService {
     private final OAuth2UserRepository oAuth2UserRepository;
     private final ProfileRepository profileRepository;
 
     @Autowired
-    public OAuth2UserCustomService(OAuth2UserRepository oAuth2UserRepository, ProfileRepository profileRepository) {
+    public OAuth2UserCustomServiceImpl(OAuth2UserRepository oAuth2UserRepository, ProfileRepository profileRepository) {
         this.oAuth2UserRepository = oAuth2UserRepository;
         this.profileRepository = profileRepository;
     }

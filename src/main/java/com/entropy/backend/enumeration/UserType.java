@@ -1,7 +1,7 @@
 package com.entropy.backend.enumeration;
 
 
-import com.entropy.backend.constant.APIMessage;
+import com.entropy.backend.common.constant.APIMessage;
 import com.entropy.backend.util.ResourceNotFoundExceptionHandler;
 import lombok.Getter;
 

@@ -1,4 +1,4 @@
-package com.entropy.backend.anonation;
+package com.entropy.backend.model.anonation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

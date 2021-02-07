@@ -1,7 +1,7 @@
 package com.entropy.backend.security.jwt;
 
-import com.entropy.backend.constant.ExceptionMessage;
-import com.entropy.backend.security.pattern.factory.JwtTokenProviderFactory;
+import com.entropy.backend.common.constant.ExceptionMessage;
+import com.entropy.backend.pattern.factory.JwtTokenProviderFactory;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;

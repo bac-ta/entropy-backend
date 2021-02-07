@@ -1,9 +1,10 @@
 package com.entropy.backend.controller;
 
-import com.entropy.backend.constant.APIEndpointBase;
-import com.entropy.backend.constant.APIMessage;
+import com.entropy.backend.common.constant.APIEndpointBase;
+import com.entropy.backend.common.constant.APIMessage;
 import com.entropy.backend.model.rest.response.file.FileResponse;
 import com.entropy.backend.service.FileService;
+import com.entropy.backend.service.impl.FileServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +29,11 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(APIEndpointBase.FILE_ENDPOINT_BASE)
 public class FileController {
-    private FileService service;
+    private final FileService service;
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 
     @Autowired
-    public FileController(FileService service) {
+    public FileController(FileServiceImpl service) {
         this.service = service;
     }
 

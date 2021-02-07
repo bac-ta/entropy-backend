@@ -1,4 +1,4 @@
-package com.entropy.backend.constant;
+package com.entropy.backend.common.constant;
 
 /**
  * @author bac-ta

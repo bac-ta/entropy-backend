@@ -1,4 +1,4 @@
-package com.entropy.backend.util;
+package com.entropy.backend.common.util;
 
 import org.springframework.util.SerializationUtils;
 
@@ -11,7 +11,7 @@ import java.util.Optional;
 /**
  * @author bac-ta
  */
-public class Util {
+public class AppUtil {
     public static Optional<Cookie> getCookie(HttpServletRequest request, String name) {
         Cookie[] cookies = request.getCookies();
         if (cookies == null || cookies.length == 0)

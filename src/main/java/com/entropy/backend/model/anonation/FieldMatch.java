@@ -1,4 +1,4 @@
-package com.entropy.backend.anonation;
+package com.entropy.backend.model.anonation;
 
 import javax.validation.Payload;
 import javax.validation.Constraint;

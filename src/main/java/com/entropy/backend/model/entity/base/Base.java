@@ -10,7 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * @author bac-ta
@@ -21,10 +21,10 @@ import java.util.Date;
 public class Base {
     @Column
     @CreatedDate
-    private Date created;
+    private LocalDate created;
     @Column
     @LastModifiedDate
-    private Date updated;
+    private LocalDate updated;
     @Column(name = "created_by")
     @CreatedBy
     private String createdBy;

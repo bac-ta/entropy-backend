@@ -1,6 +1,6 @@
 package com.entropy.backend.util;
 
-import com.entropy.backend.constant.APIMessage;
+import com.entropy.backend.common.constant.APIMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
