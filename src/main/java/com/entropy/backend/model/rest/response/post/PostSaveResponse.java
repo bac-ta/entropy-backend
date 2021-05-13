@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class PostSaveResp {
+public class PostSaveResponse {
     private Integer id;
     private String message;
 }

@@ -5,13 +5,12 @@ import com.entropy.backend.common.constant.APIMessage;
 import com.entropy.backend.model.enumeration.SortType;
 import com.entropy.backend.model.enumeration.StatusType;
 import com.entropy.backend.model.entity.Category;
-import com.entropy.backend.model.rest.request.category.CategoryCreateReq;
-import com.entropy.backend.model.rest.response.category.CategoryFetchResp;
-import com.entropy.backend.model.rest.response.category.CategoryGetResp;
-import com.entropy.backend.model.rest.response.category.CategoryResp;
-import com.entropy.backend.model.rest.response.error.ErrorResp;
+import com.entropy.backend.model.rest.request.category.CategoryCreateRequest;
+import com.entropy.backend.model.rest.response.category.CategoryFetchResponse;
+import com.entropy.backend.model.rest.response.category.CategoryGetResponse;
+import com.entropy.backend.model.rest.response.category.CategoryResponse;
+import com.entropy.backend.model.rest.response.error.ErrorResponse;
 import com.entropy.backend.service.CategoryService;
-import com.entropy.backend.service.impl.CategoryServiceImpl;
 import com.entropy.backend.util.ResourceNotFoundExceptionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,24 +33,24 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @Autowired
-    public CategoryController(CategoryServiceImpl categoryService) {
+    public CategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
 
     @PostMapping("/create")
-    public ResponseEntity<CategoryResp> createCategory(@Valid @RequestBody CategoryCreateReq request) {
+    public ResponseEntity<CategoryResponse> createCategory(@Valid @RequestBody CategoryCreateRequest request) {
         try {
             Category category = categoryService.createCategory(request);
-            return new ResponseEntity<>(new CategoryResp(category.getId(), APIMessage.CREATE_CATEGORY_SUCCESSFUL), HttpStatus.OK);
+            return new ResponseEntity<>(new CategoryResponse(category.getId(), APIMessage.CREATE_CATEGORY_SUCCESSFUL), HttpStatus.OK);
         } catch (ResourceNotFoundExceptionHandler e) {
-            return new ResponseEntity<>(new CategoryResp(APIMessage.CREATE_CATEGORY_FAILURE + " cause: " + e.getMessage()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new CategoryResponse(APIMessage.CREATE_CATEGORY_FAILURE + " cause: " + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
 
     @GetMapping("/get-many")
-    public ResponseEntity<List<CategoryGetResp>> findCategoryEnableList() {
-        List<CategoryGetResp> categoryGetResps = categoryService.findCategoryListEnable();
-        return new ResponseEntity<>(categoryGetResps, HttpStatus.OK);
+    public ResponseEntity<List<CategoryGetResponse>> findCategoryEnableList() {
+        List<CategoryGetResponse> categoryGetResponses = categoryService.findCategoryListEnable();
+        return new ResponseEntity<>(categoryGetResponses, HttpStatus.OK);
     }
 
     @GetMapping("/get-list")
@@ -59,12 +58,12 @@ public class CategoryController {
         try {
             SortType.findByValue(sort);
         } catch (ResourceNotFoundExceptionHandler e) {
-            return new ResponseEntity<>(new ErrorResp(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ErrorResponse(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
         }
 
         if (limit < 0 || start < 0)
-            return new ResponseEntity<>(new ErrorResp(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
-        CategoryFetchResp fetchResp = categoryService.findCategories(sort, limit, start, statusType, searchText);
+            return new ResponseEntity<>(new ErrorResponse(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
+        CategoryFetchResponse fetchResp = categoryService.findCategories(sort, limit, start, statusType, searchText);
         return new ResponseEntity<>(fetchResp, HttpStatus.OK);
     }
 
@@ -73,10 +72,10 @@ public class CategoryController {
         try {
             StatusType.findByValue(status);
         } catch (ResourceNotFoundExceptionHandler e) {
-            return new ResponseEntity<>(new ErrorResp(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ErrorResponse(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
         }
         if (id <= 0)
-            return new ResponseEntity<>(new ErrorResp(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ErrorResponse(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
         categoryService.changeStatusType(id, status);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -84,10 +83,10 @@ public class CategoryController {
     @GetMapping("/get/{id}")
     public ResponseEntity<?> findCategory(@PathVariable("id") int id) {
         if (id <= 0)
-            return new ResponseEntity<>(new ErrorResp(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ErrorResponse(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
         Category category = categoryService.findCategory(id);
         if (category == null)
-            return new ResponseEntity<>(new ErrorResp(APIMessage.CATEGORY_ID_NOT_EXIST), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new ErrorResponse(APIMessage.CATEGORY_ID_NOT_EXIST), HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(category, HttpStatus.OK);
     }
 }

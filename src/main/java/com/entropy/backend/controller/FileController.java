@@ -4,7 +4,6 @@ import com.entropy.backend.common.constant.APIEndpointBase;
 import com.entropy.backend.common.constant.APIMessage;
 import com.entropy.backend.model.rest.response.file.FileResponse;
 import com.entropy.backend.service.FileService;
-import com.entropy.backend.service.impl.FileServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +32,7 @@ public class FileController {
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 
     @Autowired
-    public FileController(FileServiceImpl service) {
+    public FileController(FileService service) {
         this.service = service;
     }
 

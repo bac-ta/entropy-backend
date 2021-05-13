@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class PostFetchResp {
+public class PostFetchResponse {
     private int count;
     private List<PostDTO> posts;
 }

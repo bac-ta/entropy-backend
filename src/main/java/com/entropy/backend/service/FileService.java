@@ -7,6 +7,6 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public interface FileService {
     String storeFile(MultipartFile file);
-    Resource loadFileAsResource(String fileName);
 
+    Resource loadFileAsResource(String fileName);
 }

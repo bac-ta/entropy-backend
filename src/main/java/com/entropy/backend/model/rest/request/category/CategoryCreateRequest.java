@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @ToString
-public class CategoryCreateReq {
+public class CategoryCreateRequest {
     @JsonProperty("category_type")
     @NotNull
     private String categoryType;

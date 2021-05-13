@@ -1,8 +1,8 @@
 package com.entropy.backend.service.impl;
 
 import com.entropy.backend.common.constant.APIMessage;
-import com.entropy.backend.model.rest.request.auth.LoginInfoReq;
-import com.entropy.backend.model.rest.response.auth.LoginInfoResp;
+import com.entropy.backend.model.rest.request.auth.LoginInfoRequest;
+import com.entropy.backend.model.rest.response.auth.LoginInfoResponse;
 import com.entropy.backend.pattern.factory.JwtTokenProviderFactory;
 import com.entropy.backend.security.jwt.AccountPrincipal;
 import com.entropy.backend.service.AuthenticationService;
@@ -29,7 +29,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public LoginInfoResp login(LoginInfoReq req) {
+    public LoginInfoResponse login(LoginInfoRequest req) {
         String emailOrUsername = req.getEmailOrUsername();
         String password = req.getPassword();
 
@@ -42,7 +42,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtFactory.generateToken(authentication);
-        return new LoginInfoResp(APIMessage.LOGIN_SUCCESSFUL, jwt);
+        return new LoginInfoResponse(APIMessage.LOGIN_SUCCESSFUL, jwt);
     }
 
     @Override

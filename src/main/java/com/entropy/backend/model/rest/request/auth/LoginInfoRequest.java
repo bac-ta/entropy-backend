@@ -13,7 +13,7 @@ import javax.validation.constraints.NotBlank;
  */
 @Data
 @AllArgsConstructor
-public class LoginInfoReq {
+public class LoginInfoRequest {
     @JsonProperty(value = "email_or_username", required = true)
     @NotBlank(message = APIMessage.EMAIL_NOT_BLANK)
     private String emailOrUsername;

@@ -1,20 +1,20 @@
 package com.entropy.backend.service;
 
 import com.entropy.backend.model.entity.Category;
-import com.entropy.backend.model.rest.request.category.CategoryCreateReq;
-import com.entropy.backend.model.rest.response.category.CategoryFetchResp;
-import com.entropy.backend.model.rest.response.category.CategoryGetResp;
+import com.entropy.backend.model.rest.request.category.CategoryCreateRequest;
+import com.entropy.backend.model.rest.response.category.CategoryFetchResponse;
+import com.entropy.backend.model.rest.response.category.CategoryGetResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public interface CategoryService {
-    Category createCategory(CategoryCreateReq request);
+    Category createCategory(CategoryCreateRequest request);
 
-    List<CategoryGetResp> findCategoryListEnable();
+    List<CategoryGetResponse> findCategoryListEnable();
 
-    CategoryFetchResp findCategories(int sort, int limit, int start, Integer statusType, String searchText);
+    CategoryFetchResponse findCategories(int sort, int limit, int start, Integer statusType, String searchText);
 
     void changeStatusType(int id, int status);
 

@@ -2,14 +2,18 @@ package com.entropy.backend.controller;
 
 import com.entropy.backend.common.constant.APIEndpointBase;
 import com.entropy.backend.common.constant.APIMessage;
-import com.entropy.backend.model.rest.request.user.UserRegistrationReq;
-import com.entropy.backend.model.rest.response.user.UserRegistrationResp;
+import com.entropy.backend.model.rest.request.user.UserRegistrationRequest;
+import com.entropy.backend.model.rest.response.user.UserRegistrationResponse;
 import com.entropy.backend.service.UserService;
 import com.entropy.backend.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -28,20 +32,20 @@ public class UserController {
     }
 
     @PostMapping("/regist")
-    public ResponseEntity<UserRegistrationResp> registUser(@Valid @RequestBody UserRegistrationReq req) {
+    public ResponseEntity<UserRegistrationResponse> registerUser(@Valid @RequestBody UserRegistrationRequest req) {
         try {
-            UserRegistrationResp resp = userService.regist(req);
+            UserRegistrationResponse resp = userService.register(req);
             return new ResponseEntity<>(resp, HttpStatus.OK);
         } catch (Exception e) {
-            UserRegistrationResp resp = new UserRegistrationResp();
+            UserRegistrationResponse resp = new UserRegistrationResponse();
             resp.setMessage(APIMessage.REGIST_USER_FAIL);
             return new ResponseEntity<>(resp, HttpStatus.BAD_REQUEST);
         }
     }
 
     @GetMapping("/ids-watting")
-    public ResponseEntity<List<Long>> findUserRegistListWatting() {
-        List<Long> idList = userService.findUserRegistListWatting();
+    public ResponseEntity<List<Long>> findUserRegisterListWaiting() {
+        List<Long> idList = userService.findUserRegisterListWatting();
         return new ResponseEntity<>(idList, HttpStatus.OK);
     }
 }

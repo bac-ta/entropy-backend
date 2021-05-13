@@ -56,6 +56,6 @@ public class Post extends Base {
     private StatusType statusType = StatusType.ON;
     @Column(name = "publish_type", columnDefinition = "VARCHAR(45) DEFAULT 'WATTING'", nullable = false)
     @Enumerated(value = EnumType.STRING)
-    private PublishType publishType = PublishType.WAITTING;
+    private PublishType publishType = PublishType.WAITING;
 
 }

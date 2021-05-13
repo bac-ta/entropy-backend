@@ -14,9 +14,9 @@ public enum GenderType {
     FEMALE(1, "FEMALE"),
     OTHER(2, "OTHER");
     @Getter
-    private int value;
+    private final int value;
     @Getter
-    private String name;
+    private final String name;
 
     GenderType(int value, final String name) {
         this.value = value;

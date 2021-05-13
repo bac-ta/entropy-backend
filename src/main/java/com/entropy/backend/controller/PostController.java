@@ -6,11 +6,11 @@ import com.entropy.backend.model.enumeration.SortType;
 import com.entropy.backend.model.enumeration.StatusType;
 import com.entropy.backend.model.dto.PostFetchByIdDTO;
 import com.entropy.backend.model.entity.Post;
-import com.entropy.backend.model.rest.request.post.PostCreateReq;
-import com.entropy.backend.model.rest.request.post.PostUpdateReq;
-import com.entropy.backend.model.rest.response.error.ErrorResp;
-import com.entropy.backend.model.rest.response.post.PostFetchResp;
-import com.entropy.backend.model.rest.response.post.PostSaveResp;
+import com.entropy.backend.model.rest.request.post.PostCreateRequest;
+import com.entropy.backend.model.rest.request.post.PostUpdateRequest;
+import com.entropy.backend.model.rest.response.error.ErrorResponse;
+import com.entropy.backend.model.rest.response.post.PostFetchResponse;
+import com.entropy.backend.model.rest.response.post.PostSaveResponse;
 import com.entropy.backend.service.PostService;
 import com.entropy.backend.service.impl.PostServiceImpl;
 import com.entropy.backend.util.ResourceNotFoundExceptionHandler;
@@ -51,12 +51,12 @@ public class PostController {
         try {
             SortType.findByValue(sort);
         } catch (ResourceNotFoundExceptionHandler e) {
-            return new ResponseEntity<>(new ErrorResp(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ErrorResponse(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
         }
 
         if (limit < 0 || start < 0)
-            return new ResponseEntity<>(new ErrorResp(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
-        PostFetchResp fetchResp = service.findPosts(sort, start, limit, statusType, publishType, categoryId, searchText);
+            return new ResponseEntity<>(new ErrorResponse(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
+        PostFetchResponse fetchResp = service.findPosts(sort, start, limit, statusType, publishType, categoryId, searchText);
         return new ResponseEntity<>(fetchResp, HttpStatus.OK);
     }
 
@@ -66,15 +66,15 @@ public class PostController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<PostSaveResp> createPost(@Valid @RequestBody PostCreateReq postReq) {
+    public ResponseEntity<PostSaveResponse> createPost(@Valid @RequestBody PostCreateRequest postReq) {
         Post post;
         try {
             post = service.createPost(postReq);
             if (post == null)
-                return new ResponseEntity<>(new PostSaveResp(0, APIMessage.CREATE_POST_FAILURE), HttpStatus.BAD_REQUEST);
-            return new ResponseEntity<>(new PostSaveResp(post.getId(), APIMessage.CREATE_POST_SUCCESSFUL), HttpStatus.OK);
+                return new ResponseEntity<>(new PostSaveResponse(0, APIMessage.CREATE_POST_FAILURE), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new PostSaveResponse(post.getId(), APIMessage.CREATE_POST_SUCCESSFUL), HttpStatus.OK);
         } catch (DataIntegrityViolationException e) {
-            return new ResponseEntity<>(new PostSaveResp(0, APIMessage.POST_TITLE_EXIST), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new PostSaveResponse(0, APIMessage.POST_TITLE_EXIST), HttpStatus.BAD_REQUEST);
         }
 
     }
@@ -90,17 +90,17 @@ public class PostController {
         try {
             StatusType.findByValue(status);
         } catch (ResourceNotFoundExceptionHandler e) {
-            return new ResponseEntity<>(new ErrorResp(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ErrorResponse(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
         }
         if (id <= 0)
-            return new ResponseEntity<>(new ErrorResp(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ErrorResponse(APIMessage.PARAMS_INVALID), HttpStatus.BAD_REQUEST);
         service.changeStatusType(id, status);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<PostSaveResp> updatePost(@PathVariable("id") int id, @Valid @RequestBody PostUpdateReq postReq) throws ResourceNotFoundExceptionHandler {
-        PostSaveResp saveResp = service.updatePost(id, postReq);
+    public ResponseEntity<PostSaveResponse> updatePost(@PathVariable("id") int id, @Valid @RequestBody PostUpdateRequest postReq) throws ResourceNotFoundExceptionHandler {
+        PostSaveResponse saveResp = service.updatePost(id, postReq);
         return new ResponseEntity<>(saveResp, HttpStatus.OK);
     }
 }

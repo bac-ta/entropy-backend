@@ -4,9 +4,9 @@ import com.entropy.backend.model.enumeration.SortType;
 import com.entropy.backend.model.enumeration.StatusType;
 import com.entropy.backend.model.dto.CategoryDTO;
 import com.entropy.backend.model.entity.Category;
-import com.entropy.backend.model.rest.request.category.CategoryCreateReq;
-import com.entropy.backend.model.rest.response.category.CategoryFetchResp;
-import com.entropy.backend.model.rest.response.category.CategoryGetResp;
+import com.entropy.backend.model.rest.request.category.CategoryCreateRequest;
+import com.entropy.backend.model.rest.response.category.CategoryFetchResponse;
+import com.entropy.backend.model.rest.response.category.CategoryGetResponse;
 import com.entropy.backend.repository.CategoryRepository;
 import com.entropy.backend.service.CategoryService;
 import com.entropy.backend.util.ResourceNotFoundExceptionHandler;
@@ -34,7 +34,7 @@ public class CategoryServiceImpl implements CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public Category createCategory(CategoryCreateReq request) throws ResourceNotFoundExceptionHandler {
+    public Category createCategory(CategoryCreateRequest request) throws ResourceNotFoundExceptionHandler {
         logger.debug("Create category");
         logger.info(request.toString());
 
@@ -44,15 +44,15 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryGetResp> findCategoryListEnable() {
+    public List<CategoryGetResponse> findCategoryListEnable() {
         logger.debug("Find categories enable");
         return categoryRepository.findAllByStatusType(StatusType.ON).stream().
-                map(category -> new CategoryGetResp(category.getId(), category.getCategoryType())).
+                map(category -> new CategoryGetResponse(category.getId(), category.getCategoryType())).
                 collect(Collectors.toList());
     }
 
     @Override
-    public CategoryFetchResp findCategories(int sort, int limit, int start, Integer statusType, String searchText) {
+    public CategoryFetchResponse findCategories(int sort, int limit, int start, Integer statusType, String searchText) {
         logger.debug("Find categories");
         logger.info("sort: " + sort + ", start: " + start + ", limit: " + limit + ", status type: " + statusType + ", search text: " + searchText);
         Pageable pageable = null;
@@ -68,24 +68,24 @@ public class CategoryServiceImpl implements CategoryService {
         if (StringUtils.isBlank(searchText) && statusType == null) {
             count = categoryRepository.findAll().size();
             if (count == 0)
-                return new CategoryFetchResp(0, new ArrayList<>());
+                return new CategoryFetchResponse(0, new ArrayList<>());
             categories = categoryRepository.findAll(pageable).getContent();
         } else {
             if (!StringUtils.isBlank(searchText) && statusType == null) {
                 System.out.println("vafaf");
                 count = categoryRepository.findByCategoryTypeContainingIgnoreCase(searchText).size();
                 if (count == 0)
-                    return new CategoryFetchResp(0, new ArrayList<>());
+                    return new CategoryFetchResponse(0, new ArrayList<>());
                 categories = categoryRepository.findByCategoryTypeContainingIgnoreCase(searchText, pageable);
             } else if (StringUtils.isBlank(searchText) && statusType != null) {
                 count = categoryRepository.findByStatusType(StatusType.findByValue(statusType)).size();
                 if (count == 0)
-                    return new CategoryFetchResp(0, new ArrayList<>());
+                    return new CategoryFetchResponse(0, new ArrayList<>());
                 categories = categoryRepository.findByStatusType(StatusType.findByValue(statusType), pageable);
             } else {
                 count = categoryRepository.findByCategoryTypeContainingIgnoreCaseAndStatusType(searchText, StatusType.findByValue(statusType)).size();
                 if (count == 0)
-                    return new CategoryFetchResp(0, new ArrayList<>());
+                    return new CategoryFetchResponse(0, new ArrayList<>());
                 categories = categoryRepository.findByCategoryTypeContainingIgnoreCaseAndStatusType(searchText, StatusType.findByValue(statusType), pageable);
             }
         }
@@ -93,7 +93,7 @@ public class CategoryServiceImpl implements CategoryService {
         List<CategoryDTO> categoryDTOS = categories.stream()
                 .map(category -> new CategoryDTO(category.getId(), category.getCategoryType(), category.getUpdated().toString(), category.getStatusType().getName()))
                 .collect(Collectors.toList());
-        return new CategoryFetchResp(count, categoryDTOS);
+        return new CategoryFetchResponse(count, categoryDTOS);
     }
 
     @Override

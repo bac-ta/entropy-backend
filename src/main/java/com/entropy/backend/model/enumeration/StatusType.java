@@ -10,9 +10,9 @@ public enum StatusType {
     ON(1, "ON"),
     OFF(0, "OFF");
     @Getter
-    private int value;
+    private final int value;
     @Getter
-    private String name;
+    private final String name;
 
     StatusType(int value, final String name) {
         this.value = value;

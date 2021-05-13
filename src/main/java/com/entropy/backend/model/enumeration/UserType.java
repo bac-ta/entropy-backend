@@ -15,9 +15,9 @@ public enum UserType {
     GUEST(1, "GUEST"),
     ADMINITRATOR(2, "ADMINITRATOR");
     @Getter
-    private int value;
+    private final int value;
     @Getter
-    private String name;
+    private final String name;
 
     UserType(int value, final String name) {
         this.value = value;

@@ -1,10 +1,11 @@
-package com.entropy.backend.repository.custom;
+package com.entropy.backend.repository.custom.impl;
 
 import com.entropy.backend.common.constant.QueryName;
 import com.entropy.backend.model.enumeration.PublishType;
 import com.entropy.backend.model.enumeration.SortType;
 import com.entropy.backend.model.enumeration.StatusType;
 import com.entropy.backend.model.dto.PostDTO;
+import com.entropy.backend.repository.custom.PostRepositoryCustom;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

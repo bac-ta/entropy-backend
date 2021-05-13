@@ -10,7 +10,7 @@ import java.util.List;
 
 @Data
 @ToString
-public class PostCreateReq {
+public class PostCreateRequest {
     @NotBlank
     @JsonProperty(required = true)
     private String title;

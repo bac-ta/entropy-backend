@@ -11,9 +11,9 @@ public enum ApproveType {
     ACCEPTED(1, "ACCEPTED"),
     WAITING(2, "WAITING");
     @Getter
-    private int value;
+    private final int value;
     @Getter
-    private String name;
+    private final String name;
 
     ApproveType(int value, final String name) {
         this.value = value;

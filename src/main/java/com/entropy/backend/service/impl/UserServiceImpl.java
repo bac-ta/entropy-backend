@@ -6,8 +6,8 @@ import com.entropy.backend.model.enumeration.ApproveType;
 import com.entropy.backend.model.enumeration.GenderType;
 import com.entropy.backend.model.enumeration.StatusType;
 import com.entropy.backend.model.entity.User;
-import com.entropy.backend.model.rest.request.user.UserRegistrationReq;
-import com.entropy.backend.model.rest.response.user.UserRegistrationResp;
+import com.entropy.backend.model.rest.request.user.UserRegistrationRequest;
+import com.entropy.backend.model.rest.response.user.UserRegistrationResponse;
 import com.entropy.backend.repository.UserRepository;
 import com.entropy.backend.service.UserService;
 import org.slf4j.Logger;
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserRegistrationResp regist(UserRegistrationReq registration) {
+    public UserRegistrationResponse register(UserRegistrationRequest registration) {
         User user = new User();
         user.setFirstName(registration.getFirstName());
         user.setLastName(registration.getLastName());
@@ -53,11 +53,11 @@ public class UserServiceImpl implements UserService {
         User userSave = userRepository.save(user);
         Long id = userSave.getId();
         logger.info("User id: " + id);
-        return new UserRegistrationResp(id, APIMessage.REGIST_USER_SUCCESSFUL);
+        return new UserRegistrationResponse(id, APIMessage.REGIST_USER_SUCCESSFUL);
     }
 
     @Override
-    public List<Long> findUserRegistListWatting() {
+    public List<Long> findUserRegisterListWatting() {
         Optional<List<Long>> optionalIdList = userRepository.findUserRegistListWatting(StatusType.ON.name(), ApproveType.WAITING.name());
         return optionalIdList.isPresent() ? optionalIdList.get() : new ArrayList<>();
     }

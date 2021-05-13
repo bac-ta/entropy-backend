@@ -11,7 +11,7 @@ import java.util.List;
 
 @Data
 @ToString
-public class PostUpdateReq {
+public class PostUpdateRequest {
     @NotBlank
     @JsonProperty(required = true)
     private String title;

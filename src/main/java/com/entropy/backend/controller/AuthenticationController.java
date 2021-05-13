@@ -1,8 +1,8 @@
 package com.entropy.backend.controller;
 
 import com.entropy.backend.common.constant.APIEndpointBase;
-import com.entropy.backend.model.rest.request.auth.LoginInfoReq;
-import com.entropy.backend.model.rest.response.auth.LoginInfoResp;
+import com.entropy.backend.model.rest.request.auth.LoginInfoRequest;
+import com.entropy.backend.model.rest.response.auth.LoginInfoResponse;
 import com.entropy.backend.service.AuthenticationService;
 import com.entropy.backend.service.impl.AuthenticationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +27,8 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginInfoResp> login(@RequestBody LoginInfoReq req) {
-        LoginInfoResp resp = authService.login(req);
+    public ResponseEntity<LoginInfoResponse> login(@RequestBody LoginInfoRequest req) {
+        LoginInfoResponse resp = authService.login(req);
         return new ResponseEntity<>(resp, HttpStatus.OK);
     }
 }

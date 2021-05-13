@@ -7,7 +7,7 @@ import lombok.Getter;
 import java.util.Arrays;
 
 public enum PublishType {
-    WAITTING(0, "WAITTING"),
+    WAITING(0, "WAITING"),
     PUBLISH(1, "PUBLISH");
     @Getter
     private int value;

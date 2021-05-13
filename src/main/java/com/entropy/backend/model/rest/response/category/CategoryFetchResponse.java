@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class CategoryFetchResp {
+public class CategoryFetchResponse {
     private int count;
     private List<CategoryDTO> categories;
 }

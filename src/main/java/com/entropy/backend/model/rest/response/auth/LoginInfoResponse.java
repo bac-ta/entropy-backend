@@ -9,7 +9,7 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
-public class LoginInfoResp {
+public class LoginInfoResponse {
     private String message;
     @JsonProperty(value = "access_token")
     private String accessToken;

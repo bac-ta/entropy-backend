@@ -10,9 +10,9 @@ public enum SortType {
     ASC(0, "ASC"),
     DESC(1, "DESC");
     @Getter
-    private int value;
+    private final int value;
     @Getter
-    private String name;
+    private final String name;
 
     SortType(int value, final String name) {
         this.value = value;

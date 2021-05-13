@@ -1,6 +1,6 @@
 package com.entropy.backend.controller;
 
-import com.entropy.backend.model.rest.error.APIErrorResp;
+import com.entropy.backend.model.rest.error.APIErrorResponse;
 import com.entropy.backend.util.ResourceNotFoundExceptionHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +30,7 @@ public class GlobalExceptionHandler {
             ResourceNotFoundExceptionHandler.class
     })
     @Nullable
-    public final ResponseEntity<APIErrorResp> handleException(Exception ex, WebRequest request) {
+    public final ResponseEntity<APIErrorResponse> handleException(Exception ex, WebRequest request) {
         HttpHeaders headers = new HttpHeaders();
 
         LOGGER.error("Handling " + ex.getClass().getSimpleName() + " due to " + ex.getMessage());
@@ -58,11 +58,11 @@ public class GlobalExceptionHandler {
      * @param status  The selected response status
      * @return a {@code ResponseEntity} instance
      */
-    protected ResponseEntity<APIErrorResp> handleUserNotFoundException(ResourceNotFoundExceptionHandler ex,
-                                                                       HttpHeaders headers, HttpStatus status,
-                                                                       WebRequest request) {
+    protected ResponseEntity<APIErrorResponse> handleUserNotFoundException(ResourceNotFoundExceptionHandler ex,
+                                                                           HttpHeaders headers, HttpStatus status,
+                                                                           WebRequest request) {
         List<String> errors = Collections.singletonList(ex.getMessage());
-        return handleExceptionInternal(ex, new APIErrorResp(errors), headers, status, request);
+        return handleExceptionInternal(ex, new APIErrorResponse(errors), headers, status, request);
     }
 
     /**
@@ -78,9 +78,9 @@ public class GlobalExceptionHandler {
      * @param status  The response status
      * @param request The current request
      */
-    protected ResponseEntity<APIErrorResp> handleExceptionInternal(Exception ex, @Nullable APIErrorResp body,
-                                                                   HttpHeaders headers, HttpStatus status,
-                                                                   WebRequest request) {
+    protected ResponseEntity<APIErrorResponse> handleExceptionInternal(Exception ex, @Nullable APIErrorResponse body,
+                                                                       HttpHeaders headers, HttpStatus status,
+                                                                       WebRequest request) {
         if (HttpStatus.INTERNAL_SERVER_ERROR.equals(status)) {
             request.setAttribute(WebUtils.ERROR_EXCEPTION_ATTRIBUTE, ex, WebRequest.SCOPE_REQUEST);
         }

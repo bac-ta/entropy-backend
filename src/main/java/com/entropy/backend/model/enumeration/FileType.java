@@ -18,9 +18,9 @@ public enum FileType {
     PDF(7, "pdf");
 
     @Getter
-    private int value;
+    private final int value;
     @Getter
-    private String name;
+    private final String name;
 
     FileType(int value, final String name) {
         this.value = value;

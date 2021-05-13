@@ -9,10 +9,10 @@ import com.entropy.backend.model.dto.PostFetchByIdDTO;
 import com.entropy.backend.model.entity.Category;
 import com.entropy.backend.model.entity.Post;
 import com.entropy.backend.model.entity.PostCategory;
-import com.entropy.backend.model.rest.request.post.PostCreateReq;
-import com.entropy.backend.model.rest.request.post.PostUpdateReq;
-import com.entropy.backend.model.rest.response.post.PostFetchResp;
-import com.entropy.backend.model.rest.response.post.PostSaveResp;
+import com.entropy.backend.model.rest.request.post.PostCreateRequest;
+import com.entropy.backend.model.rest.request.post.PostUpdateRequest;
+import com.entropy.backend.model.rest.response.post.PostFetchResponse;
+import com.entropy.backend.model.rest.response.post.PostSaveResponse;
 import com.entropy.backend.repository.CategoryRepository;
 import com.entropy.backend.repository.PostCategoryRepository;
 import com.entropy.backend.repository.PostRepository;
@@ -49,7 +49,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostFetchResp findPosts(int sort, int start, int limit, Integer statusType, Integer publishType, Integer categoryId, String searchText) {
+    public PostFetchResponse findPosts(int sort, int start, int limit, Integer statusType, Integer publishType, Integer categoryId, String searchText) {
         logger.debug("Find posts");
         logger.info("sort: " + sort + ", start: " + start + ", limit: " + limit + ", status type: " + statusType +
                 ", publish type: " + publishType + ", category id: " + categoryId + ", search text: " + searchText);
@@ -58,7 +58,7 @@ public class PostServiceImpl implements PostService {
         Map.Entry<Integer, List<PostDTO>> entry = map.entrySet().iterator().next();
         Integer count = entry.getKey();
         List<PostDTO> postDTOList = entry.getValue();
-        return new PostFetchResp(count, postDTOList);
+        return new PostFetchResponse(count, postDTOList);
     }
 
     @Override
@@ -91,7 +91,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post createPost(PostCreateReq postReq) {
+    public Post createPost(PostCreateRequest postReq) {
         logger.debug("Create post");
         logger.debug(postReq.toString());
 
@@ -129,7 +129,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostSaveResp updatePost(int id, PostUpdateReq req) {
+    public PostSaveResponse updatePost(int id, PostUpdateRequest req) {
         logger.debug("Update post");
         logger.debug(req.toString());
 
@@ -150,7 +150,7 @@ public class PostServiceImpl implements PostService {
 
         List<Integer> categoryUseIds = req.getCategoryUseIds();
         if (categoryUseIds.isEmpty())
-            return new PostSaveResp(id, APIMessage.UPDATE_POST_SUCCESSFUL);
+            return new PostSaveResponse(id, APIMessage.UPDATE_POST_SUCCESSFUL);
 
         List<PostCategory> postCategoriesStore = postCategoryRepo.findByPostId(id);
         List<Integer> categoryStoreNotUseIds = postCategoriesStore.stream().filter(postCategory ->
@@ -178,7 +178,7 @@ public class PostServiceImpl implements PostService {
 
         postCategoryRepo.saveAll(postCategoriesNewUse);
 
-        return new PostSaveResp(id, APIMessage.UPDATE_POST_SUCCESSFUL);
+        return new PostSaveResponse(id, APIMessage.UPDATE_POST_SUCCESSFUL);
     }
 
     @Override

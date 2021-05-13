@@ -1,15 +1,13 @@
 package com.entropy.backend.model.rest.response.category;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class CategoryResp {
+public class CategoryGetResponse {
     private Integer id;
-    private String message;
-
-    public CategoryResp(String message) {
-        this.message = message;
-    }
+    @JsonProperty("category_type")
+    private String categoryType;
 }

@@ -23,7 +23,7 @@ import javax.validation.constraints.NotBlank;
 @Data
 @Builder
 @NoArgsConstructor
-public class UserRegistrationReq {
+public class UserRegistrationRequest {
 
     @NotBlank(message = APIMessage.FIRST_NAME_NOT_BLANK)
     @JsonProperty(value = "first_name", required = true)
