@@ -1,6 +1,6 @@
 package com.entropy.backend.security.config;
 
-import com.entropy.backend.enumeration.UserType;
+import com.entropy.backend.model.enumeration.UserType;
 import com.entropy.backend.repository.HttpCookieOAuth2AuthorizationRequestRepository;
 import com.entropy.backend.security.entrypoint.JwtAuthenticationEntryPoint;
 import com.entropy.backend.security.jwt.JwtAuthenticationFilter;

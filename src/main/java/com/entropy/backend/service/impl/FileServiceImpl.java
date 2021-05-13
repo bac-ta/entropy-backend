@@ -1,7 +1,7 @@
 package com.entropy.backend.service.impl;
 
 import com.entropy.backend.common.constant.APIMessage;
-import com.entropy.backend.enumeration.FileType;
+import com.entropy.backend.model.enumeration.FileType;
 import com.entropy.backend.model.property.FileStorageProperties;
 import com.entropy.backend.service.FileService;
 import com.entropy.backend.util.ResourceNotFoundExceptionHandler;

@@ -3,10 +3,11 @@ package com.entropy.backend.service.impl;
 import com.entropy.backend.common.constant.APIMessage;
 import com.entropy.backend.model.rest.request.auth.LoginInfoReq;
 import com.entropy.backend.model.rest.response.auth.LoginInfoResp;
-import com.entropy.backend.security.jwt.AccountPrincipal;
 import com.entropy.backend.pattern.factory.JwtTokenProviderFactory;
+import com.entropy.backend.security.jwt.AccountPrincipal;
 import com.entropy.backend.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -18,11 +19,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
-    private JwtTokenProviderFactory jwtFactory;
-    private AuthenticationManager authManager;
+    private final JwtTokenProviderFactory jwtFactory;
+    private final AuthenticationManager authManager;
 
     @Autowired
-    public AuthenticationServiceImpl(JwtTokenProviderFactory jwtFactory, AuthenticationManager authManager) {
+    public AuthenticationServiceImpl(@Qualifier("jwtTokenProviderImpl") JwtTokenProviderFactory jwtFactory, AuthenticationManager authManager) {
         this.jwtFactory = jwtFactory;
         this.authManager = authManager;
     }

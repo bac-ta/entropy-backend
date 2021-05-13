@@ -2,9 +2,9 @@ package com.entropy.backend.service.impl;
 
 import com.entropy.backend.common.constant.APIMessage;
 import com.entropy.backend.common.util.TimeUtil;
-import com.entropy.backend.enumeration.ApproveType;
-import com.entropy.backend.enumeration.GenderType;
-import com.entropy.backend.enumeration.StatusType;
+import com.entropy.backend.model.enumeration.ApproveType;
+import com.entropy.backend.model.enumeration.GenderType;
+import com.entropy.backend.model.enumeration.StatusType;
 import com.entropy.backend.model.entity.User;
 import com.entropy.backend.model.rest.request.user.UserRegistrationReq;
 import com.entropy.backend.model.rest.response.user.UserRegistrationResp;

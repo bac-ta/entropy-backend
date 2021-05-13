@@ -1,6 +1,6 @@
 package com.entropy.backend.pattern.factory;
 
-import com.entropy.backend.enumeration.OAuth2Type;
+import com.entropy.backend.model.enumeration.OAuth2Type;
 import com.entropy.backend.security.oauth2.FacebookOAuth2UserInfo;
 import com.entropy.backend.security.oauth2.GithubOAuth2UserInfo;
 import com.entropy.backend.pattern.template.OAuth2UserInfoTemplate;

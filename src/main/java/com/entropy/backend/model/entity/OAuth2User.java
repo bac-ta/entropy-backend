@@ -1,6 +1,6 @@
 package com.entropy.backend.model.entity;
 
-import com.entropy.backend.enumeration.OAuth2Type;
+import com.entropy.backend.model.enumeration.OAuth2Type;
 import com.entropy.backend.model.entity.base.Base;
 import lombok.AllArgsConstructor;
 import lombok.Data;

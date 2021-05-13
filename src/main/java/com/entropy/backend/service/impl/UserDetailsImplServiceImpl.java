@@ -1,9 +1,9 @@
 package com.entropy.backend.service.impl;
 
 import com.entropy.backend.model.entity.User;
-import com.entropy.backend.enumeration.ApproveType;
-import com.entropy.backend.enumeration.StatusType;
-import com.entropy.backend.enumeration.UserType;
+import com.entropy.backend.model.enumeration.ApproveType;
+import com.entropy.backend.model.enumeration.StatusType;
+import com.entropy.backend.model.enumeration.UserType;
 import com.entropy.backend.repository.UserRepository;
 import com.entropy.backend.security.jwt.AccountPrincipal;
 import com.entropy.backend.util.ResourceNotFoundExceptionHandler;

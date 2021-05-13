@@ -1,8 +1,8 @@
 package com.entropy.backend.service.impl;
 
 import com.entropy.backend.common.constant.APIMessage;
-import com.entropy.backend.enumeration.PublishType;
-import com.entropy.backend.enumeration.StatusType;
+import com.entropy.backend.model.enumeration.PublishType;
+import com.entropy.backend.model.enumeration.StatusType;
 import com.entropy.backend.model.dto.CategoryDTO;
 import com.entropy.backend.model.dto.PostDTO;
 import com.entropy.backend.model.dto.PostFetchByIdDTO;

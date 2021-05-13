@@ -1,7 +1,7 @@
 package com.entropy.backend.service.impl;
 
-import com.entropy.backend.enumeration.SortType;
-import com.entropy.backend.enumeration.StatusType;
+import com.entropy.backend.model.enumeration.SortType;
+import com.entropy.backend.model.enumeration.StatusType;
 import com.entropy.backend.model.dto.CategoryDTO;
 import com.entropy.backend.model.entity.Category;
 import com.entropy.backend.model.rest.request.category.CategoryCreateReq;

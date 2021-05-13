@@ -22,10 +22,10 @@ import java.util.Map;
 /**
  * @author bac-ta
  */
-@Component
-public class JwtTokenProvider implements JwtTokenProviderFactory {
+@Component("jwtTokenProviderImpl")
+public class JwtTokenProviderImpl implements JwtTokenProviderFactory {
 
-    private static final Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
+    private static final Logger logger = LoggerFactory.getLogger(JwtTokenProviderImpl.class);
     @Value("${app.auth.token-secret}")
     private String clientSecrectKey;
     @Value("${app.auth.token-expiration-msec}")

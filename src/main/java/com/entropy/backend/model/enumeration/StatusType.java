@@ -1,4 +1,4 @@
-package com.entropy.backend.enumeration;
+package com.entropy.backend.model.enumeration;
 
 import com.entropy.backend.common.constant.APIMessage;
 import com.entropy.backend.util.ResourceNotFoundExceptionHandler;

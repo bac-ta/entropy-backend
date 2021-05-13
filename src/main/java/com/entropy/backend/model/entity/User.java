@@ -1,9 +1,9 @@
 package com.entropy.backend.model.entity;
 
-import com.entropy.backend.enumeration.ApproveType;
-import com.entropy.backend.enumeration.GenderType;
-import com.entropy.backend.enumeration.StatusType;
-import com.entropy.backend.enumeration.UserType;
+import com.entropy.backend.model.enumeration.ApproveType;
+import com.entropy.backend.model.enumeration.GenderType;
+import com.entropy.backend.model.enumeration.StatusType;
+import com.entropy.backend.model.enumeration.UserType;
 import com.entropy.backend.model.entity.base.Base;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,7 +19,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**

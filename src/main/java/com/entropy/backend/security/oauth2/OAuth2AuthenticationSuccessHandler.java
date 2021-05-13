@@ -2,7 +2,7 @@ package com.entropy.backend.security.oauth2;
 
 import com.entropy.backend.common.constant.APIMessage;
 import com.entropy.backend.repository.HttpCookieOAuth2AuthorizationRequestRepository;
-import com.entropy.backend.security.jwt.JwtTokenProvider;
+import com.entropy.backend.security.jwt.JwtTokenProviderImpl;
 import com.entropy.backend.util.ResourceNotFoundExceptionHandler;
 import com.entropy.backend.common.util.AppUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +26,11 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     @Value("${app.oauth2.authorized-redirect-uris}")
     private List<String> authorizedRedirectUris;
 
-    private JwtTokenProvider tokenProvider;
+    private JwtTokenProviderImpl tokenProvider;
     private HttpCookieOAuth2AuthorizationRequestRepository repository;
 
     @Autowired
-    public OAuth2AuthenticationSuccessHandler(JwtTokenProvider tokenProvider, HttpCookieOAuth2AuthorizationRequestRepository repository) {
+    public OAuth2AuthenticationSuccessHandler(JwtTokenProviderImpl tokenProvider, HttpCookieOAuth2AuthorizationRequestRepository repository) {
         this.tokenProvider = tokenProvider;
         this.repository = repository;
     }

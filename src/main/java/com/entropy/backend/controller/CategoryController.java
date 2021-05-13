@@ -2,8 +2,8 @@ package com.entropy.backend.controller;
 
 import com.entropy.backend.common.constant.APIEndpointBase;
 import com.entropy.backend.common.constant.APIMessage;
-import com.entropy.backend.enumeration.SortType;
-import com.entropy.backend.enumeration.StatusType;
+import com.entropy.backend.model.enumeration.SortType;
+import com.entropy.backend.model.enumeration.StatusType;
 import com.entropy.backend.model.entity.Category;
 import com.entropy.backend.model.rest.request.category.CategoryCreateReq;
 import com.entropy.backend.model.rest.response.category.CategoryFetchResp;

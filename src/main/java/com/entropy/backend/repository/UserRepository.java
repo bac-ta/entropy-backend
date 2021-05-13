@@ -1,9 +1,9 @@
 package com.entropy.backend.repository;
 
 import com.entropy.backend.model.entity.User;
-import com.entropy.backend.enumeration.ApproveType;
-import com.entropy.backend.enumeration.StatusType;
-import com.entropy.backend.enumeration.UserType;
+import com.entropy.backend.model.enumeration.ApproveType;
+import com.entropy.backend.model.enumeration.StatusType;
+import com.entropy.backend.model.enumeration.UserType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

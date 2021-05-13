@@ -1,7 +1,7 @@
 package com.entropy.backend.service.impl;
 
 import com.entropy.backend.common.constant.ExceptionMessage;
-import com.entropy.backend.enumeration.OAuth2Type;
+import com.entropy.backend.model.enumeration.OAuth2Type;
 import com.entropy.backend.model.entity.Profile;
 import com.entropy.backend.pattern.factory.OAuth2UserInfoFactory;
 import com.entropy.backend.pattern.template.OAuth2UserInfoTemplate;

@@ -1,13 +1,12 @@
 package com.entropy.backend.model.rest.request.post;
 
-import com.entropy.backend.enumeration.PublishType;
-import com.entropy.backend.enumeration.StatusType;
+import com.entropy.backend.model.enumeration.PublishType;
+import com.entropy.backend.model.enumeration.StatusType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data

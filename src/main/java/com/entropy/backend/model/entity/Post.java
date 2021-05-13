@@ -1,8 +1,8 @@
 package com.entropy.backend.model.entity;
 
 import com.entropy.backend.common.constant.QueryName;
-import com.entropy.backend.enumeration.PublishType;
-import com.entropy.backend.enumeration.StatusType;
+import com.entropy.backend.model.enumeration.PublishType;
+import com.entropy.backend.model.enumeration.StatusType;
 import com.entropy.backend.model.dto.PostDTO;
 import com.entropy.backend.model.entity.base.Base;
 import lombok.AllArgsConstructor;

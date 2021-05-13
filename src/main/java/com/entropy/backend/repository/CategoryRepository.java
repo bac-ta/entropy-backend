@@ -1,6 +1,6 @@
 package com.entropy.backend.repository;
 
-import com.entropy.backend.enumeration.StatusType;
+import com.entropy.backend.model.enumeration.StatusType;
 import com.entropy.backend.model.entity.Category;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
