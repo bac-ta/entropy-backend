@@ -1,13 +1,81 @@
 version: '3.3'
-
 services:
 
-  entropy-app-server:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    expose:
-      - "1109"
+  # Database Service (Mysql)
+  mysql_database:
+    image: mysql:8
     ports:
-      - "1109:8080"
+      - "3309:3306"
     restart: always
+    environment:
+      MYSQL_DATABASE: entropy-tech-blog
+      MYSQL_USER: entropy
+      MYSQL_PASSWORD: Silencer&&55
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - db-data:/var/lib/mysql
+    command: [ 'mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci' ]
+    networks:
+      entropy-tech-blog-network:
+        ipv4_address: 172.22.0.2
+
+  # Openfire
+  openfire:
+    image: quantumobject/docker-openfire
+    ports:
+      - "9090:9090/tcp"
+      - "9091:9091/tcp"
+      - "5222:5222/tcp"
+      - "7777:7777/tcp"
+      - "7070:7070/tcp"
+    volumes:
+      - openfire-data:/var/lib/openfire
+      - openfire-logs:/var/log/openfire
+    links:
+      - mysql_database
+    depends_on:
+      - mysql_database
+    networks:
+      entropy-tech-blog-network:
+        ipv4_address: 172.22.0.3
+
+  proftpd:
+    image: kibatic/proftpd
+    networks:
+      entropy-tech-blog-network:
+        ipv4_address: 172.22.0.4
+    restart: unless-stopped
+    environment:
+      FTP_LIST: "entropy-tech-blog-ftp:Silencer&&55"
+      USERADD_OPTIONS: "-o --gid 33 --uid 33"
+    volumes:
+      - "/otp/entropy-tech-blog/stores:/home/entropy-tech-blog-ftp"
+    ports:
+      - "21:21/tcp"
+      - "20:20/tcp"
+  # App config
+#  entropy-tech-blog-backend-app:
+#    image: "entropy-tech-blog-backend-app"
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    ports:
+#      - "1109:8080"
+#    restart: always
+#    depends_on:
+#      - mysql_database
+#    networks:
+#      entropy-tech-blog-network:
+#        ipv4_address: 172.22.0.5
+
+volumes:
+  db-data:
+  openfire-data:
+  openfire-logs:
+
+networks:
+  entropy-tech-blog-network:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.22.0.0/16
