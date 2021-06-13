@@ -1,13 +1,13 @@
 package com.entropy.backend.services.impls;
 
-import com.entropy.backend.models.enumerations.ApproveType;
+import com.entropy.backend.configurations.securities.jwts.AccountPrincipal;
+import com.entropy.backend.exceptions.ResourceNotFoundExceptionHandler;
+import com.entropy.backend.models.entities.User;
+import com.entropy.backend.models.enumerations.ApprovalType;
 import com.entropy.backend.models.enumerations.StatusType;
 import com.entropy.backend.models.enumerations.UserType;
 import com.entropy.backend.repositories.UserRepository;
-import com.entropy.backend.configurations.securities.jwts.AccountPrincipal;
-import com.entropy.backend.exceptions.ResourceNotFoundExceptionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -29,7 +29,7 @@ public class UserDetailsImplServiceImpl implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String emailOrUsername) throws UsernameNotFoundException {
-        User user = userRepository.findUser(emailOrUsername, ApproveType.ACCEPTED, StatusType.ON, UserType.ADMINITRATOR);
+        User user = userRepository.findUser(emailOrUsername, (byte) ApprovalType.ACCEPTED.getValue(), (byte) StatusType.ON.getValue(), (byte) UserType.ADMINISTRATOR.getValue());
         return AccountPrincipal.create(user);
     }
 

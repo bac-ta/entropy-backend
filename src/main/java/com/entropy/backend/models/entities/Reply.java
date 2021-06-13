@@ -25,6 +25,9 @@ public class Reply extends Base {
     @Column(name = "content")
     private String content;
 
+    @Column(name = "fileUrl")
+    private String fileUrl;
+
     @Column
     private String username;
 }

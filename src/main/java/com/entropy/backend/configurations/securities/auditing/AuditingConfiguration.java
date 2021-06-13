@@ -36,7 +36,7 @@ class SpringSecurityAuditAwareImpl implements AuditorAware<String> {
         if (authentication == null ||
                 !authentication.isAuthenticated() ||
                 authentication instanceof AnonymousAuthenticationToken)
-            return Optional.of("anonymous user");
+            return Optional.of("Anonymous user");
 
 
         AccountPrincipal accountPrincipal = (AccountPrincipal) authentication.getPrincipal();

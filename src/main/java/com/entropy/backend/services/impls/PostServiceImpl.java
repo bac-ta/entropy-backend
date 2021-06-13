@@ -1,7 +1,7 @@
 package com.entropy.backend.services.impls;
 
 import com.entropy.backend.common.constants.APIMessage;
-import com.entropy.backend.models.enumerations.PublishType;
+import com.entropy.backend.models.enumerations.PublicationType;
 import com.entropy.backend.models.enumerations.StatusType;
 import com.entropy.backend.models.dtos.CategoryDTO;
 import com.entropy.backend.models.dtos.PostDTO;
@@ -100,7 +100,7 @@ public class PostServiceImpl implements PostService {
         post.setTitle(title);
         post.setImageTitle(imageTitle);
         post.setContent(content);
-        post.setPublishType(PublishType.findByValue(postReq.getPublishType()));
+        post.setPublishType(PublicationType.findByValue(postReq.getPublishType()));
 
         AccountPrincipal principal = authService.getCurrentPrincipal();
         post.setAuthor(principal.getUsername());
@@ -134,7 +134,7 @@ public class PostServiceImpl implements PostService {
         String title = req.getTitle();
         String imageTitle = req.getImageTitle();
         String content = req.getContent();
-        PublishType publishType = PublishType.findByValue(req.getPublishType());
+        PublicationType publicationType = PublicationType.findByValue(req.getPublishType());
         StatusType statusType = StatusType.findByValue(req.getStatusType());
 
         Optional<Post> postOptional = postRepo.findById(id);
@@ -142,7 +142,7 @@ public class PostServiceImpl implements PostService {
         post.setTitle(title);
         post.setImageTitle(imageTitle);
         post.setContent(content);
-        post.setPublishType(publishType);
+        post.setPublishType(publicationType);
         post.setStatusType(statusType);
 
         List<Integer> categoryUseIds = req.getCategoryUseIds();

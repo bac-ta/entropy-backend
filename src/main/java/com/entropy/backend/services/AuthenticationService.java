@@ -5,8 +5,16 @@ import com.entropy.backend.models.rests.responses.authentications.LoginInfoRespo
 import com.entropy.backend.configurations.securities.jwts.AccountPrincipal;
 import org.springframework.stereotype.Service;
 
+/**
+ * Interface provide methods handle authentications
+ *
+ * @author bac-ta
+ * @see AuthenticationService
+ * @since 2021-06-10
+ */
 @Service
 public interface AuthenticationService {
     LoginInfoResponse login(LoginInfoRequest req);
+
     AccountPrincipal getCurrentPrincipal();
 }

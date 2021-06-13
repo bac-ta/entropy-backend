@@ -1,6 +1,6 @@
 package com.entropy.backend.models.rests.requests.posts;
 
-import com.entropy.backend.models.enumerations.PublishType;
+import com.entropy.backend.models.enumerations.PublicationType;
 import com.entropy.backend.models.enumerations.StatusType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -24,7 +24,7 @@ public class PostUpdateRequest {
     @JsonProperty("category_use_ids")
     private List<Integer> categoryUseIds;
     @JsonProperty(value = "publish_type")
-    private Integer publishType = PublishType.PUBLISH.getValue();
+    private Integer publishType = PublicationType.PUBLISH.getValue();
     @JsonProperty(value = "status_type")
     private Integer statusType = StatusType.ON.getValue();
 }

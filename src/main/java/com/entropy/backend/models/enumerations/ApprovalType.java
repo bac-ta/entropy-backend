@@ -6,7 +6,7 @@ import lombok.Getter;
 
 import java.util.Arrays;
 
-public enum ApproveType {
+public enum ApprovalType {
     REJECT(0, "REJECT"),
     ACCEPTED(1, "ACCEPTED"),
     WAITING(2, "WAITING");
@@ -15,14 +15,14 @@ public enum ApproveType {
     @Getter
     private final String name;
 
-    ApproveType(int value, final String name) {
+    ApprovalType(int value, final String name) {
         this.value = value;
         this.name = name;
     }
 
 
-    public static ApproveType findByValue(int value) {
-        return Arrays.stream(ApproveType.values())
+    public static ApprovalType findByValue(int value) {
+        return Arrays.stream(ApprovalType.values())
                 .filter(approveType -> approveType.getValue() == value)
                 .findFirst().orElseThrow(() -> new ResourceNotFoundExceptionHandler(APIMessage.APPROVE_TYPE_INVALID));
     }

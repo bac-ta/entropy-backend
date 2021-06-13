@@ -18,8 +18,8 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
     @Transactional
     @Modifying
-    @Query("UPDATE Category SET statusType=:statusType WHERE id=:id")
-    void changeStatusType(int id, StatusType statusType);
+    @Query("UPDATE Category SET status=:status WHERE id=:id")
+    void changeStatusType(int id, byte status);
 
     Optional<Category> findById(int id);
 

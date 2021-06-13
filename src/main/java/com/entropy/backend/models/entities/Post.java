@@ -25,8 +25,8 @@ public class Post extends Base {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "imageTitle")
-    private String imageTitle;
+    @Column(name = "imageTitleUrl")
+    private String imageTitleUrl;
 
     @Column(name = "content", columnDefinition = "LONGTEXT")
     private String content;

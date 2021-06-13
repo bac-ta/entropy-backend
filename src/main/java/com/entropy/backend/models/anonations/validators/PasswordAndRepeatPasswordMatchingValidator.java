@@ -1,20 +1,25 @@
-package com.entropy.backend.models.anonations;
+package com.entropy.backend.models.anonations.validators;
+
+import com.entropy.backend.models.anonations.PasswordMatchingWithRepeatPassword;
+import org.apache.commons.beanutils.BeanUtils;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import org.apache.commons.beanutils.BeanUtils;
-
 /**
+ * The class handle logic check matching the password and the repeat password
+ *
  * @author bac-ta
+ * @see PasswordAndRepeatPasswordMatchingValidator
+ * @since 2021-06-13
  */
-public class FieldMatchValidator implements ConstraintValidator<FieldMatch, Object> {
+public class PasswordAndRepeatPasswordMatchingValidator implements ConstraintValidator<PasswordMatchingWithRepeatPassword, Object> {
 
     private String firstFieldName;
     private String secondFieldName;
 
     @Override
-    public void initialize(final FieldMatch constraintAnnotation) {
+    public void initialize(final PasswordMatchingWithRepeatPassword constraintAnnotation) {
         firstFieldName = constraintAnnotation.first();
         secondFieldName = constraintAnnotation.second();
     }

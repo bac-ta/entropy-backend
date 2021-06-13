@@ -1,5 +1,7 @@
 package com.entropy.backend.models.anonations;
 
+import com.entropy.backend.models.anonations.validators.PasswordAndRepeatPasswordMatchingValidator;
+
 import javax.validation.Payload;
 import javax.validation.Constraint;
 import java.lang.annotation.Documented;
@@ -15,9 +17,9 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  */
 @Target({TYPE, ANNOTATION_TYPE})
 @Retention(RUNTIME)
-@Constraint(validatedBy = FieldMatchValidator.class)
+@Constraint(validatedBy = PasswordAndRepeatPasswordMatchingValidator.class)
 @Documented
-public @interface FieldMatch {
+public @interface PasswordMatchingWithRepeatPassword {
     String message() default "{constraints.field-match}";
 
     Class<?>[] groups() default {};
@@ -32,6 +34,6 @@ public @interface FieldMatch {
     @Retention(RUNTIME)
     @Documented
     @interface List {
-        FieldMatch[] value();
+        PasswordMatchingWithRepeatPassword[] value();
     }
 }

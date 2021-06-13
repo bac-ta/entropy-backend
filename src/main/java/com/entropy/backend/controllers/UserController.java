@@ -46,10 +46,4 @@ public class UserController {
             return new ResponseEntity<>(resp, HttpStatus.BAD_REQUEST);
         }
     }
-
-    @GetMapping("/ids-watting")
-    public ResponseEntity<List<Long>> findUserRegisterListWaiting() {
-        List<Long> idList = userService.findUserRegisterListWaiting();
-        return new ResponseEntity<>(idList, HttpStatus.OK);
-    }
 }

@@ -1,5 +1,6 @@
 package com.entropy.backend.repositories;
 
+import com.entropy.backend.models.entities.Post;
 import com.entropy.backend.models.enumerations.StatusType;
 import com.entropy.backend.repositories.customs.PostRepositoryCustom;
 import org.springframework.data.jpa.repository.JpaRepository;

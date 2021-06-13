@@ -1,9 +1,6 @@
 package com.entropy.backend.repositories;
 
 import com.entropy.backend.models.entities.User;
-import com.entropy.backend.models.enumerations.ApproveType;
-import com.entropy.backend.models.enumerations.StatusType;
-import com.entropy.backend.models.enumerations.UserType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -16,11 +13,12 @@ import java.util.Optional;
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    @Query("FROM User WHERE email=:emailOrUsername OR userName=:emailOrUsername AND approveType=:approveType AND statusType=:statusType AND userType=:userType")
-    User findUser(String emailOrUsername, ApproveType approveType, StatusType statusType, UserType userType);
+    @Query("FROM User WHERE email=:emailOrUsername OR username=:emailOrUsername AND approval=:approval AND status=:status AND type=:type")
+    User findUser(String emailOrUsername, byte approval, byte status, byte type);
 
-    Optional<User> findById(Long id);
+    @Query("FROM User WHERE username = :username OR email = :email OR phone = :phone")
+    Optional<User> findUserExistBy(String username, String email, String phone);
 
-    @Query("SELECT id FROM User WHERE statusType =:statusType AND approveType=:approveType")
-    Optional<List<Long>> findUserRegistListWatting(String statusType, String approveType);
+    @Query("SELECT username FROM User WHERE status =:status AND approval=:approval")
+    Optional<List<String>> findUserRegistListWatting(byte status, byte approval);
 }
