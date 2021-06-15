@@ -48,7 +48,7 @@ public class AccountPrincipal implements UserDetails, OAuth2User {
 
     public static AccountPrincipal create(com.entropy.backend.models.entities.OAuth2User oAuth2UserEntity, Map<String, Object> attributes) {
         List<GrantedAuthority> authorities = Collections.
-                singletonList(new SimpleGrantedAuthority(UserType.NORMAL.name()));
+                singletonList(new SimpleGrantedAuthority(UserType.CLIENT.name()));
 
         AccountPrincipal principal = new AccountPrincipal();
         principal.setAuthorities(authorities);

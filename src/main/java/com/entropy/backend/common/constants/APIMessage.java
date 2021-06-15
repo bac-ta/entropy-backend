@@ -29,8 +29,8 @@ public class APIMessage {
     public static String OAUTH2_UNAUTHORIZED = "Sorry! We've got an Unauthorized Redirect URI and can't proceed with the authentication";
 
     //User
-    public static final String REGIST_USER_SUCCESSFUL = "Register user is successful";
-    public static final String REGIST_USER_FAIL = "Register user is failure";
+    public static final String REGISTER_USER_SUCCESSFUL = "Register user is success";
+    public static final String REGISTER_USER_FAIL = "Register user is failure";
     public static final String APPROVE_TYPE_INVALID = "Approve type invalid";
     public static final String USER_TYPE_INVALID = "User type invalid";
     public static final String OAUTH2_TYPE_INVALID = "OAuth2 type invalid";

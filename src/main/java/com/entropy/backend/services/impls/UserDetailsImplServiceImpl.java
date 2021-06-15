@@ -3,7 +3,6 @@ package com.entropy.backend.services.impls;
 import com.entropy.backend.configurations.securities.jwts.AccountPrincipal;
 import com.entropy.backend.exceptions.ResourceNotFoundExceptionHandler;
 import com.entropy.backend.models.entities.User;
-import com.entropy.backend.models.enumerations.ApprovalType;
 import com.entropy.backend.models.enumerations.StatusType;
 import com.entropy.backend.models.enumerations.UserType;
 import com.entropy.backend.repositories.UserRepository;
@@ -29,7 +28,7 @@ public class UserDetailsImplServiceImpl implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String emailOrUsername) throws UsernameNotFoundException {
-        User user = userRepository.findUser(emailOrUsername, (byte) ApprovalType.ACCEPTED.getValue(), (byte) StatusType.ON.getValue(), (byte) UserType.ADMINISTRATOR.getValue());
+        User user = userRepository.findUser(emailOrUsername, (byte) StatusType.ON.getValue(), (byte) UserType.ADMINISTRATOR.getValue());
         return AccountPrincipal.create(user);
     }
 

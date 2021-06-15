@@ -25,7 +25,6 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class UserRegistrationRequest extends OpenfireUserRegistrationRequest {
-
     private String phone;
 
     @JsonProperty(value = "dateOfBirth", required = true)

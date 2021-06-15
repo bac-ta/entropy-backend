@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserRegistrationResponse {
-    private Long id;
+    private int statusCode;
     private String message;
 }

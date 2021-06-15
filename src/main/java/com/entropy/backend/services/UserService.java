@@ -17,8 +17,7 @@ import java.util.List;
  */
 @Service
 public interface UserService {
-    public UserRegistrationResponse register(OpenfireUserRegistrationRequest openfireUserRequest, UserRegistrationRequest userRequest, UserType userType);
+    public UserRegistrationResponse register(UserRegistrationRequest userRequest, UserType userType);
 
-    List<String> findUserRegisterListWaiting();
 
 }

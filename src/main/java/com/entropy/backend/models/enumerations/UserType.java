@@ -11,7 +11,7 @@ import java.util.Arrays;
  * @author bac-ta
  */
 public enum UserType {
-    NORMAL(1, "NORMAL"),
+    CLIENT(1, "NORMAL"),
     ADMINISTRATOR(2, "ADMINISTRATOR");
     @Getter
     private final int value;

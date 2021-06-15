@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +19,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@FieldNameConstants
 public class User extends Base {
     @Id
     @Column(name = "username")
@@ -46,9 +48,6 @@ public class User extends Base {
 
     @Column(name = "email")
     private String email;
-
-    @Column
-    private Byte approval;
 
     @Column
     private Byte status;

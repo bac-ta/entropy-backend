@@ -1,7 +1,9 @@
 package com.entropy.backend.controllers;
 
 import com.entropy.backend.exceptions.ResourceNotFoundExceptionHandler;
+import com.entropy.backend.exceptions.UserAlreadyExistException;
 import com.entropy.backend.models.rests.responses.errors.GlobalExceptionResponse;
+import com.entropy.backend.models.rests.responses.user.UserRegistrationResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -34,10 +36,10 @@ public class GlobalExceptionHandler {
      * @param request The current request
      */
     @ExceptionHandler({
-            ResourceNotFoundExceptionHandler.class
+            ResourceNotFoundExceptionHandler.class, UserAlreadyExistException.class
     })
     @Nullable
-    public final ResponseEntity<GlobalExceptionResponse> handleException(Exception ex, WebRequest request) {
+    public final ResponseEntity<Object> handleException(Exception ex, WebRequest request) {
         HttpHeaders headers = new HttpHeaders();
 
         LOGGER.error("Handling " + ex.getClass().getSimpleName() + " due to " + ex.getMessage());
@@ -47,6 +49,10 @@ public class GlobalExceptionHandler {
             ResourceNotFoundExceptionHandler exception = (ResourceNotFoundExceptionHandler) ex;
 
             return handleUserNotFoundException(exception, headers, status, request);
+        } else if (ex instanceof UserAlreadyExistException) {
+            return new ResponseEntity<>(
+                    new UserRegistrationResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage()),
+                    HttpStatus.BAD_REQUEST);
         } else {
             if (LOGGER.isWarnEnabled()) {
                 LOGGER.warn("Unknown exception type: " + ex.getClass().getName());
@@ -65,9 +71,9 @@ public class GlobalExceptionHandler {
      * @param status  The selected response status
      * @return a {@code ResponseEntity} instance
      */
-    protected ResponseEntity<GlobalExceptionResponse> handleUserNotFoundException(ResourceNotFoundExceptionHandler ex,
-                                                                                  HttpHeaders headers, HttpStatus status,
-                                                                                  WebRequest request) {
+    protected ResponseEntity<Object> handleUserNotFoundException(ResourceNotFoundExceptionHandler ex,
+                                                                 HttpHeaders headers, HttpStatus status,
+                                                                 WebRequest request) {
         List<String> errors = Collections.singletonList(ex.getMessage());
         return handleExceptionInternal(ex, new GlobalExceptionResponse(errors), headers, status, request);
     }
@@ -85,9 +91,9 @@ public class GlobalExceptionHandler {
      * @param status  The response status
      * @param request The current request
      */
-    protected ResponseEntity<GlobalExceptionResponse> handleExceptionInternal(Exception ex, @Nullable GlobalExceptionResponse body,
-                                                                              HttpHeaders headers, HttpStatus status,
-                                                                              WebRequest request) {
+    protected ResponseEntity<Object> handleExceptionInternal(Exception ex, @Nullable GlobalExceptionResponse body,
+                                                             HttpHeaders headers, HttpStatus status,
+                                                             WebRequest request) {
         if (HttpStatus.INTERNAL_SERVER_ERROR.equals(status)) {
             request.setAttribute(WebUtils.ERROR_EXCEPTION_ATTRIBUTE, ex, WebRequest.SCOPE_REQUEST);
         }

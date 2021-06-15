@@ -1,29 +1,29 @@
 package com.entropy.backend.services.impls;
 
 import com.entropy.backend.common.constants.APIMessage;
+import com.entropy.backend.common.utils.TimeUtil;
 import com.entropy.backend.exceptions.UserAlreadyExistException;
 import com.entropy.backend.models.entities.User;
-import com.entropy.backend.models.enumerations.ApproveType;
-import com.entropy.backend.models.enumerations.StatusType;
+import com.entropy.backend.models.enumerations.GenderType;
 import com.entropy.backend.models.enumerations.UserType;
 import com.entropy.backend.models.rests.requests.users.OpenfireUserRegistrationRequest;
 import com.entropy.backend.models.rests.requests.users.UserRegistrationRequest;
 import com.entropy.backend.models.rests.responses.user.UserRegistrationResponse;
 import com.entropy.backend.repositories.UserRepository;
 import com.entropy.backend.services.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserRegistrationResponse register(OpenfireUserRegistrationRequest openfireUserRequest, UserRegistrationRequest userRequest, UserType userType) {
+    public UserRegistrationResponse register(UserRegistrationRequest userRequest, UserType userType) {
         String username = userRequest.getUsername();
         String email = userRequest.getEmail();
         String phone = userRequest.getPhone();
@@ -78,27 +78,39 @@ public class UserServiceImpl implements UserService {
                 throw new UserAlreadyExistException("email");
 
             String alreadyPhone = alreadyUser.getPhone();
-            if (alreadyPhone.equals(phone))
+            if (StringUtils.isNotBlank(alreadyPhone) && alreadyPhone.equals(phone))
                 throw new UserAlreadyExistException("phone");
         }
+
+        String name = userRequest.getName();
+        String password = userRequest.getPassword();
 
         //Call openfire rest api
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", openfireRestSecretKey);
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<OpenfireUserRegistrationRequest> requestBody = new HttpEntity<>(openfireUserRequest, headers);
+
+        HttpEntity<OpenfireUserRegistrationRequest> requestBody = new HttpEntity<>(new OpenfireUserRegistrationRequest(
+                username, name, email, password
+        ), headers);
+
         final String openfireRestApiUrl = openfireRestSecretKey + ":" + xmppClientBinPort + "/plugins/restapi/v1/users";
         restTemplate.postForObject(openfireRestApiUrl, requestBody, OpenfireUserRegistrationRequest.class);
 
         //Update the fields extant
+        User storedUser = userRepository.findUserByUsername(username);
+        GenderType genderType = GenderType.valueOf(userRequest.getGender());
+        storedUser.setGender((byte) genderType.getValue());
+        storedUser.setBcryptedPassword(passwordEncoder.encode(userRequest.getPassword()));
+        storedUser.setDateOfBirth(TimeUtil.toDate(userRequest.getDateOfBirth()));
+        storedUser.setType((byte) userType.getValue());
+        if (StringUtils.isNotBlank(phone))
+            storedUser.setPhone(phone);
 
-        return new UserRegistrationResponse(id, APIMessage.REGIST_USER_SUCCESSFUL);
+        userRepository.save(storedUser);
+
+        return new UserRegistrationResponse(HttpStatus.CREATED.value(), APIMessage.REGISTER_USER_SUCCESSFUL);
     }
 
-    @Override
-    public List<String> findUserRegisterListWaiting() {
-        Optional<List<String>> optionalIdList = userRepository.findUserRegistListWatting(StatusType.ON.name(), ApproveType.WAITING.name());
-        return optionalIdList.isPresent() ? optionalIdList.get() : new ArrayList<>();
-    }
 }
