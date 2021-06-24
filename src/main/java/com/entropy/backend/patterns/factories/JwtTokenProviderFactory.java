@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 public interface JwtTokenProviderFactory {
     String generateToken(Authentication authentication);
 
+    String generateToken(String username);
+
     Long getUserIdFromJWT(String token);
 
     boolean validateToken(String authToken);

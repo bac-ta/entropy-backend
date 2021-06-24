@@ -1,8 +1,8 @@
 package com.entropy.backend.services.impls;
 
 import com.entropy.backend.common.constants.APIMessage;
-import com.entropy.backend.exceptions.RefreshTokenException;
 import com.entropy.backend.models.entities.RefreshToken;
+import com.entropy.backend.models.exceptions.RefreshTokenException;
 import com.entropy.backend.repositories.RefreshTokenRepository;
 import com.entropy.backend.services.RefreshTokenService;
 import org.springframework.beans.factory.annotation.Autowired;

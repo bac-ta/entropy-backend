@@ -1,7 +1,7 @@
 package com.entropy.backend.models.enumerations;
 
 import com.entropy.backend.common.constants.APIMessage;
-import com.entropy.backend.exceptions.ResourceNotFoundExceptionHandler;
+import com.entropy.backend.models.exceptions.ResourceNotFoundExceptionHandler;
 import lombok.Getter;
 
 import java.util.Arrays;

@@ -1,6 +1,6 @@
 package com.entropy.backend.models.rests.responses.categories;
 
-import com.entropy.backend.models.dtos.CategoryDTO;
+import com.entropy.backend.models.dtos.CategoryDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -10,5 +10,5 @@ import java.util.List;
 @AllArgsConstructor
 public class CategoryFetchResponse {
     private int count;
-    private List<CategoryDTO> categories;
+    private List<CategoryDto> categories;
 }

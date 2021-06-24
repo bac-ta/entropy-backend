@@ -1,4 +1,4 @@
-package com.entropy.backend.configurations.securities.oauth2s;
+package com.entropy.backend.configurations.securities.oauth2;
 
 import com.entropy.backend.repositories.HttpCookieOAuth2AuthorizationRequestRepository;
 import com.entropy.backend.common.utils.AppUtil;

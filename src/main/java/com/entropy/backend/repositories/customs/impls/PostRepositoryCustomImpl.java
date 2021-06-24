@@ -4,7 +4,7 @@ import com.entropy.backend.common.constants.QueryName;
 import com.entropy.backend.models.enumerations.PublicationType;
 import com.entropy.backend.models.enumerations.SortType;
 import com.entropy.backend.models.enumerations.StatusType;
-import com.entropy.backend.models.dtos.PostDTO;
+import com.entropy.backend.models.dtos.PostDto;
 import com.entropy.backend.repositories.customs.PostRepositoryCustom;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
@@ -24,9 +24,9 @@ public class PostRepositoryCustomImpl implements PostRepositoryCustom {
     private EntityManager entityManager;
 
     @Override
-    public Map<Integer, List<PostDTO>> findPosts(int sort, int start, int limit, Integer statusType, Integer publishType, Integer categoryId, String searchText) {
+    public Map<Integer, List<PostDto>> findPosts(int sort, int start, int limit, Integer statusType, Integer publishType, Integer categoryId, String searchText) {
 
-        Map<Integer, List<PostDTO>> map = new HashMap<>();
+        Map<Integer, List<PostDto>> map = new HashMap<>();
         StringBuilder queryBuilder = new StringBuilder();
         queryBuilder.append("SELECT post.id, post.updated, post.author, post.title, post.publish_type, post.status_type FROM post ");
 
@@ -84,8 +84,8 @@ public class PostRepositoryCustomImpl implements PostRepositoryCustom {
         Query queryCount = entityManager.createNativeQuery(queryCountBuilder.toString());
         String countStr = queryCount.getResultList().get(0).toString();
 
-        List<PostDTO> postDTOList = query.getResultList();
-        map.put(Integer.parseInt(countStr), postDTOList);
+        List<PostDto> postDtoList = query.getResultList();
+        map.put(Integer.parseInt(countStr), postDtoList);
         return map;
     }
 }

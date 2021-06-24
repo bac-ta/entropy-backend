@@ -2,7 +2,7 @@ package com.entropy.backend.services.impls;
 
 import com.entropy.backend.common.constants.APIMessage;
 import com.entropy.backend.configurations.securities.jwts.AccountPrincipal;
-import com.entropy.backend.models.dtos.SessionDTO;
+import com.entropy.backend.models.dtos.SessionDto;
 import com.entropy.backend.models.entities.RefreshToken;
 import com.entropy.backend.models.enumerations.SessionStatusType;
 import com.entropy.backend.models.rests.requests.authentications.LoginInfoRequest;
@@ -103,11 +103,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 SessionResponse.class, uriParam);
 
         SessionResponse sessionsResponse = responses.getBody();
-        List<SessionDTO> dtoList = Objects.requireNonNull(sessionsResponse).getSessions();
+        List<SessionDto> dtoList = Objects.requireNonNull(sessionsResponse).getSessions();
 
 
         if (dtoList.size() > 0) {
-            for (SessionDTO sessionDTO : dtoList) {
+            for (SessionDto sessionDTO : dtoList) {
                 if (sessionDTO.getSessionStatus().equals(SessionStatusType.AUTHENTICATED.name()))
                     return new LoginInfoResponse(APIMessage.LOGIN_SUCCESSFUL, accessToken, HttpStatus.OK.value(), refreshToken.getToken());
             }
@@ -136,6 +136,16 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public AccountPrincipal getCurrentPrincipal() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return (AccountPrincipal) authentication.getPrincipal();
+    }
+
+    @Override
+    public LoginInfoResponse refreshToken(String token) {
+        return refreshTokenService.findByToken(token).map(refreshTokenService::verifyExpiration)
+                .map(RefreshToken::getUsername)
+                .map(username->{
+                    String jwtToken = jwtFactory
+
+                })
     }
 
 }

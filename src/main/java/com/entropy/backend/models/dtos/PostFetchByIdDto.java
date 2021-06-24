@@ -8,11 +8,11 @@ import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class PostFetchByIdDTO extends PostDTO {
+public class PostFetchByIdDto extends PostDto {
     private String content;
     @JsonProperty("image_title")
     private String imageTitle;
     @JsonProperty("category_info_list")
-    private List<CategoryDTO> categoryDTOInfoList;
+    private List<CategoryDto> categoryDtoInfoList;
 
 }

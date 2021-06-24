@@ -13,21 +13,18 @@ import javax.persistence.Table;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "ofOAuth2User")
+@Table(name = "ofTag")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class OAuth2User extends Base {
+public class Tag extends Base {
     @Id
-    @Column
+    @Column(name = "id")
     private Integer id;
 
-    @Column
+    @Column(name = "name")
     private String name;
 
-    @Column
-    private String email;
-
-    @Column
-    private Byte type;
+    @Column(name = "categoryId")
+    private Integer categoryId;
 }

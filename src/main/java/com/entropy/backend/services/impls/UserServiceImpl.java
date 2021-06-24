@@ -2,10 +2,10 @@ package com.entropy.backend.services.impls;
 
 import com.entropy.backend.common.constants.APIMessage;
 import com.entropy.backend.common.utils.TimeUtil;
-import com.entropy.backend.exceptions.UserAlreadyExistException;
+import com.entropy.backend.models.exceptions.AccountAlreadyExistException;
 import com.entropy.backend.models.entities.User;
 import com.entropy.backend.models.enumerations.GenderType;
-import com.entropy.backend.models.enumerations.UserType;
+import com.entropy.backend.models.enumerations.AccountType;
 import com.entropy.backend.models.rests.requests.users.OpenfireUserRegistrationRequest;
 import com.entropy.backend.models.rests.requests.users.UserRegistrationRequest;
 import com.entropy.backend.models.rests.responses.user.UserRegistrationResponse;
@@ -36,7 +36,7 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     private final BCryptPasswordEncoder passwordEncoder;
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
@@ -45,10 +45,6 @@ public class UserServiceImpl implements UserService {
     private String openfireHost;
     @Value("${openfire.rest-secret-key}")
     private String openfireRestSecretKey;
-    @Value("${openfire.xmpp-client-connection-port}")
-    private Integer xmppClientConnectionPort;
-    @Value("${openfire.xmpp-domain}")
-    private String xmppDomain;
     @Value("${openfire.xmpp-client-bin-port}")
     private String xmppClientBinPort;
 
@@ -60,7 +56,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserRegistrationResponse register(UserRegistrationRequest userRequest, UserType userType) {
+    public UserRegistrationResponse register(UserRegistrationRequest userRequest, AccountType accountType) {
+        logger.info("user request: ", userRequest);
         String username = userRequest.getUsername();
         String email = userRequest.getEmail();
         String phone = userRequest.getPhone();
@@ -71,15 +68,15 @@ public class UserServiceImpl implements UserService {
 
             String alreadyUsername = alreadyUser.getUsername();
             if (alreadyUsername.equals(username))
-                throw new UserAlreadyExistException("username");
+                throw new AccountAlreadyExistException("username");
 
             String alreadyEmail = alreadyUser.getEmail();
             if (alreadyEmail.equals(email))
-                throw new UserAlreadyExistException("email");
+                throw new AccountAlreadyExistException("email");
 
             String alreadyPhone = alreadyUser.getPhone();
             if (StringUtils.isNotBlank(alreadyPhone) && alreadyPhone.equals(phone))
-                throw new UserAlreadyExistException("phone");
+                throw new AccountAlreadyExistException("phone");
         }
 
         String name = userRequest.getName();
@@ -95,16 +92,18 @@ public class UserServiceImpl implements UserService {
                 username, name, email, password
         ), headers);
 
-        final String openfireRestApiUrl = openfireRestSecretKey + ":" + xmppClientBinPort + "/plugins/restapi/v1/users";
+        final String openfireRestApiUrl = openfireHost + ":" + xmppClientBinPort + "/plugins/restapi/v1/users";
         restTemplate.postForObject(openfireRestApiUrl, requestBody, OpenfireUserRegistrationRequest.class);
 
         //Update the fields extant
         User storedUser = userRepository.findUserByUsername(username);
+
+        logger.info("storedUser: ", storedUser);
         GenderType genderType = GenderType.valueOf(userRequest.getGender());
         storedUser.setGender((byte) genderType.getValue());
         storedUser.setBcryptedPassword(passwordEncoder.encode(userRequest.getPassword()));
         storedUser.setDateOfBirth(TimeUtil.toDate(userRequest.getDateOfBirth()));
-        storedUser.setType((byte) userType.getValue());
+        storedUser.setType((byte) accountType.getValue());
         if (StringUtils.isNotBlank(phone))
             storedUser.setPhone(phone);
 

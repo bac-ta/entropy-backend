@@ -20,6 +20,7 @@ public class APIMessage {
     public static final String NOT_DETERMINE_FILE_TYPE = "Could not determine file type";
     public static final String FILE_TYPE_INVALID = "File type is invalid";
     public static final String PARAMS_INVALID = "Params is invalid";
+    public static final String USERNAME_INVALID= "Account with username: '%s' is invalid";
 
     //Authenticate
     public static String RESOURCE_NOT_FOUND = "%s not found with %s : '%s'";
@@ -45,7 +46,7 @@ public class APIMessage {
     public static final String UPDATE_POST_SUCCESSFUL = "Update post successful";
     public static final String PUBLISH_TYPE_INVALID = "Publish type invalid";
     public static final String POST_TITLE_EXIST = "Post title exist, please try again with other title";
-    public static final String POST_NOT_FOUND = "Post not found";
+    public static final String POST_NOT_FOUND = "Post not found by id %s";
 
     //Category
     public static final String CREATE_CATEGORY_SUCCESSFUL = "Create category successful";
@@ -55,4 +56,5 @@ public class APIMessage {
 
     //Refresh token
     public static final String REFRESH_TOKEN_EXPIRE = "Refresh token was expired. Please make a new signing request";
+    public static final String REFRESH_TOKEN_NOT_FOUND = "Refresh token not found";
 }

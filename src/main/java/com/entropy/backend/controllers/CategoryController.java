@@ -2,7 +2,7 @@ package com.entropy.backend.controllers;
 
 import com.entropy.backend.common.constants.APIEndpointBase;
 import com.entropy.backend.common.constants.APIMessage;
-import com.entropy.backend.exceptions.ResourceNotFoundExceptionHandler;
+import com.entropy.backend.models.exceptions.ResourceNotFoundExceptionHandler;
 import com.entropy.backend.models.entities.Category;
 import com.entropy.backend.models.enumerations.SortType;
 import com.entropy.backend.models.enumerations.StatusType;

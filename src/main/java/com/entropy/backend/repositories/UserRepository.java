@@ -13,8 +13,12 @@ import java.util.Optional;
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>, UserRepositoryCustom {
-    @Query("FROM User WHERE email=:emailOrUsername OR username=:emailOrUsername AND status=:status AND type=:type")
-    User findUser(String emailOrUsername, byte status, byte type);
+    @Query("FROM User WHERE email=:emailOrUsername OR username=:emailOrUsername AND status=:status")
+    User findUser(String emailOrUsername, byte status);
 
+    @Query("FROM User WHERE username=:username AND status=:status")
+    Optional<User> findUserByUsernameAndStatus(String username, byte status);
+
+    @Query("FROM User WHERE username=:username")
     User findUserByUsername(String username);
 }

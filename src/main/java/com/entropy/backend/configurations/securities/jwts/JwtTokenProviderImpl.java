@@ -1,7 +1,11 @@
 package com.entropy.backend.configurations.securities.jwts;
 
 import com.entropy.backend.common.constants.ExceptionMessage;
+import com.entropy.backend.models.entities.User;
+import com.entropy.backend.models.enumerations.StatusType;
+import com.entropy.backend.models.exceptions.AccountInvalidException;
 import com.entropy.backend.patterns.factories.JwtTokenProviderFactory;
+import com.entropy.backend.repositories.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -11,6 +15,7 @@ import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -18,6 +23,7 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Class handle JWT (generate, validate...) implement {@link JwtTokenProviderFactory}
@@ -28,12 +34,18 @@ import java.util.Map;
  */
 @Component("jwtTokenProviderImpl")
 public class JwtTokenProviderImpl implements JwtTokenProviderFactory {
+    private final UserRepository userRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(JwtTokenProviderImpl.class);
     @Value("${app.auth.token-secret}")
     private String clientSecrectKey;
     @Value("${app.auth.token-expiration-msec}")
     private int expirationInMs;
+
+    @Autowired
+    public JwtTokenProviderImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public String generateToken(Authentication authentication) {
@@ -48,6 +60,24 @@ public class JwtTokenProviderImpl implements JwtTokenProviderFactory {
 
         return Jwts.builder().setId(principal.getUsername()).setClaims(claimMap).setIssuedAt(dateNow).
                 setExpiration(expiryDate).signWith(SignatureAlgorithm.HS512, clientSecrectKey).compact();
+    }
+
+    @Override
+    public String generateToken(String username) {
+        Date dateNow = new Date();
+        Date expiryDate = new Date(dateNow.getTime() + expirationInMs);
+
+        Optional<User> optionalUser = userRepository.findUserByUsernameAndStatus(username, (byte) StatusType.ON.getValue());
+        if (!optionalUser.isPresent())
+            throw new AccountInvalidException(username);
+
+        User user = optionalUser.get();
+
+        Map<String, Object> claimMap = new HashMap<>();
+        claimMap.put("username", user.getUsername());
+        claimMap.put("email", user.getEmail());
+
+        return null;
     }
 
     @Override

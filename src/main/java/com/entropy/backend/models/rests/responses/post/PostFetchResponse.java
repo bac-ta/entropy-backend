@@ -1,6 +1,6 @@
 package com.entropy.backend.models.rests.responses.post;
 
-import com.entropy.backend.models.dtos.PostDTO;
+import com.entropy.backend.models.dtos.PostDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -10,5 +10,5 @@ import java.util.List;
 @AllArgsConstructor
 public class PostFetchResponse {
     private int count;
-    private List<PostDTO> posts;
+    private List<PostDto> posts;
 }

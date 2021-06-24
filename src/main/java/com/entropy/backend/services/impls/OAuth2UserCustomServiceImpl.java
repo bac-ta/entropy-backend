@@ -1,14 +1,14 @@
 package com.entropy.backend.services.impls;
 
 import com.entropy.backend.common.constants.ExceptionMessage;
+import com.entropy.backend.configurations.securities.jwts.AccountPrincipal;
 import com.entropy.backend.models.entities.Profile;
 import com.entropy.backend.models.enumerations.OAuth2Type;
+import com.entropy.backend.models.exceptions.OAuth2AuthenticationProcessingException;
 import com.entropy.backend.patterns.factories.OAuth2UserInfoFactory;
 import com.entropy.backend.patterns.templates.OAuth2UserInfoTemplate;
 import com.entropy.backend.repositories.OAuth2UserRepository;
 import com.entropy.backend.repositories.ProfileRepository;
-import com.entropy.backend.configurations.securities.jwts.AccountPrincipal;
-import com.entropy.backend.exceptions.OAuth2AuthenticationProcessingException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
@@ -21,6 +21,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * This class implement {@link DefaultOAuth2UserService}
+ *
+ * @author bac-ta
+ * @see OAuth2UserCustomServiceImpl
+ * @since 2021-06-22
+ */
 @Service
 public class OAuth2UserCustomServiceImpl extends DefaultOAuth2UserService {
     private final OAuth2UserRepository oAuth2UserRepository;
@@ -77,7 +84,7 @@ public class OAuth2UserCustomServiceImpl extends DefaultOAuth2UserService {
         oAuth2UserEntity.setName(template.getName());
         oAuth2UserEntity.setEmail(template.getEmail());
 
-        int oauth2Value  = OAuth2Type.findByName(request.getClientRegistration().getRegistrationId()).getValue();
+        int oauth2Value = OAuth2Type.findByName(request.getClientRegistration().getRegistrationId()).getValue();
         oAuth2UserEntity.setType((byte) oauth2Value);
         com.entropy.backend.models.entities.OAuth2User oAuth2UserEntitySaved = oAuth2UserRepository.save(oAuth2UserEntity);
         Profile profile = new Profile();

@@ -1,7 +1,7 @@
 package com.entropy.backend.configurations.securities.jwts;
 
 import com.entropy.backend.models.entities.User;
-import com.entropy.backend.models.enumerations.UserType;
+import com.entropy.backend.models.enumerations.AccountType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -36,7 +36,7 @@ public class AccountPrincipal implements UserDetails, OAuth2User {
     public static AccountPrincipal create(User user) {
         Set<GrantedAuthority> authorities = new HashSet<>();
         Byte type = user.getType();
-        authorities.add(new SimpleGrantedAuthority(UserType.findByValue(type).getName()));
+        authorities.add(new SimpleGrantedAuthority(AccountType.findByValue(type).getName()));
         AccountPrincipal principal = new AccountPrincipal();
 
         principal.setEmail(user.getEmail());
@@ -48,7 +48,7 @@ public class AccountPrincipal implements UserDetails, OAuth2User {
 
     public static AccountPrincipal create(com.entropy.backend.models.entities.OAuth2User oAuth2UserEntity, Map<String, Object> attributes) {
         List<GrantedAuthority> authorities = Collections.
-                singletonList(new SimpleGrantedAuthority(UserType.CLIENT.name()));
+                singletonList(new SimpleGrantedAuthority(AccountType.CLIENT.name()));
 
         AccountPrincipal principal = new AccountPrincipal();
         principal.setAuthorities(authorities);

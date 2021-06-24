@@ -1,4 +1,4 @@
-package com.entropy.backend.exceptions;
+package com.entropy.backend.models.exceptions;
 
 import org.springframework.security.core.AuthenticationException;
 

@@ -1,10 +1,10 @@
 package com.entropy.backend.patterns.factories;
 
 import com.entropy.backend.models.enumerations.OAuth2Type;
-import com.entropy.backend.configurations.securities.oauth2s.FacebookOAuth2UserInfo;
-import com.entropy.backend.configurations.securities.oauth2s.GithubOAuth2UserInfo;
+import com.entropy.backend.configurations.securities.oauth2.FacebookOAuth2UserInfo;
+import com.entropy.backend.configurations.securities.oauth2.GithubOAuth2UserInfo;
 import com.entropy.backend.patterns.templates.OAuth2UserInfoTemplate;
-import com.entropy.backend.exceptions.OAuth2AuthenticationProcessingException;
+import com.entropy.backend.models.exceptions.OAuth2AuthenticationProcessingException;
 
 import java.util.Map;
 

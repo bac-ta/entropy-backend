@@ -2,9 +2,9 @@ package com.entropy.backend.services.impls;
 
 import com.entropy.backend.common.constants.APIMessage;
 import com.entropy.backend.models.enumerations.FileType;
+import com.entropy.backend.models.exceptions.ResourceNotFoundExceptionHandler;
 import com.entropy.backend.models.properties.FileStorageProperties;
 import com.entropy.backend.services.FileService;
-import com.entropy.backend.exceptions.ResourceNotFoundExceptionHandler;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +23,13 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.UUID;
 
+/**
+ * This class implement {@link FileService}
+ *
+ * @author bac-ta
+ * @see FileServiceImpl
+ * @since 2021-06-22
+ */
 @Service
 public class FileServiceImpl implements FileService {
     private final Path fileStorageLocation;

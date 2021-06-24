@@ -1,4 +1,4 @@
-package com.entropy.backend.configurations.securities.oauth2s;
+package com.entropy.backend.configurations.securities.oauth2;
 
 
 import com.entropy.backend.patterns.templates.OAuth2UserInfoTemplate;

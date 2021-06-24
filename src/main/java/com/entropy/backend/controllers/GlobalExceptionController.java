@@ -1,7 +1,7 @@
 package com.entropy.backend.controllers;
 
-import com.entropy.backend.exceptions.ResourceNotFoundExceptionHandler;
-import com.entropy.backend.exceptions.UserAlreadyExistException;
+import com.entropy.backend.models.exceptions.ResourceNotFoundExceptionHandler;
+import com.entropy.backend.models.exceptions.AccountAlreadyExistException;
 import com.entropy.backend.models.rests.responses.errors.GlobalExceptionResponse;
 import com.entropy.backend.models.rests.responses.user.UserRegistrationResponse;
 import org.slf4j.Logger;
@@ -22,12 +22,12 @@ import java.util.List;
  * Class AOP for catch and return if request API has exception
  *
  * @author bac-ta
- * @see GlobalExceptionHandler
+ * @see GlobalExceptionController
  * @since 2021-05-31
  */
 @ControllerAdvice
-public class GlobalExceptionHandler {
-    private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+public class GlobalExceptionController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionController.class);
 
     /**
      * Provides handling for exceptions throughout this service.
@@ -36,7 +36,7 @@ public class GlobalExceptionHandler {
      * @param request The current request
      */
     @ExceptionHandler({
-            ResourceNotFoundExceptionHandler.class, UserAlreadyExistException.class
+            ResourceNotFoundExceptionHandler.class, AccountAlreadyExistException.class
     })
     @Nullable
     public final ResponseEntity<Object> handleException(Exception ex, WebRequest request) {
@@ -49,10 +49,11 @@ public class GlobalExceptionHandler {
             ResourceNotFoundExceptionHandler exception = (ResourceNotFoundExceptionHandler) ex;
 
             return handleUserNotFoundException(exception, headers, status, request);
-        } else if (ex instanceof UserAlreadyExistException) {
+        } else if (ex instanceof AccountAlreadyExistException) {
             return new ResponseEntity<>(
                     new UserRegistrationResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage()),
                     HttpStatus.BAD_REQUEST);
+        
         } else {
             if (LOGGER.isWarnEnabled()) {
                 LOGGER.warn("Unknown exception type: " + ex.getClass().getName());

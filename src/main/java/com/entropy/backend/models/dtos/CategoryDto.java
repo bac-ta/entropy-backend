@@ -5,16 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
-public class PostDTO {
+public class CategoryDto {
     private int id;
+    @JsonProperty("category_type")
+    private String categoryType;
     private String updated;
-    private String author;
-    private String title;
-    @JsonProperty("publish_type")
-    private String publishType;
     @JsonProperty("status_type")
     private String statusType;
 }

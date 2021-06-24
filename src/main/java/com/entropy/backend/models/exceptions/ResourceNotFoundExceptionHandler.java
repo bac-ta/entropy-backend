@@ -1,4 +1,4 @@
-package com.entropy.backend.exceptions;
+package com.entropy.backend.models.exceptions;
 
 import com.entropy.backend.common.constants.APIMessage;
 import org.springframework.http.HttpStatus;

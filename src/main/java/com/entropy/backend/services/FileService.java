@@ -1,10 +1,15 @@
 package com.entropy.backend.services;
 
 import org.springframework.core.io.Resource;
-import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-@Service
+/**
+ * Interface provide methods handle file
+ *
+ * @author bac-ta
+ * @see FileService
+ * @since 2021-06-22
+ */
 public interface FileService {
     String storeFile(MultipartFile file);
 

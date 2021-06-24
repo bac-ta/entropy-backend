@@ -1,9 +1,9 @@
-package com.entropy.backend.configurations.securities.oauth2s;
+package com.entropy.backend.configurations.securities.oauth2;
 
 import com.entropy.backend.common.constants.APIMessage;
 import com.entropy.backend.repositories.HttpCookieOAuth2AuthorizationRequestRepository;
 import com.entropy.backend.configurations.securities.jwts.JwtTokenProviderImpl;
-import com.entropy.backend.exceptions.ResourceNotFoundExceptionHandler;
+import com.entropy.backend.models.exceptions.ResourceNotFoundExceptionHandler;
 import com.entropy.backend.common.utils.AppUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

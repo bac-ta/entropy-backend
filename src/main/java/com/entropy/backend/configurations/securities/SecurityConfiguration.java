@@ -3,9 +3,9 @@ package com.entropy.backend.configurations.securities;
 import com.entropy.backend.common.constants.AppConstant;
 import com.entropy.backend.configurations.securities.entrypoint.JwtAuthenticationEntryPoint;
 import com.entropy.backend.configurations.securities.jwts.JwtAuthenticationFilter;
-import com.entropy.backend.configurations.securities.oauth2s.OAuth2AuthenticationFailureHandler;
-import com.entropy.backend.configurations.securities.oauth2s.OAuth2AuthenticationSuccessHandler;
-import com.entropy.backend.models.enumerations.UserType;
+import com.entropy.backend.configurations.securities.oauth2.OAuth2AuthenticationFailureHandler;
+import com.entropy.backend.configurations.securities.oauth2.OAuth2AuthenticationSuccessHandler;
+import com.entropy.backend.models.enumerations.AccountType;
 import com.entropy.backend.repositories.HttpCookieOAuth2AuthorizationRequestRepository;
 import com.entropy.backend.services.impls.OAuth2UserCustomServiceImpl;
 import com.entropy.backend.services.impls.UserDetailsImplServiceImpl;
@@ -81,7 +81,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/auth/login", "/user/regist", "/file/view-file/*").permitAll()
-                .antMatchers("/post/*", "/file/*", "/category/*").hasRole(UserType.ADMINISTRATOR.getName())
+                .antMatchers("/post/*", "/file/*", "/category/*").hasRole(AccountType.ADMINISTRATOR.getName())
                 .anyRequest()
                 .authenticated()
                 .and()

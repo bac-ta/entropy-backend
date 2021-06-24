@@ -5,18 +5,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * The response class of login API
+ * The response class of refresh token API
  *
  * @author bac-ta
- * @see LoginInfoResponse
+ * @see TokenRefreshResponse
  * @since 2021-06-21
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginInfoResponse {
-    private String message;
+public class TokenRefreshResponse {
     private String accessToken;
-    private int statusCode;
     private String refreshToken;
+    private String type = "Bearer";
 }

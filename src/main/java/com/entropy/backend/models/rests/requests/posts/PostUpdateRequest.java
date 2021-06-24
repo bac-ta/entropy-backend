@@ -1,13 +1,14 @@
 package com.entropy.backend.models.rests.requests.posts;
 
-import com.entropy.backend.models.enumerations.PublicationType;
-import com.entropy.backend.models.enumerations.StatusType;
+import com.entropy.backend.models.anonations.URLVerifier;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
+import java.util.Map;
 
 @Data
 @ToString
@@ -16,16 +17,18 @@ public class PostUpdateRequest {
     @JsonProperty(required = true)
     private String title;
     @NotBlank
-    @JsonProperty(value = "image_title", required = true)
-    private String imageTitle;
+    @JsonProperty(required = true)
+    @URLVerifier
+    private String imageTitleUrl;
     @NotBlank
     @JsonProperty(required = true)
     private String content;
-    @JsonProperty("category_use_ids")
-    private List<Integer> categoryUseIds;
-    @JsonProperty(value = "publish_type")
-    private Integer publishType = PublicationType.PUBLISH.getValue();
-    @JsonProperty(value = "status_type")
-    private Integer statusType = StatusType.ON.getValue();
+    @NotBlank
+    @JsonProperty(required = true)
+    private String author;
+    @NotEmpty
+    @JsonProperty(required = true)
+    private List<Map<Integer, List<Integer>>> mapCategoryAndTagIds;
+    private Integer status;
 }
 
