@@ -1,31 +1,27 @@
 package com.entropy.backend.models.enumerations;
 
 
-import com.entropy.backend.common.constants.APIMessage;
-import com.entropy.backend.models.exceptions.ResourceNotFoundExceptionHandler;
 import lombok.Getter;
 
-import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author bac-ta
+ * @since 2021-06-25
  */
 public enum AccountType {
-    CLIENT(1, "NORMAL"),
-    ADMINISTRATOR(2, "ADMINISTRATOR");
+    CLIENT(1, Stream.of(AccountPermission.CLIENT_VIEW, AccountPermission.CLIENT_SAVE, AccountPermission.CLIENT_DELETE).collect(Collectors.toSet())),
+    ADMINISTRATOR(2, Stream.of(AccountPermission.ADMINISTRATOR_VIEW, AccountPermission.ADMINISTRATOR_SAVE, AccountPermission.ADMINISTRATOR_DELETE).collect(Collectors.toSet()));
     @Getter
     private final int value;
     @Getter
-    private final String name;
+    private final Set<AccountPermission> permissions;
 
-    AccountType(int value, final String name) {
+    AccountType(int value, Set<AccountPermission> permissions) {
         this.value = value;
-        this.name = name;
+        this.permissions = permissions;
     }
 
-    public static AccountType findByValue(int value) {
-        return Arrays.stream(AccountType.values())
-                .filter(userType -> userType.getValue() == value)
-                .findFirst().orElseThrow(() -> new ResourceNotFoundExceptionHandler(APIMessage.USER_TYPE_INVALID));
-    }
 }

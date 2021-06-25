@@ -56,7 +56,7 @@ public class JwtTokenProviderImpl implements JwtTokenProviderFactory {
         Map<String, Object> claimMap = new HashMap<>();
         claimMap.put("username", principal.getUsername());
         claimMap.put("email", principal.getEmail());
-        claimMap.put("authorities", principal.getAuthorities());
+        claimMap.put("types", principal.getAuthorities());
 
         return Jwts.builder().setId(principal.getUsername()).setClaims(claimMap).setIssuedAt(dateNow).
                 setExpiration(expiryDate).signWith(SignatureAlgorithm.HS512, clientSecrectKey).compact();
@@ -77,7 +77,8 @@ public class JwtTokenProviderImpl implements JwtTokenProviderFactory {
         claimMap.put("username", user.getUsername());
         claimMap.put("email", user.getEmail());
 
-        return null;
+        return Jwts.builder().setId(username).setClaims(claimMap).setIssuedAt(dateNow).
+                setExpiration(expiryDate).signWith(SignatureAlgorithm.HS512, clientSecrectKey).compact();
     }
 
     @Override
