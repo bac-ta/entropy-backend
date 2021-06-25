@@ -62,7 +62,7 @@ public class User extends Base {
     private String phone;
 
     @Column
-    private Byte type;
+    private Byte role;
 
     @Column(name = "bcryptedPassword")
     private String bcryptedPassword;

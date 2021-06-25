@@ -1,7 +1,6 @@
 package com.entropy.backend.models.enumerations;
 
-import com.entropy.backend.common.constants.APIMessage;
-import com.entropy.backend.models.exceptions.ResourceNotFoundExceptionHandler;
+import com.entropy.backend.models.exceptions.EnumNotFoundException;
 import lombok.Getter;
 
 import java.util.Arrays;
@@ -24,6 +23,6 @@ public enum ApprovalType {
     public static ApprovalType findByValue(int value) {
         return Arrays.stream(ApprovalType.values())
                 .filter(approveType -> approveType.getValue() == value)
-                .findFirst().orElseThrow(() -> new ResourceNotFoundExceptionHandler(APIMessage.APPROVE_TYPE_INVALID));
+                .findFirst().orElseThrow(() -> new EnumNotFoundException("Approval type", value));
     }
 }

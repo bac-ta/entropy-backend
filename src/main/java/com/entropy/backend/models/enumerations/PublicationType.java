@@ -1,7 +1,6 @@
 package com.entropy.backend.models.enumerations;
 
-import com.entropy.backend.common.constants.APIMessage;
-import com.entropy.backend.models.exceptions.ResourceNotFoundExceptionHandler;
+import com.entropy.backend.models.exceptions.EnumNotFoundException;
 import lombok.Getter;
 
 import java.util.Arrays;
@@ -23,6 +22,6 @@ public enum PublicationType {
     public static PublicationType findByValue(int value) {
         return Arrays.stream(PublicationType.values())
                 .filter(publicationType -> publicationType.getValue() == value)
-                .findFirst().orElseThrow(() -> new ResourceNotFoundExceptionHandler(APIMessage.PUBLISH_TYPE_INVALID));
+                .findFirst().orElseThrow(() -> new EnumNotFoundException("Publication type", value));
     }
 }

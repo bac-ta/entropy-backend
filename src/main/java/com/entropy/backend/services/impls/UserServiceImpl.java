@@ -2,10 +2,10 @@ package com.entropy.backend.services.impls;
 
 import com.entropy.backend.common.constants.APIMessage;
 import com.entropy.backend.common.utils.TimeUtil;
-import com.entropy.backend.models.exceptions.AccountAlreadyExistException;
 import com.entropy.backend.models.entities.User;
-import com.entropy.backend.models.enumerations.GenderType;
 import com.entropy.backend.models.enumerations.AccountType;
+import com.entropy.backend.models.enumerations.GenderType;
+import com.entropy.backend.models.exceptions.AccountAlreadyExistException;
 import com.entropy.backend.models.rests.requests.users.OpenfireUserRegistrationRequest;
 import com.entropy.backend.models.rests.requests.users.UserRegistrationRequest;
 import com.entropy.backend.models.rests.responses.user.UserRegistrationResponse;
@@ -103,7 +103,7 @@ public class UserServiceImpl implements UserService {
         storedUser.setGender((byte) genderType.getValue());
         storedUser.setBcryptedPassword(passwordEncoder.encode(userRequest.getPassword()));
         storedUser.setDateOfBirth(TimeUtil.toDate(userRequest.getDateOfBirth()));
-        storedUser.setType((byte) accountType.getValue());
+        storedUser.setRole((byte) accountType.getValue());
         if (StringUtils.isNotBlank(phone))
             storedUser.setPhone(phone);
 

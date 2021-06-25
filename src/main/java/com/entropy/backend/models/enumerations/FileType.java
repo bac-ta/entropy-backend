@@ -1,7 +1,6 @@
 package com.entropy.backend.models.enumerations;
 
-import com.entropy.backend.common.constants.APIMessage;
-import com.entropy.backend.models.exceptions.ResourceNotFoundExceptionHandler;
+import com.entropy.backend.models.exceptions.EnumNotFoundException;
 import lombok.Getter;
 
 import java.util.Arrays;
@@ -31,12 +30,12 @@ public enum FileType {
     public static FileType findByValue(int value) {
         return Arrays.stream(FileType.values())
                 .filter(fileType -> fileType.getValue() == value)
-                .findFirst().orElseThrow(() -> new ResourceNotFoundExceptionHandler(APIMessage.FILE_TYPE_INVALID));
+                .findFirst().orElseThrow(() -> new EnumNotFoundException("File type", value));
     }
 
     public static FileType findByName(String name) {
         return Arrays.stream(FileType.values()).filter(fileType -> fileType.getName().equals(name))
-                .findFirst().orElseThrow(() -> new ResourceNotFoundExceptionHandler(APIMessage.FILE_TYPE_INVALID));
+                .findFirst().orElseThrow(() -> new EnumNotFoundException("File type", name));
     }
 
 }
