@@ -1,7 +1,6 @@
 package com.entropy.backend.controllers;
 
 import com.entropy.backend.common.constants.APIEndpointBase;
-import com.entropy.backend.models.enumerations.AccountType;
 import com.entropy.backend.models.rests.requests.users.UserRegistrationRequest;
 import com.entropy.backend.models.rests.responses.user.UserRegistrationResponse;
 import com.entropy.backend.services.UserService;
@@ -35,7 +34,7 @@ public class UserController {
 
     @PostMapping("/registration")
     public ResponseEntity<UserRegistrationResponse> registerUser(@Valid @RequestBody UserRegistrationRequest req) {
-        UserRegistrationResponse resp = userService.register(req, AccountType.CLIENT);
+        UserRegistrationResponse resp = userService.register(req, UserRole.CLIENT);
         return new ResponseEntity<>(resp, HttpStatus.CREATED);
     }
 }

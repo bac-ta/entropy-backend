@@ -9,7 +9,9 @@ import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.time.LocalDate;
 
@@ -49,20 +51,21 @@ public class User extends Base {
     @Column(name = "email")
     private String email;
 
-    @Column
+    @Column(name = "status")
     private Byte status;
 
-    @Column
+    @Column(name = "gender")
     private Byte gender;
 
     @Column(name = "dateOfBirth")
     private LocalDate dateOfBirth;
 
-    @Column
+    @Column(name = "phone")
     private String phone;
 
-    @Column
-    private Byte role;
+    @Column(name = "role")
+    @OneToOne(fetch = FetchType.LAZY)
+    private Role role;
 
     @Column(name = "bcryptedPassword")
     private String bcryptedPassword;

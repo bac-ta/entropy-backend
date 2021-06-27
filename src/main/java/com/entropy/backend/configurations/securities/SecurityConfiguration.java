@@ -5,10 +5,9 @@ import com.entropy.backend.configurations.securities.entrypoint.JwtAuthenticatio
 import com.entropy.backend.configurations.securities.jwts.JwtAuthenticationFilter;
 import com.entropy.backend.configurations.securities.oauth2.OAuth2AuthenticationFailureHandler;
 import com.entropy.backend.configurations.securities.oauth2.OAuth2AuthenticationSuccessHandler;
-import com.entropy.backend.models.enumerations.AccountType;
 import com.entropy.backend.repositories.HttpCookieOAuth2AuthorizationRequestRepository;
+import com.entropy.backend.services.UserDetailsServiceCustom;
 import com.entropy.backend.services.impls.OAuth2UserCustomServiceImpl;
-import com.entropy.backend.services.impls.UserDetailsImplServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -45,7 +44,7 @@ import java.util.Collections;
 )
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private final UserDetailsImplServiceImpl userDetailsService;
+    private final UserDetailsServiceCustom userDetailsService;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final OAuth2UserCustomServiceImpl oAuth2UserCustomService;
     @Autowired
@@ -54,7 +53,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private OAuth2AuthenticationFailureHandler failureHandler;
 
     @Autowired
-    public SecurityConfiguration(UserDetailsImplServiceImpl userDetailsService, JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
+    public SecurityConfiguration(UserDetailsServiceCustom userDetailsService, JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
                                  OAuth2UserCustomServiceImpl oAuth2UserCustomService) {
         this.userDetailsService = userDetailsService;
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;

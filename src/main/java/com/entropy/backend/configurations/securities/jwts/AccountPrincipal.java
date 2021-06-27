@@ -1,7 +1,5 @@
 package com.entropy.backend.configurations.securities.jwts;
 
-import com.entropy.backend.models.entities.User;
-import com.entropy.backend.models.enumerations.AccountType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -26,37 +24,40 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 public class AccountPrincipal implements UserDetails, OAuth2User {
-    private String email;
     private String username;
+    private String email;
+    private String phone;
     private String password;
     private String name; //For oauth2
     private Map<String, Object> attributes;//For oath2
     private Collection<? extends GrantedAuthority> authorities;
 
-    public static AccountPrincipal create(User user) {
+    public static AccountPrincipal create(String username, String email, String phone, String roleName, Set<String> permissions) {
         Set<GrantedAuthority> authorities = new HashSet<>();
-        Byte type = user.getType();
-        authorities.add(new SimpleGrantedAuthority(AccountType.findByValue(type).getName()));
-        AccountPrincipal principal = new AccountPrincipal();
+        authorities.add(new SimpleGrantedAuthority(roleName));
+        permissions.forEach(permission -> authorities.add(new SimpleGrantedAuthority(permission)));
 
-        principal.setEmail(user.getEmail());
-        principal.setUsername(user.getUsername());
+        AccountPrincipal principal = new AccountPrincipal();
+        principal.setEmail(email);
+        principal.setUsername(username);
+        principal.setPhone(phone);
         principal.setAuthorities(authorities);
 
         return principal;
     }
 
     public static AccountPrincipal create(com.entropy.backend.models.entities.OAuth2User oAuth2UserEntity, Map<String, Object> attributes) {
-        List<GrantedAuthority> authorities = Collections.
-                singletonList(new SimpleGrantedAuthority(AccountType.CLIENT.name()));
+//        List<GrantedAuthority> authorities = Collections.
+//                singletonList(new SimpleGrantedAuthority(UserRole.CLIENT.name()));
+//
+//        AccountPrincipal principal = new AccountPrincipal();
+//        principal.setAuthorities(authorities);
+//        principal.setEmail(oAuth2UserEntity.getEmail());
+//        principal.setName(oAuth2UserEntity.getName());
+//        principal.setAttributes(attributes);
 
-        AccountPrincipal principal = new AccountPrincipal();
-        principal.setAuthorities(authorities);
-        principal.setEmail(oAuth2UserEntity.getEmail());
-        principal.setName(oAuth2UserEntity.getName());
-        principal.setAttributes(attributes);
-
-        return principal;
+//        return principal;
+        return null;
     }
 
     @Override

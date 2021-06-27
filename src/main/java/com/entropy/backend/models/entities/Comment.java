@@ -2,14 +2,19 @@ package com.entropy.backend.models.entities;
 
 import com.entropy.backend.models.entities.base.Base;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -36,4 +41,8 @@ public class Comment extends Base {
 
     @Column(name = "status")
     private Byte status;
+
+    @Builder.Default
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "ofComment")
+    private List<Reply> replies;
 }

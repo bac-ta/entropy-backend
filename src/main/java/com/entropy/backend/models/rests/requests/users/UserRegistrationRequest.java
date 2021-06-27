@@ -38,4 +38,7 @@ public class UserRegistrationRequest extends OpenfireUserRegistrationRequest {
     @JsonProperty(value = "gender", required = true)
     @GenderVerifier(message = APIMessage.GENDER_INVALID)
     private String gender;
+
+    @JsonProperty(value = "role", required = true)
+    private int role;
 }

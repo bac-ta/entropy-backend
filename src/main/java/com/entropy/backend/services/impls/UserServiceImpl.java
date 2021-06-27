@@ -2,13 +2,15 @@ package com.entropy.backend.services.impls;
 
 import com.entropy.backend.common.constants.APIMessage;
 import com.entropy.backend.common.utils.TimeUtil;
+import com.entropy.backend.models.entities.Role;
 import com.entropy.backend.models.entities.User;
-import com.entropy.backend.models.enumerations.AccountType;
 import com.entropy.backend.models.enumerations.GenderType;
 import com.entropy.backend.models.exceptions.AccountAlreadyExistException;
+import com.entropy.backend.models.exceptions.AccountRoleInvalidException;
 import com.entropy.backend.models.rests.requests.users.OpenfireUserRegistrationRequest;
 import com.entropy.backend.models.rests.requests.users.UserRegistrationRequest;
 import com.entropy.backend.models.rests.responses.user.UserRegistrationResponse;
+import com.entropy.backend.repositories.RoleRepository;
 import com.entropy.backend.repositories.UserRepository;
 import com.entropy.backend.services.UserService;
 import org.apache.commons.lang3.StringUtils;
@@ -37,6 +39,7 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
     private final BCryptPasswordEncoder passwordEncoder;
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
@@ -50,13 +53,14 @@ public class UserServiceImpl implements UserService {
 
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
     @Override
-    public UserRegistrationResponse register(UserRegistrationRequest userRequest, AccountType accountType) {
+    public UserRegistrationResponse register(UserRegistrationRequest userRequest) {
         logger.info("user request: ", userRequest);
         String username = userRequest.getUsername();
         String email = userRequest.getEmail();
@@ -78,6 +82,9 @@ public class UserServiceImpl implements UserService {
             if (StringUtils.isNotBlank(alreadyPhone) && alreadyPhone.equals(phone))
                 throw new AccountAlreadyExistException("phone");
         }
+
+        Role role = roleRepository.findById((byte) userRequest.getRole()).orElseThrow(
+                () -> new AccountRoleInvalidException(userRequest.getRole()));
 
         String name = userRequest.getName();
         String password = userRequest.getPassword();
@@ -103,9 +110,10 @@ public class UserServiceImpl implements UserService {
         storedUser.setGender((byte) genderType.getValue());
         storedUser.setBcryptedPassword(passwordEncoder.encode(userRequest.getPassword()));
         storedUser.setDateOfBirth(TimeUtil.toDate(userRequest.getDateOfBirth()));
-        storedUser.setRole((byte) accountType.getValue());
         if (StringUtils.isNotBlank(phone))
             storedUser.setPhone(phone);
+
+        storedUser.setRole(role);
 
         userRepository.save(storedUser);
 

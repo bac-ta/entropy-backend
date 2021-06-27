@@ -1,6 +1,5 @@
 package com.entropy.backend.services;
 
-import com.entropy.backend.models.enumerations.AccountType;
 import com.entropy.backend.models.rests.requests.users.UserRegistrationRequest;
 import com.entropy.backend.models.rests.responses.user.UserRegistrationResponse;
 import org.springframework.stereotype.Service;
@@ -14,6 +13,5 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface UserService {
-    UserRegistrationResponse register(UserRegistrationRequest userRequest, AccountType accountType);
-
+    UserRegistrationResponse register(UserRegistrationRequest userRequest);
 }

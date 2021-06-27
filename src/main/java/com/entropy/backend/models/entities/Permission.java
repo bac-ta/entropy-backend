@@ -6,10 +6,14 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.util.HashSet;
+import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -24,4 +28,7 @@ public class Permission extends Base {
 
     @Column(name = "name")
     private String name;
+
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "ofPermission")
+    Set<Role> roles = new HashSet<>();
 }
