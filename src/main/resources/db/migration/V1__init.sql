@@ -549,6 +549,33 @@ INSERT INTO `ofOffline` VALUES ('admin',1,'001622821843918',131,'<message from=\
 UNLOCK TABLES;
 
 --
+-- Table structure for table `ofPermission`
+--
+
+DROP TABLE IF EXISTS `ofPermission`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ofPermission` (
+  `id` tinyint NOT NULL AUTO_INCREMENT,
+  `name` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated` datetime DEFAULT NULL,
+  `createdBy` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updatedBy` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ofPermission`
+--
+
+LOCK TABLES `ofPermission` WRITE;
+/*!40000 ALTER TABLE `ofPermission` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ofPermission` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `ofPost`
 --
 
@@ -1062,6 +1089,7 @@ CREATE TABLE `ofReply` (
   `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `fileUrl` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `username` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `commentId` int NOT NULL,
   `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated` datetime DEFAULT NULL,
   `createdBy` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -1077,6 +1105,61 @@ CREATE TABLE `ofReply` (
 LOCK TABLES `ofReply` WRITE;
 /*!40000 ALTER TABLE `ofReply` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ofReply` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ofRole`
+--
+
+DROP TABLE IF EXISTS `ofRole`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ofRole` (
+  `id` tinyint NOT NULL AUTO_INCREMENT,
+  `name` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated` datetime DEFAULT NULL,
+  `createdBy` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updatedBy` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ofRole`
+--
+
+LOCK TABLES `ofRole` WRITE;
+/*!40000 ALTER TABLE `ofRole` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ofRole` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ofRolePermission`
+--
+
+DROP TABLE IF EXISTS `ofRolePermission`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ofRolePermission` (
+  `id` tinyint NOT NULL AUTO_INCREMENT,
+  `roleId` tinyint NOT NULL,
+  `permissionId` tinyint NOT NULL,
+  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated` datetime DEFAULT NULL,
+  `createdBy` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updatedBy` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ofRolePermission`
+--
+
+LOCK TABLES `ofRolePermission` WRITE;
+/*!40000 ALTER TABLE `ofRolePermission` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ofRolePermission` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1238,7 +1321,7 @@ CREATE TABLE `ofUser` (
   `gender` tinyint NOT NULL DEFAULT '0',
   `dateOfBirth` date DEFAULT NULL,
   `phone` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `type` tinyint NOT NULL DEFAULT '1',
+  `role` tinyint NOT NULL DEFAULT '1',
   `bcryptedPassword` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated` datetime DEFAULT NULL,
@@ -1367,4 +1450,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-21 22:37:23
+-- Dump completed on 2021-06-27 23:34:21
