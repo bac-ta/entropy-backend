@@ -44,6 +44,7 @@ public class AuthenticationController {
     @PostMapping("refresh-token/{token}")
     public ResponseEntity<TokenRefreshResponse> refreshToken(@PathVariable String token) {
         refreshTokenService.findByToken()
+
         return null;
     }
 }
