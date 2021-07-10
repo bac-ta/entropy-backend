@@ -5,6 +5,7 @@ import com.entropy.backend.configurations.securities.jwts.AccountPrincipal;
 import com.entropy.backend.models.dtos.SessionDto;
 import com.entropy.backend.models.entities.RefreshToken;
 import com.entropy.backend.models.enumerations.SessionStatusType;
+import com.entropy.backend.models.exceptions.RefreshTokenException;
 import com.entropy.backend.models.rests.requests.authentications.LoginInfoRequest;
 import com.entropy.backend.models.rests.responses.authentications.LoginInfoResponse;
 import com.entropy.backend.models.rests.responses.authentications.SessionResponse;
@@ -139,13 +140,18 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public LoginInfoResponse refreshToken(String token) {
-        return refreshTokenService.findByToken(token).map(refreshTokenService::verifyExpiration)
+    public LoginInfoResponse refreshToken(String refreshToken) {
+        return refreshTokenService.findByToken(refreshToken).map(refreshTokenService::verifyExpiration)
                 .map(RefreshToken::getUsername)
-                .map(username->{
-                    String jwtToken = jwtFactory
-
+                .map(username -> {
+                    String accessToken = jwtFactory.generateToken(username);
+                    return new LoginInfoResponse(APIMessage.LOGIN_SUCCESSFUL, accessToken, HttpStatus.OK.value(), refreshToken);
                 })
+                .orElseThrow(() -> new RefreshTokenException(refreshToken, APIMessage.REFRESH_TOKEN_NOT_FOUND));
     }
 
+    @Override
+    public void logout(String username) {
+        refreshTokenService.deleteByUsername(username);
+    }
 }

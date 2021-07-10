@@ -1,9 +1,11 @@
 package com.entropy.backend.configurations.securities.jwts;
 
 import com.entropy.backend.common.constants.ExceptionMessage;
+import com.entropy.backend.models.entities.Permission;
+import com.entropy.backend.models.entities.Role;
 import com.entropy.backend.models.entities.User;
 import com.entropy.backend.models.enumerations.StatusType;
-import com.entropy.backend.models.exceptions.AccountInvalidException;
+import com.entropy.backend.models.exceptions.AccountNotFoundException;
 import com.entropy.backend.patterns.factories.JwtTokenProviderFactory;
 import com.entropy.backend.repositories.UserRepository;
 import io.jsonwebtoken.Claims;
@@ -18,12 +20,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Class handle JWT (generate, validate...) implement {@link JwtTokenProviderFactory}
@@ -56,35 +62,42 @@ public class JwtTokenProviderImpl implements JwtTokenProviderFactory {
         Map<String, Object> claimMap = new HashMap<>();
         claimMap.put("username", principal.getUsername());
         claimMap.put("email", principal.getEmail());
-        claimMap.put("types", principal.getAuthorities());
+        claimMap.put("authorities", principal.getAuthorities());
 
         return Jwts.builder().setId(principal.getUsername()).setClaims(claimMap).setIssuedAt(dateNow).
                 setExpiration(expiryDate).signWith(SignatureAlgorithm.HS512, clientSecrectKey).compact();
     }
 
     @Override
-    public String generateToken(String username) {
+    public String generateToken(String emailOrUsername) {
         Date dateNow = new Date();
         Date expiryDate = new Date(dateNow.getTime() + expirationInMs);
 
-        Optional<User> optionalUser = userRepository.findUserByUsernameAndStatus(username, (byte) StatusType.ON.getValue());
+        Optional<User> optionalUser = userRepository.loadUserAndAuthorities(emailOrUsername, (byte) StatusType.ON.getValue());
         if (!optionalUser.isPresent())
-            throw new AccountInvalidException(username);
+            throw new AccountNotFoundException(emailOrUsername);
 
         User user = optionalUser.get();
+        Role role = user.getRole();
+        Set<Permission> permissions = role.getPermissions();
 
         Map<String, Object> claimMap = new HashMap<>();
         claimMap.put("username", user.getUsername());
         claimMap.put("email", user.getEmail());
 
-        return Jwts.builder().setId(username).setClaims(claimMap).setIssuedAt(dateNow).
+        Set<GrantedAuthority> authorities = new HashSet<>();
+        authorities.add(new SimpleGrantedAuthority(role.getName()));
+        permissions.forEach(permission -> authorities.add(new SimpleGrantedAuthority(permission.getName())));
+        claimMap.put("authorities", authorities);
+
+        return Jwts.builder().setId(user.getUsername()).setClaims(claimMap).setIssuedAt(dateNow).
                 setExpiration(expiryDate).signWith(SignatureAlgorithm.HS512, clientSecrectKey).compact();
     }
 
     @Override
-    public Long getUserIdFromJWT(String token) {
+    public String getUsernameFromJWT(String token) {
         Claims claims = Jwts.parser().setSigningKey(clientSecrectKey).parseClaimsJws(token).getBody();
-        return Long.valueOf(claims.get("id").toString());
+        return claims.get("id").toString();
     }
 
     @Override

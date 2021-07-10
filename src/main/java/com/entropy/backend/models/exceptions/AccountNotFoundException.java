@@ -5,9 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.FORBIDDEN)
-public class AccountInvalidException extends RuntimeException {
-
-    public AccountInvalidException(String username) {
-        super(String.format(APIMessage.USERNAME_INVALID, username));
+public class AccountNotFoundException extends RuntimeException {
+    public AccountNotFoundException(String emailOrUsername) {
+        super(String.format(APIMessage.ACCOUNT_NOTFOUND, emailOrUsername));
     }
 }

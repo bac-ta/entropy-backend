@@ -102,8 +102,8 @@ public class UserServiceImpl implements UserService {
         final String openfireRestApiUrl = openfireHost + ":" + xmppClientBinPort + "/plugins/restapi/v1/users";
         restTemplate.postForObject(openfireRestApiUrl, requestBody, OpenfireUserRegistrationRequest.class);
 
-        //Update the fields extant
-        User storedUser = userRepository.findUserByUsername(username);
+        //Update the fields remaining
+        User storedUser = userRepository.findById(username).get();
 
         logger.info("storedUser: ", storedUser);
         GenderType genderType = GenderType.valueOf(userRequest.getGender());

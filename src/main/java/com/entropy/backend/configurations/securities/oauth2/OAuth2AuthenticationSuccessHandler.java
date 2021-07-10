@@ -47,7 +47,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     }
 
     protected String determineTargetUrl(HttpServletRequest request, Authentication authentication) {
-        Optional<String> redirectUri = AppUtil.getCookie(request, redirectUriParamCookieName).map(Cookie::getValue);
+        Optional<String> redirectUri = AppUtil.Cookie.getCookie(request, redirectUriParamCookieName).map(Cookie::getValue);
         if (redirectUri.isPresent() && !isAuthorizedRedirectUri(redirectUri.get())) {
             throw new ResourceNotFoundExceptionHandler(APIMessage.OAUTH2_UNAUTHORIZED);
         }

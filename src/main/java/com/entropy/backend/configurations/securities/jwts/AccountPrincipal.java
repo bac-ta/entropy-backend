@@ -32,10 +32,10 @@ public class AccountPrincipal implements UserDetails, OAuth2User {
     private Map<String, Object> attributes;//For oath2
     private Collection<? extends GrantedAuthority> authorities;
 
-    public static AccountPrincipal create(String username, String email, String phone, String roleName, Set<String> permissions) {
+    public static AccountPrincipal create(String username, String email, String phone, String roleName, Set<String> permissionNames) {
         Set<GrantedAuthority> authorities = new HashSet<>();
         authorities.add(new SimpleGrantedAuthority(roleName));
-        permissions.forEach(permission -> authorities.add(new SimpleGrantedAuthority(permission)));
+        permissionNames.forEach(name -> authorities.add(new SimpleGrantedAuthority(name)));
 
         AccountPrincipal principal = new AccountPrincipal();
         principal.setEmail(email);

@@ -3,6 +3,7 @@ package com.entropy.backend.configurations.securities.jwts;
 import com.entropy.backend.services.UserDetailsServiceCustom;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,6 +30,7 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private JwtTokenProviderImpl tokenProvider;
+    @Qualifier("userDetailsServiceCustom")
     @Autowired
     private UserDetailsServiceCustom authService;
 
@@ -36,8 +38,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         String jwt = getJwtFromRequest(httpServletRequest);
         if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
-            Long id = tokenProvider.getUserIdFromJWT(jwt);
-            UserDetails details = authService.loadById(id);
+            String username = tokenProvider.getUsernameFromJWT(jwt);
+            UserDetails details = authService.loadUserByUsername(username);
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(details, null, details.getAuthorities());
             authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);

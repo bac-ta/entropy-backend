@@ -19,4 +19,6 @@ public interface AuthenticationService {
     AccountPrincipal getCurrentPrincipal();
 
     LoginInfoResponse refreshToken(String token);
+
+    void logout(String username);
 }

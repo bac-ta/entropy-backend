@@ -20,7 +20,7 @@ public class APIMessage {
     public static final String NOT_DETERMINE_FILE_TYPE = "Could not determine file type";
     public static final String FILE_TYPE_INVALID = "File type is invalid";
     public static final String PARAMS_INVALID = "Params is invalid";
-    public static final String USERNAME_INVALID= "Account with username: '%s' is invalid";
+    public static final String ACCOUNT_NOTFOUND= "Account with email or username: '%s' is not found";
 
     //Authenticate
     public static String RESOURCE_NOT_FOUND = "%s not found with %s : '%s'";

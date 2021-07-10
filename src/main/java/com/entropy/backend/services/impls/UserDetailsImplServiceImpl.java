@@ -5,7 +5,7 @@ import com.entropy.backend.models.entities.Permission;
 import com.entropy.backend.models.entities.Role;
 import com.entropy.backend.models.entities.User;
 import com.entropy.backend.models.enumerations.StatusType;
-import com.entropy.backend.models.exceptions.ResourceNotFoundExceptionHandler;
+import com.entropy.backend.models.exceptions.AccountNotFoundException;
 import com.entropy.backend.repositories.UserRepository;
 import com.entropy.backend.services.UserDetailsServiceCustom;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -35,16 +36,19 @@ public class UserDetailsImplServiceImpl implements UserDetailsServiceCustom {
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String emailOrUsername) throws UsernameNotFoundException {
-        User user = userRepository.loadUserAndAuthorities(emailOrUsername, (byte) StatusType.ON.getValue());
-        String username = user.getUsername();
-        String email = user.getEmail();
-        String phone = user.getPhone();
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<User> optionalUser = userRepository.loadUserAndAuthoritiesByUsername(username, (byte) StatusType.ON.getValue());
+        if (!optionalUser.isPresent())
+            throw new AccountNotFoundException(username);
 
-        Role role = user.getRole();
-        String roleName = role.getName();
+        User userStored = optionalUser.get();
+        String email = userStored.getEmail();
+        String phone = userStored.getPhone();
 
-        Set<String> permissions = role.getPermissions()
+        Role roleStored = userStored.getRole();
+        String roleName = roleStored.getName();
+
+        Set<String> permissions = roleStored.getPermissions()
                 .stream().map(Permission::getName).collect(Collectors.toSet());
 
         return AccountPrincipal.create(username, email, phone, roleName, permissions);
