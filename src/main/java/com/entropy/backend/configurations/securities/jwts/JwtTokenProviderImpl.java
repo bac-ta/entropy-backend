@@ -86,7 +86,7 @@ public class JwtTokenProviderImpl implements JwtTokenProviderFactory {
         claimMap.put("email", user.getEmail());
 
         Set<GrantedAuthority> authorities = new HashSet<>();
-        authorities.add(new SimpleGrantedAuthority(role.getName()));
+        authorities.add(new SimpleGrantedAuthority(role.getName().name()));
         permissions.forEach(permission -> authorities.add(new SimpleGrantedAuthority(permission.getName())));
         claimMap.put("authorities", authorities);
 

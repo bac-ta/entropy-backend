@@ -11,6 +11,6 @@ import org.springframework.stereotype.Service;
  * @see UserDetailsImplServiceImpl
  * @since 2021-06-16
  */
-@Service("userDetailsServiceCustom")
+@Service
 public interface UserDetailsServiceCustom extends UserDetailsService {
 }

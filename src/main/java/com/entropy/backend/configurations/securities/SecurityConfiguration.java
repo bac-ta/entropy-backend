@@ -9,6 +9,7 @@ import com.entropy.backend.repositories.HttpCookieOAuth2AuthorizationRequestRepo
 import com.entropy.backend.services.UserDetailsServiceCustom;
 import com.entropy.backend.services.impls.OAuth2UserCustomServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
@@ -53,7 +54,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private OAuth2AuthenticationFailureHandler failureHandler;
 
     @Autowired
-    public SecurityConfiguration(UserDetailsServiceCustom userDetailsService, JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
+    public SecurityConfiguration(@Qualifier("userDetailsImplServiceImpl") UserDetailsServiceCustom userDetailsService, JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
                                  OAuth2UserCustomServiceImpl oAuth2UserCustomService) {
         this.userDetailsService = userDetailsService;
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
@@ -79,7 +80,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/auth/login", "/user/regist", "/file/view-file/*").permitAll()
+                .antMatchers("/auth/login", "/user/register", "/file/view-file/*").permitAll()
 //                .antMatchers("/post/*", "/file/*", "/category/*").hasRole(AccountType.ADMINISTRATOR.getName())
                 .anyRequest()
                 .authenticated()

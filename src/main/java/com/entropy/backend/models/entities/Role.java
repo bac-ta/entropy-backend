@@ -1,6 +1,7 @@
 package com.entropy.backend.models.entities;
 
 import com.entropy.backend.models.entities.base.Base;
+import com.entropy.backend.models.enumerations.RoleType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,6 +11,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -30,7 +33,8 @@ public class Role extends Base {
     private Byte id;
 
     @Column(name = "name")
-    private String name;
+    @Enumerated(EnumType.STRING)
+    private RoleType name;
 
     @Builder.Default
     @ManyToMany(cascade = CascadeType.ALL)

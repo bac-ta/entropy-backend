@@ -1,7 +1,6 @@
 package com.entropy.backend.services.impls;
 
 import com.entropy.backend.configurations.securities.jwts.AccountPrincipal;
-import com.entropy.backend.models.entities.Permission;
 import com.entropy.backend.models.entities.Role;
 import com.entropy.backend.models.entities.User;
 import com.entropy.backend.models.enumerations.StatusType;
@@ -25,7 +24,7 @@ import java.util.stream.Collectors;
  * @see UserDetailsImplServiceImpl
  * @since 2021-06-16
  */
-@Service
+@Service("userDetailsImplServiceImpl")
 public class UserDetailsImplServiceImpl implements UserDetailsServiceCustom {
     private final UserRepository userRepository;
 
@@ -46,10 +45,10 @@ public class UserDetailsImplServiceImpl implements UserDetailsServiceCustom {
         String phone = userStored.getPhone();
 
         Role roleStored = userStored.getRole();
-        String roleName = roleStored.getName();
+        String roleName = roleStored.getName().name();
 
         Set<String> permissions = roleStored.getPermissions()
-                .stream().map(Permission::getName).collect(Collectors.toSet());
+                .stream().map(permission -> permission.getName().name()).collect(Collectors.toSet());
 
         return AccountPrincipal.create(username, email, phone, roleName, permissions);
     }

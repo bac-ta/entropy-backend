@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-05-31
  */
 @RestController
-@RequestMapping(APIEndpointBase.POST_ENDPOINT_BASE)
+@RequestMapping(APIEndpointBase.POST_URL_BASE)
 public class PostController {
 //    private final PostService postService;
 //

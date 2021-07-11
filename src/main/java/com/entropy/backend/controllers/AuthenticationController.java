@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-05-31
  */
 @RestController
-@RequestMapping(APIEndpointBase.AUTH_ENDPOINT_BASE)
+@RequestMapping(APIEndpointBase.AUTH_URL_BASE)
 public class AuthenticationController {
     private final AuthenticationService authService;
 

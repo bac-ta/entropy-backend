@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
  * @since 2021-05-31
  */
 @RestController
-@RequestMapping(APIEndpointBase.FILE_ENDPOINT_BASE)
+@RequestMapping(APIEndpointBase.FILE_URL_BASE)
 public class FileController {
     private final FileService service;
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
@@ -48,7 +48,7 @@ public class FileController {
         String fileName = service.storeFile(file);
 
         String fileUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(APIEndpointBase.FILE_ENDPOINT_BASE + "/view-file/")
+                .path(APIEndpointBase.FILE_URL_BASE + "/view-file/")
                 .path(fileName)
                 .toUriString();
 

@@ -35,7 +35,7 @@ import java.util.List;
  * @since 2021-05-31
  */
 @RestController
-@RequestMapping(APIEndpointBase.CATEGORY_ENDPOINT_BASE)
+@RequestMapping(APIEndpointBase.CATEGORY_URL_BASE)
 public class CategoryController {
     private final CategoryService categoryService;
 

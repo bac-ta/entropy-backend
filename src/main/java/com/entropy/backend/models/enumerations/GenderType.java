@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 /**
  * @author bac-ta
+ *
  */
 public enum GenderType {
     MALE(0, "MALE"),
