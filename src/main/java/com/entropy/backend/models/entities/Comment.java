@@ -20,7 +20,6 @@ import java.util.List;
 @Entity
 @Table(name = "ofComment")
 @AllArgsConstructor
-@NoArgsConstructor
 @Data
 public class Comment extends Base {
     @Id

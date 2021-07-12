@@ -19,7 +19,6 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "ofUser")
 @AllArgsConstructor
-@NoArgsConstructor
 @Data
 @FieldNameConstants
 public class User extends Base {

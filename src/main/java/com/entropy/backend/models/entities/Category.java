@@ -15,7 +15,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "ofCategory")
 @AllArgsConstructor
-@NoArgsConstructor
 @Data
 public class Category extends Base {
     @Id

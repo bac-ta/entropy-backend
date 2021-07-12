@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,7 +24,6 @@ import java.util.Set;
 @Entity
 @Table(name = "ofRole")
 @AllArgsConstructor
-@NoArgsConstructor
 @Data
 public class Role extends Base {
     @Id

@@ -22,7 +22,6 @@ import java.util.Set;
 @Entity
 @Table(name = "ofPermission")
 @AllArgsConstructor
-@NoArgsConstructor
 @Data
 public class Permission extends Base {
     @Id

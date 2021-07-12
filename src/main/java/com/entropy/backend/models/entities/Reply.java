@@ -19,7 +19,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "ofReply")
 @AllArgsConstructor
-@NoArgsConstructor
 @Data
 public class Reply extends Base {
     @Id

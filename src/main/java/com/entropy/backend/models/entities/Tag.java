@@ -15,7 +15,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "ofTag")
 @AllArgsConstructor
-@NoArgsConstructor
 @Data
 public class Tag extends Base {
     @Id

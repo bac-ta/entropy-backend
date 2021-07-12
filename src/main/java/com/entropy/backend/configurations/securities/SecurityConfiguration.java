@@ -48,17 +48,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final UserDetailsServiceCustom userDetailsService;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final OAuth2UserCustomServiceImpl oAuth2UserCustomService;
-    @Autowired
-    private OAuth2AuthenticationSuccessHandler successHandler;
-    @Autowired
-    private OAuth2AuthenticationFailureHandler failureHandler;
+    private final OAuth2AuthenticationSuccessHandler successHandler;
+    private final OAuth2AuthenticationFailureHandler failureHandler;
 
     @Autowired
     public SecurityConfiguration(@Qualifier("userDetailsImplServiceImpl") UserDetailsServiceCustom userDetailsService, JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
-                                 OAuth2UserCustomServiceImpl oAuth2UserCustomService) {
+                                 OAuth2UserCustomServiceImpl oAuth2UserCustomService, OAuth2AuthenticationSuccessHandler successHandler, OAuth2AuthenticationFailureHandler failureHandler) {
         this.userDetailsService = userDetailsService;
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
         this.oAuth2UserCustomService = oAuth2UserCustomService;
+        this.successHandler = successHandler;
+        this.failureHandler = failureHandler;
     }
 
     @Bean

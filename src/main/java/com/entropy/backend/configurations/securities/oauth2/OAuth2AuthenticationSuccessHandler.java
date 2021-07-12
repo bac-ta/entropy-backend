@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
-@Component
+@Component("oAuth2AuthenticationSuccessHandler")
 public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     @Value("${app.oauth2.redirect-uri-param-cookie-name}")
     private String redirectUriParamCookieName;

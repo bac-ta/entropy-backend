@@ -1,7 +1,7 @@
 package com.entropy.backend.configurations.securities.oauth2;
 
-import com.entropy.backend.repositories.HttpCookieOAuth2AuthorizationRequestRepository;
 import com.entropy.backend.common.utils.AppUtil;
+import com.entropy.backend.repositories.HttpCookieOAuth2AuthorizationRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.AuthenticationException;
@@ -14,12 +14,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@Component
+@Component("oAuth2AuthenticationFailureHandler")
 public class OAuth2AuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
-    @Autowired
-    private HttpCookieOAuth2AuthorizationRequestRepository repository;
+    private final HttpCookieOAuth2AuthorizationRequestRepository repository;
     @Value("${app.oauth2.redirect-uri-param-cookie-name}")
     private String redirectUriParamCookieName;
+
+    @Autowired
+    public OAuth2AuthenticationFailureHandler(HttpCookieOAuth2AuthorizationRequestRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {
