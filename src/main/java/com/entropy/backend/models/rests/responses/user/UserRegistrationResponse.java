@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
+
 public class UserRegistrationResponse {
     private int statusCode;
     private String message;

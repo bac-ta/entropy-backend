@@ -6,10 +6,9 @@ import com.entropy.backend.configurations.securities.jwts.JwtAuthenticationFilte
 import com.entropy.backend.configurations.securities.oauth2.OAuth2AuthenticationFailureHandler;
 import com.entropy.backend.configurations.securities.oauth2.OAuth2AuthenticationSuccessHandler;
 import com.entropy.backend.repositories.HttpCookieOAuth2AuthorizationRequestRepository;
-import com.entropy.backend.services.UserDetailsServiceCustom;
 import com.entropy.backend.services.impls.OAuth2UserCustomServiceImpl;
+import com.entropy.backend.services.impls.UserDetailsImplServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
@@ -45,14 +44,14 @@ import java.util.Collections;
 )
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private final UserDetailsServiceCustom userDetailsService;
+    private final UserDetailsImplServiceImpl userDetailsService;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final OAuth2UserCustomServiceImpl oAuth2UserCustomService;
     private final OAuth2AuthenticationSuccessHandler successHandler;
     private final OAuth2AuthenticationFailureHandler failureHandler;
 
     @Autowired
-    public SecurityConfiguration(@Qualifier("userDetailsImplServiceImpl") UserDetailsServiceCustom userDetailsService, JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
+    public SecurityConfiguration(UserDetailsImplServiceImpl userDetailsService, JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
                                  OAuth2UserCustomServiceImpl oAuth2UserCustomService, OAuth2AuthenticationSuccessHandler successHandler, OAuth2AuthenticationFailureHandler failureHandler) {
         this.userDetailsService = userDetailsService;
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;

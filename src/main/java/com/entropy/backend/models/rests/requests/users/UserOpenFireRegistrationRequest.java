@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
+
 public class UserOpenFireRegistrationRequest {
     @NotBlank(message = APIMessage.USER_NAME_NOT_BLANK)
     private String username;

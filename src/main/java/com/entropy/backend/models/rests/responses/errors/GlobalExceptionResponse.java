@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @AllArgsConstructor
-@NoArgsConstructor
+
 @Data
 public class GlobalExceptionResponse {
     private List<String> errors;

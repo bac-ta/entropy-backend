@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Repository
+@Repository("httpCookieOAuth2AuthorizationRequestRepository")
 public class HttpCookieOAuth2AuthorizationRequestRepository implements AuthorizationRequestRepository<OAuth2AuthorizationRequest> {
 
     @Value("${app.oauth2.auth-request-cookie-name}")

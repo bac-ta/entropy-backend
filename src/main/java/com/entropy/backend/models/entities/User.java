@@ -4,13 +4,13 @@ import com.entropy.backend.models.entities.base.Base;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.time.LocalDate;
@@ -62,7 +62,7 @@ public class User extends Base {
     @Column(name = "phone")
     private String phone;
 
-    @Column(name = "role")
+    @JoinColumn(name = "role")
     @OneToOne(fetch = FetchType.LAZY)
     private Role role;
 

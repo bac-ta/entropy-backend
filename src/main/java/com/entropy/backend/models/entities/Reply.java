@@ -18,6 +18,7 @@ import javax.persistence.Table;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "ofReply")
+@NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class Reply extends Base {

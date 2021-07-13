@@ -23,7 +23,7 @@ import java.util.UUID;
 public class RefreshTokenServiceImpl implements RefreshTokenService {
     private final RefreshTokenRepository refreshTokenRepository;
     @Value("${app.auth.refresh-token-expiration-msec}")
-    private Long refreshTokenExpire;
+    private long refreshTokenExpire;
 
     @Autowired
     public RefreshTokenServiceImpl(RefreshTokenRepository refreshTokenRepository) {

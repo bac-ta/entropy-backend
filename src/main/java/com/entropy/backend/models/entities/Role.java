@@ -36,6 +36,10 @@ public class Role extends Base {
 
     @Builder.Default
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "ofRolePermission", joinColumns = @JoinColumn(name = "roleId"), inverseJoinColumns = @JoinColumn(name = "permissionId"))
-    Set<Permission> permissions = new HashSet<>();
+    @JoinTable(
+            name = "ofRolePermission",
+            joinColumns = @JoinColumn(name = "roleId"),
+            inverseJoinColumns = @JoinColumn(name = "permissionId")
+    )
+    private Set<Permission> permissions = new HashSet<>();
 }

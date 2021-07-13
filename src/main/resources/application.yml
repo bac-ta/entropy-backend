@@ -2,7 +2,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3309/entropyb?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3309/entropy-tech-blog?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
     username: entropy
     password: Silencer&&55
     platform: mysql
@@ -12,7 +12,7 @@ spring:
     database: mysql
     show-sql: true
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
     properties:
       hibernate:
@@ -48,7 +48,7 @@ spring:
     baseline-on-migrate: true
     validate-on-migrate: false
     enabled: true
-    schemas: entropyb
+    schemas: entropy-tech-blog
     locations: classpath:db/migration
 
   servlet:
@@ -69,7 +69,7 @@ app:
   auth:
     token-secret: ZGltYWdlc2hhcmUtbGVnYWN5LWJhY2tlbmQtcHJvamVjdA==
     token-expiration-msec: 36000000
-    refresh-token-expiration-msec: 36000000 * 10
+    refresh-token-expiration-msec: 360000000
 
 
   oauth2:

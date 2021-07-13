@@ -11,6 +11,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 /**
@@ -19,11 +20,8 @@ import javax.validation.constraints.NotBlank;
 @PasswordMatchingWithRepeatPassword.List({
         @PasswordMatchingWithRepeatPassword(first = "password", second = "repeatPassword", message = APIMessage.PASSWORD_NOT_MATCH)
 })
-@AllArgsConstructor
 @Data
 @Builder
-@NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 public class UserRegistrationRequest extends OpenfireUserRegistrationRequest {
     private String phone;
 

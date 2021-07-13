@@ -22,7 +22,7 @@ import java.util.Set;
  * @since 2021-05-31
  */
 @Data
-@NoArgsConstructor
+
 public class AccountPrincipal implements UserDetails, OAuth2User {
     private String username;
     private String email;

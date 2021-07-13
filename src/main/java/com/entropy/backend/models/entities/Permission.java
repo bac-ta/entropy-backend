@@ -21,6 +21,7 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "ofPermission")
+@NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class Permission extends Base {
@@ -32,6 +33,6 @@ public class Permission extends Base {
     @Enumerated(EnumType.STRING)
     private PermissionType name;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "ofPermission")
-    Set<Role> roles = new HashSet<>();
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "permissions")
+    private Set<Role> roles = new HashSet<>();
 }

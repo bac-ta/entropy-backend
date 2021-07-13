@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
+
 public class LoginInfoResponse {
     private String message;
     private String accessToken;

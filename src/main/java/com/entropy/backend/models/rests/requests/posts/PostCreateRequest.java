@@ -17,7 +17,7 @@ import java.util.Map;
 @Data
 @ToString
 @AllArgsConstructor
-@NoArgsConstructor
+
 public class PostCreateRequest {
     @NotBlank
     @JsonProperty(required = true)

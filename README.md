@@ -26,7 +26,7 @@ $ docker-compose up -d --build
 ##### Server Host Name (FQDN):
 ##### entropy.com.vn
 ##### Mysql connection:
-##### jdbc:mysql://mysql_database:3306/chat-realtime-db?rewriteBatchedStatements=true
+##### jdbc:mysql://mysql_database:3306/entropy-tech-blog?rewriteBatchedStatements=true
 ##### username: entropy
 ##### password: Silencer&&55
 (You can set up admin account controller like this: email: admin@example.com/ password: dimagesharevn). Then, when login admin controller, username/password is: admin/dimagesharevn
@@ -40,7 +40,7 @@ $ docker-compose up -d --build
 
 #***Now we can run app on base endpoint: http://172.22.0.5:1234/api/ and enjoy !***
 ## Destroy each other container (recommendation)
-**Note: Because our container has enviroments like openfire, mysql, redis data, so you might keep it, and only remove "chat-app" If you 're really need . Now, if you remove each container, first, you need getting its id. Run:**
+**Note: Because our container has environments like openfire, mysql, redis data, so you might keep it, and only remove "chat-app" If you 're really need . Now, if you remove each container, first, you need getting its id. Run:**
 ```bash
 $ docker ps
 ```

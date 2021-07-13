@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,7 +23,7 @@ import java.util.List;
 public class Comment extends Base {
     @Id
     @Column(name = "id")
-    private String id;
+    private Integer id;
 
     @Column(name = "content", columnDefinition = "TEXT")
     private String content;
@@ -42,6 +41,6 @@ public class Comment extends Base {
     private Byte status;
 
     @Builder.Default
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "ofComment")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Reply> replies;
 }

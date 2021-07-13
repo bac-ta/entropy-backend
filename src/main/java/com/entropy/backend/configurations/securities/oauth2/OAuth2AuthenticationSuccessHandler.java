@@ -1,11 +1,12 @@
 package com.entropy.backend.configurations.securities.oauth2;
 
 import com.entropy.backend.common.constants.APIMessage;
-import com.entropy.backend.repositories.HttpCookieOAuth2AuthorizationRequestRepository;
+import com.entropy.backend.common.utils.AppUtil;
 import com.entropy.backend.configurations.securities.jwts.JwtTokenProviderImpl;
 import com.entropy.backend.models.exceptions.ResourceNotFoundExceptionHandler;
-import com.entropy.backend.common.utils.AppUtil;
+import com.entropy.backend.repositories.HttpCookieOAuth2AuthorizationRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -19,6 +20,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+
 @Component("oAuth2AuthenticationSuccessHandler")
 public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     @Value("${app.oauth2.redirect-uri-param-cookie-name}")
@@ -26,13 +28,13 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     @Value("${app.oauth2.authorized-redirect-uris}")
     private List<String> authorizedRedirectUris;
 
-    private JwtTokenProviderImpl tokenProvider;
-    private HttpCookieOAuth2AuthorizationRequestRepository repository;
+    private final JwtTokenProviderImpl tokenProvider;
+    private final HttpCookieOAuth2AuthorizationRequestRepository httpRepository;
 
     @Autowired
-    public OAuth2AuthenticationSuccessHandler(JwtTokenProviderImpl tokenProvider, HttpCookieOAuth2AuthorizationRequestRepository repository) {
+    public OAuth2AuthenticationSuccessHandler(JwtTokenProviderImpl tokenProvider, @Qualifier("httpCookieOAuth2AuthorizationRequestRepository") HttpCookieOAuth2AuthorizationRequestRepository httpRepository) {
         this.tokenProvider = tokenProvider;
-        this.repository = repository;
+        this.httpRepository = httpRepository;
     }
 
     @Override
@@ -68,6 +70,6 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
     protected void clearAuthenticationAttributes(HttpServletRequest request, HttpServletResponse response) {
         super.clearAuthenticationAttributes(request);
-        repository.removeAuthorizationRequestCookies(request, response);
+        httpRepository.removeAuthorizationRequestCookies(request, response);
     }
 }

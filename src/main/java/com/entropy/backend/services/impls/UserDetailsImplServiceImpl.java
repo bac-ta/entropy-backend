@@ -6,9 +6,9 @@ import com.entropy.backend.models.entities.User;
 import com.entropy.backend.models.enumerations.StatusType;
 import com.entropy.backend.models.exceptions.AccountNotFoundException;
 import com.entropy.backend.repositories.UserRepository;
-import com.entropy.backend.services.UserDetailsServiceCustom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,14 +18,14 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * This class implement {@link UserDetailsServiceCustom}
+ * This class implement {@link UserDetailsService}
  *
  * @author bac-ta
  * @see UserDetailsImplServiceImpl
  * @since 2021-06-16
  */
-@Service("userDetailsImplServiceImpl")
-public class UserDetailsImplServiceImpl implements UserDetailsServiceCustom {
+@Service
+public class UserDetailsImplServiceImpl implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Autowired

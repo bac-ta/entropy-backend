@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
+
 public class SessionResponse {
     public List<SessionDto> sessions;
 }
