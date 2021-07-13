@@ -17,5 +17,5 @@ public interface UserRepository extends JpaRepository<User, String>, UserReposit
     Optional<User> loadUserAndAuthorities(String emailOrUsername, byte status);
 
     @Query("FROM User u JOIN FETCH u.role r JOIN FETCH r.permissions WHERE u.username=:emailOrUsername AND u.status=:status")
-    Optional<User> loadUserAndAuthoritiesByUsername(String username, byte status);
+    Optional<User> loadUserAndAuthoritiesByUsername(String emailOrUsername, byte status);
 }

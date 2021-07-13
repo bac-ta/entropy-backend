@@ -27,7 +27,6 @@ public class Category extends Base {
     @Column(name = "id")
     private Integer id;
 
-    @Id
     @Column(name = "name")
     private String name;
 

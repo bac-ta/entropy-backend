@@ -14,26 +14,4 @@ import java.util.Optional;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
-    List<Category> findAllByStatusType(StatusType statusType);
-
-    @Transactional
-    @Modifying
-    @Query("UPDATE Category SET status=:status WHERE id=:id")
-    void changeStatusType(int id, byte status);
-
-    Optional<Category> findById(int id);
-
-    List<Category> findByCategoryTypeContainingIgnoreCase(String categoryType, Pageable pageable);
-
-    List<Category> findByCategoryTypeContainingIgnoreCase(String categoryType);
-
-    List<Category> findByStatusType(StatusType statusType);
-
-    List<Category> findByStatusType(StatusType statusType, Pageable pageable);
-
-    List<Category> findByCategoryTypeContainingIgnoreCaseAndStatusType(String categoryType, StatusType statusType);
-
-    List<Category> findByCategoryTypeContainingIgnoreCaseAndStatusType(String categoryType, StatusType statusType, Pageable pageable);
-
-    List<Category> findByIdIn(List<Integer> ids);
 }
