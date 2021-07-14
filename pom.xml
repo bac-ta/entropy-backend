@@ -7,7 +7,7 @@
     <groupId>com.entropy.backend</groupId>
     <artifactId>entropy-backend</artifactId>
     <version>0.0.1</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <name>entropy-backend</name>
     <description>Entropy backend project</description>
@@ -153,6 +153,12 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${swagger.version}</version>
+        </dependency>
+        <!--Deploy with tomcat-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

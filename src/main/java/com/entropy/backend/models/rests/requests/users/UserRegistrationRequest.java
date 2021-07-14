@@ -22,6 +22,8 @@ import javax.validation.constraints.NotBlank;
 })
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserRegistrationRequest extends OpenfireUserRegistrationRequest {
     private String phone;
 

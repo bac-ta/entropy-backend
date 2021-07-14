@@ -1,5 +1,6 @@
 package com.entropy.backend.controllers;
 
+import com.entropy.backend.models.exceptions.AccountRoleInvalidException;
 import com.entropy.backend.models.exceptions.ResourceNotFoundExceptionHandler;
 import com.entropy.backend.models.exceptions.AccountAlreadyExistException;
 import com.entropy.backend.models.rests.responses.errors.GlobalExceptionResponse;
@@ -36,7 +37,7 @@ public class GlobalExceptionController {
      * @param request The current request
      */
     @ExceptionHandler({
-            ResourceNotFoundExceptionHandler.class, AccountAlreadyExistException.class
+            ResourceNotFoundExceptionHandler.class, AccountAlreadyExistException.class, AccountRoleInvalidException.class
     })
     @Nullable
     public final ResponseEntity<Object> handleException(Exception ex, WebRequest request) {
@@ -49,11 +50,11 @@ public class GlobalExceptionController {
             ResourceNotFoundExceptionHandler exception = (ResourceNotFoundExceptionHandler) ex;
 
             return handleUserNotFoundException(exception, headers, status, request);
-        } else if (ex instanceof AccountAlreadyExistException) {
+        } else if (ex instanceof AccountAlreadyExistException || ex instanceof AccountRoleInvalidException) {
             return new ResponseEntity<>(
                     new UserRegistrationResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage()),
                     HttpStatus.BAD_REQUEST);
-        
+
         } else {
             if (LOGGER.isWarnEnabled()) {
                 LOGGER.warn("Unknown exception type: " + ex.getClass().getName());

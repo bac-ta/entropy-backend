@@ -1,6 +1,6 @@
 package com.entropy.backend.controllers;
 
-import com.entropy.backend.common.constants.APIEndpointBase;
+import com.entropy.backend.common.App;
 import com.entropy.backend.models.rests.requests.users.UserRegistrationRequest;
 import com.entropy.backend.models.rests.responses.user.UserRegistrationResponse;
 import com.entropy.backend.services.UserService;
@@ -23,7 +23,7 @@ import javax.validation.Valid;
  * @since 2021-05-31
  */
 @RestController
-@RequestMapping(APIEndpointBase.CLIENT_ROLE_ENDPOINT_BASE + "/user")
+@RequestMapping(App.ApiEndpointBase.CLIENT_ENDPOINT_BASE + "/user")
 public class UserController {
     private final UserService userService;
 
@@ -32,7 +32,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/registration")
+    @PostMapping("/register")
     public ResponseEntity<UserRegistrationResponse> registerUser(@Valid @RequestBody UserRegistrationRequest req) {
         UserRegistrationResponse resp = userService.register(req);
         return new ResponseEntity<>(resp, HttpStatus.CREATED);

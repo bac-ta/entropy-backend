@@ -1,6 +1,6 @@
 package com.entropy.backend.repositories;
 
-import com.entropy.backend.common.utils.AppUtil;
+import com.entropy.backend.common.App;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.oauth2.client.web.AuthorizationRequestRepository;
@@ -22,22 +22,22 @@ public class HttpCookieOAuth2AuthorizationRequestRepository implements Authoriza
 
     @Override
     public OAuth2AuthorizationRequest loadAuthorizationRequest(HttpServletRequest httpServletRequest) {
-        return AppUtil.Cookie.getCookie(httpServletRequest, authRequestCookieName).
-                map(cookie -> AppUtil.System.deserialize(cookie, OAuth2AuthorizationRequest.class)).orElse(null);
+        return App.Cookie.getCookie(httpServletRequest, authRequestCookieName).
+                map(cookie -> App.System.deserialize(cookie, OAuth2AuthorizationRequest.class)).orElse(null);
     }
 
     @Override
     public void saveAuthorizationRequest(OAuth2AuthorizationRequest oAuth2AuthorizationRequest, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         if (oAuth2AuthorizationRequest == null) {
-            AppUtil.Cookie.deleteCookie(httpServletRequest, httpServletResponse, authRequestCookieName);
-            AppUtil.Cookie.deleteCookie(httpServletRequest, httpServletResponse, redirectUriParamCookieName);
+            App.Cookie.deleteCookie(httpServletRequest, httpServletResponse, authRequestCookieName);
+            App.Cookie.deleteCookie(httpServletRequest, httpServletResponse, redirectUriParamCookieName);
             return;
         }
-        AppUtil.Cookie.addCookie(httpServletResponse, authRequestCookieName, AppUtil.System.serialize(oAuth2AuthorizationRequest), cookieExpireSeconds);
+        App.Cookie.addCookie(httpServletResponse, authRequestCookieName, App.System.serialize(oAuth2AuthorizationRequest), cookieExpireSeconds);
         String redirectUriAfterLogin = httpServletRequest.getParameter(redirectUriParamCookieName);
         if (StringUtils.isBlank(redirectUriAfterLogin))
             return;
-        AppUtil.Cookie.addCookie(httpServletResponse, redirectUriParamCookieName, redirectUriAfterLogin, cookieExpireSeconds);
+        App.Cookie.addCookie(httpServletResponse, redirectUriParamCookieName, redirectUriAfterLogin, cookieExpireSeconds);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class HttpCookieOAuth2AuthorizationRequestRepository implements Authoriza
     }
 
     public void removeAuthorizationRequestCookies(HttpServletRequest request, HttpServletResponse response) {
-        AppUtil.Cookie.deleteCookie(request, response, authRequestCookieName);
-        AppUtil.Cookie.deleteCookie(request, response, authRequestCookieName);
+        App.Cookie.deleteCookie(request, response, authRequestCookieName);
+        App.Cookie.deleteCookie(request, response, authRequestCookieName);
     }
 }

@@ -1,6 +1,6 @@
 package com.entropy.backend.configurations.securities.oauth2;
 
-import com.entropy.backend.common.utils.AppUtil;
+import com.entropy.backend.common.App;
 import com.entropy.backend.repositories.HttpCookieOAuth2AuthorizationRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -28,7 +28,7 @@ public class OAuth2AuthenticationFailureHandler extends SimpleUrlAuthenticationF
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {
-        String targetUrl = AppUtil.Cookie.getCookie(request, redirectUriParamCookieName)
+        String targetUrl = App.Cookie.getCookie(request, redirectUriParamCookieName)
                 .map(Cookie::getValue)
                 .orElse(("/"));
 
