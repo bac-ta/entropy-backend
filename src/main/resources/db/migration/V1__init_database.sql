@@ -1296,7 +1296,6 @@ CREATE TABLE `ofUser` (
   `gender` tinyint NOT NULL DEFAULT '0',
   `dateOfBirth` date DEFAULT NULL,
   `phone` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `role` tinyint NOT NULL DEFAULT '1',
   `bcryptedPassword` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated` datetime DEFAULT NULL,

@@ -4,6 +4,7 @@ import com.entropy.backend.models.entities.base.Base;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,6 +17,7 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "ofTag")
+@NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class Tag extends Base {

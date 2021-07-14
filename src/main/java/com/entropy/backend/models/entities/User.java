@@ -4,8 +4,10 @@ import com.entropy.backend.models.entities.base.Base;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.FieldNameConstants;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,6 +20,7 @@ import java.time.LocalDate;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "ofUser")
+@NoArgsConstructor
 @AllArgsConstructor
 @Data
 @FieldNameConstants
@@ -63,7 +66,7 @@ public class User extends Base {
     private String phone;
 
     @JoinColumn(name = "role")
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Role role;
 
     @Column(name = "bcryptedPassword")
