@@ -41,12 +41,13 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
         predicates.add(builder.equal(root.get(User.Fields.email), email));
 
         if (StringUtils.isNotBlank(phone))
-            predicates.add(builder.equal(root.get(User.Fields.email), email));
+            predicates.add(builder.equal(root.get(User.Fields.phone), email));
 
         query.select(root).where(builder.or(predicates.toArray(new Predicate[0])));
 
         TypedQuery<User> typedQuery = entityManager.createQuery(query);
+        typedQuery.setMaxResults(1);
 
-        return Optional.ofNullable(typedQuery.getSingleResult());
+        return typedQuery.getResultList().stream().findFirst();
     }
 }
