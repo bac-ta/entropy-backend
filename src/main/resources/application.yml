@@ -12,7 +12,7 @@ spring:
     database: mysql
     show-sql: true
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
@@ -47,7 +47,7 @@ spring:
 
   flyway:
     baseline-on-migrate: true
-    validate-on-migrate: false
+    validate-on-migrate: true
     enabled: true
     schemas: entropy-tech-blog
     locations: classpath:db/migration
@@ -92,5 +92,5 @@ openfire:
   rest-secret-key: 46QUw5HcsuS8A9qe
   host: http://172.22.0.3
   xmpp-client-connection-port: 5222
-  xmpp-domain: entropy.app
+  xmpp-domain: entropy.tech.xmpp
   xmpp-client-bin-port: 9090
