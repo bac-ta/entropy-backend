@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -30,9 +29,9 @@ public class Permission extends Base {
     private Byte id;
 
     @Column(name = "name")
-    @Enumerated(EnumType.STRING)
+    @Enumerated(value = EnumType.STRING)
     private PermissionType name;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "permissions")
+    @ManyToMany(mappedBy = "permissions")
     private Set<Role> roles = new HashSet<>();
 }

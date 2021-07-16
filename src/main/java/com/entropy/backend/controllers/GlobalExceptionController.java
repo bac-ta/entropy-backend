@@ -1,7 +1,6 @@
 package com.entropy.backend.controllers;
 
 import com.entropy.backend.models.exceptions.AccountAlreadyExistException;
-import com.entropy.backend.models.exceptions.AccountRoleInvalidException;
 import com.entropy.backend.models.exceptions.EnumNotFoundException;
 import com.entropy.backend.models.exceptions.ResourceNotFoundExceptionHandler;
 import com.entropy.backend.models.rests.responses.errors.GlobalExceptionResponse;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.util.WebUtils;
 
+import java.time.format.DateTimeParseException;
 import java.util.Collections;
 import java.util.List;
 
@@ -40,8 +40,8 @@ public class GlobalExceptionController {
     @ExceptionHandler({
             ResourceNotFoundExceptionHandler.class,
             AccountAlreadyExistException.class,
-            AccountRoleInvalidException.class,
-            EnumNotFoundException.class
+            EnumNotFoundException.class,
+            DateTimeParseException.class
     })
     @Nullable
     public final ResponseEntity<Object> handleException(Exception ex, WebRequest request) {
@@ -55,9 +55,9 @@ public class GlobalExceptionController {
 
             return handleUserNotFoundException(exception, headers, status, request);
         } else if (
-                        ex instanceof AccountAlreadyExistException ||
-                        ex instanceof AccountRoleInvalidException ||
-                        ex instanceof EnumNotFoundException
+                ex instanceof AccountAlreadyExistException ||
+                        ex instanceof EnumNotFoundException ||
+                        ex instanceof DateTimeParseException
         ) {
             return new ResponseEntity<>(
                     new UserRegistrationResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage()),

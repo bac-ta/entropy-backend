@@ -66,7 +66,7 @@ public class User extends Base {
     private String phone;
 
     @JoinColumn(name = "role")
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     private Role role;
 
     @Column(name = "bcryptedPassword")

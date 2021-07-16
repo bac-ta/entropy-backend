@@ -46,8 +46,7 @@ public class Role extends Base {
     @Enumerated(EnumType.STRING)
     private RoleType name;
 
-    @Builder.Default
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
             name = "ofRolePermission",
             joinColumns = @JoinColumn(name = "roleId"),

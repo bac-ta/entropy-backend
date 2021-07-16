@@ -11,12 +11,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 /**
  * @author bac-ta
  */
+@EqualsAndHashCode(callSuper = true)
 @PasswordMatchingWithRepeatPassword.List({
         @PasswordMatchingWithRepeatPassword(first = "password", second = "repeatPassword", message = APIMessage.PASSWORD_NOT_MATCH)
 })
@@ -31,7 +31,7 @@ public class UserRegistrationRequest extends OpenfireUserRegistrationRequest {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private String dateOfBirth;
 
-    @NotBlank(message = APIMessage.REPEAT_PASSWORD_NOT_BLANK)
+    @NotBlank
     @JsonProperty(value = "repeatPassword", required = true)
     private String repeatPassword;
 
@@ -40,5 +40,5 @@ public class UserRegistrationRequest extends OpenfireUserRegistrationRequest {
     private String gender;
 
     @JsonProperty(value = "role", required = true)
-    private int role;
+    private String role;
 }

@@ -5,8 +5,8 @@ import com.entropy.backend.common.utils.TimeUtil;
 import com.entropy.backend.models.entities.Role;
 import com.entropy.backend.models.entities.User;
 import com.entropy.backend.models.enumerations.GenderType;
+import com.entropy.backend.models.enumerations.RoleType;
 import com.entropy.backend.models.exceptions.AccountAlreadyExistException;
-import com.entropy.backend.models.exceptions.AccountRoleInvalidException;
 import com.entropy.backend.models.rests.requests.users.OpenfireUserRegistrationRequest;
 import com.entropy.backend.models.rests.requests.users.UserRegistrationRequest;
 import com.entropy.backend.models.rests.responses.user.UserRegistrationResponse;
@@ -64,6 +64,7 @@ public class UserServiceImpl implements UserService {
         logger.info("user request: ", userRequest);
 
         GenderType genderType = GenderType.findByName(userRequest.getGender());
+        RoleType roleType = RoleType.findByName(userRequest.getRole());
 
         String username = userRequest.getUsername();
         String email = userRequest.getEmail();
@@ -85,9 +86,6 @@ public class UserServiceImpl implements UserService {
             if (StringUtils.isNotBlank(alreadyPhone) && alreadyPhone.equals(phone))
                 throw new AccountAlreadyExistException("phone");
         }
-
-        Role role = roleRepository.findById((byte) userRequest.getRole()).orElseThrow(
-                () -> new AccountRoleInvalidException(userRequest.getRole()));
 
         String name = userRequest.getName();
         String password = userRequest.getPassword();
@@ -114,6 +112,8 @@ public class UserServiceImpl implements UserService {
         storedUser.setDateOfBirth(TimeUtil.toDate(userRequest.getDateOfBirth()));
         if (StringUtils.isNotBlank(phone))
             storedUser.setPhone(phone);
+
+        Role role = roleRepository.findById((byte) roleType.getValue()).get();
 
         storedUser.setRole(role);
 
