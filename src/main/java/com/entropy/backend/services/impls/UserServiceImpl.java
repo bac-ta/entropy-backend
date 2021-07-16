@@ -62,6 +62,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserRegistrationResponse register(UserRegistrationRequest userRequest) {
         logger.info("user request: ", userRequest);
+
+        GenderType genderType = GenderType.findByName(userRequest.getGender());
+
         String username = userRequest.getUsername();
         String email = userRequest.getEmail();
         String phone = userRequest.getPhone();
@@ -106,7 +109,6 @@ public class UserServiceImpl implements UserService {
         User storedUser = userRepository.findById(username).get();
 
         logger.info("storedUser: ", storedUser);
-        GenderType genderType = GenderType.valueOf(userRequest.getGender());
         storedUser.setGender((byte) genderType.getValue());
         storedUser.setBcryptedPassword(passwordEncoder.encode(userRequest.getPassword()));
         storedUser.setDateOfBirth(TimeUtil.toDate(userRequest.getDateOfBirth()));

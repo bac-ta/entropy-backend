@@ -35,8 +35,8 @@ public class APIMessage {
     public static final String APPROVE_TYPE_INVALID = "Approve type invalid";
     public static final String USER_TYPE_INVALID = "User type invalid";
     public static final String OAUTH2_TYPE_INVALID = "OAuth2 type invalid";
-    public static final String FIELD_ALREADY_EXIST = "This % used by another user, please try with other information";
-    public static final String GENDER_INVALID = "The gender is invalid that must be in [MALE, FEMALE, OTHER]";
+    public static final String FIELD_ALREADY_EXIST = "This %s used by another user, please try with other information";
+    public static final String GENDER_INVALID = "The gender is invalid that must be in [Male, Female, Other]";
 
     //Post
     public static final String POST_ID_INVALID = "Post id not valid";

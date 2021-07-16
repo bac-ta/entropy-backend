@@ -11,6 +11,6 @@ public class EnumNotFoundException extends RuntimeException {
     }
 
     public EnumNotFoundException(String enumName, String enumDescription) {
-        super(String.format(APIMessage.RESOURCE_NOT_FOUND, enumName, "description", enumDescription));
+        super(String.format(APIMessage.RESOURCE_NOT_FOUND, enumName, "name", enumDescription));
     }
 }
