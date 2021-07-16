@@ -5,7 +5,7 @@ CREATE TABLE ofCategory
     id        integer not null,
     name      varchar(255),
     status    tinyint,
-    created   datetime,
+    created   datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
     createdBy varchar(255),
     updated   datetime,
     updatedBy varchar(255),
@@ -25,7 +25,7 @@ CREATE TABLE ofComment
     postId    integer,
     status    tinyint,
     username  varchar(255),
-    created   datetime,
+    created   datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
     createdBy varchar(255),
     updated   datetime,
     updatedBy varchar(255),
@@ -37,7 +37,7 @@ CREATE TABLE ofOAuth2User
     email     varchar(255),
     name      varchar(255),
     type      tinyint,
-    created   datetime,
+    created   datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
     createdBy varchar(255),
     updated   datetime,
     updatedBy varchar(255),
@@ -47,7 +47,7 @@ CREATE TABLE ofPermission
 (
     id        tinyint not null,
     name      varchar(255),
-    created   datetime,
+    created   datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
     createdBy varchar(255),
     updated   datetime,
     updatedBy varchar(255),
@@ -62,7 +62,7 @@ CREATE TABLE ofPost
     publication   tinyint,
     status        tinyint,
     title         varchar(255),
-    created       datetime,
+    created       datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
     createdBy     varchar(255),
     updated       datetime,
     updatedBy     varchar(255),
@@ -79,7 +79,7 @@ CREATE TABLE ofPostTag
     id        integer not null,
     postId    integer,
     tagId     integer,
-    created   datetime,
+    created   datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
     createdBy varchar(255),
     updated   datetime,
     updatedBy varchar(255),
@@ -93,7 +93,7 @@ CREATE TABLE ofProfile
     oauth2Avatar varchar(255),
     oauth2UserId integer,
     username     varchar(255),
-    created      datetime,
+    created      datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
     createdBy    varchar(255),
     updated      datetime,
     updatedBy    varchar(255),
@@ -105,7 +105,7 @@ CREATE TABLE ofRefreshToken
     token      varchar(255),
     expiryDate bigint,
     username   varchar(255),
-    created    datetime,
+    created    datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
     createdBy  varchar(255),
     updated    datetime,
     updatedBy  varchar(255),
@@ -118,7 +118,7 @@ CREATE TABLE ofReply
     fileUrl   varchar(255),
     username  varchar(255),
     commentId integer,
-    created   datetime,
+    created   datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
     createdBy varchar(255),
     updated   datetime,
     updatedBy varchar(255),
@@ -128,7 +128,7 @@ CREATE TABLE ofRole
 (
     id        tinyint not null auto_increment,
     name      varchar(255),
-    created   datetime,
+    created   datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
     createdBy varchar(255),
     updated   datetime,
     updatedBy varchar(255),
@@ -145,7 +145,7 @@ CREATE TABLE ofTag
     id         integer not null,
     name       varchar(255),
     categoryId integer,
-    created    datetime,
+    created    datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
     createdBy  varchar(255),
     updated    datetime,
     updatedBy  varchar(255),
@@ -154,7 +154,7 @@ CREATE TABLE ofTag
 
 -- ALTER TABLE
 ALTER TABLE ofUser
-    add column created datetime;
+    add column created datetime NOT NULL DEFAULT CURRENT_TIMESTAMP;
 ALTER TABLE ofUser
     add column createdBy varchar(255);
 ALTER TABLE ofUser
