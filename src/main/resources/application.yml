@@ -1,7 +1,6 @@
 #Config app
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3309/entropy-tech-blog?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
     username: entropy
     password: Silencer&&55

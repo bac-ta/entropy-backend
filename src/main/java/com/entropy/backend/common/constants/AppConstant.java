@@ -13,4 +13,5 @@ public class AppConstant {
     public static final long CORS_MAX_AGE = 3000;
     public static final String LOGGER_PREFIX_NAME = "APP.";
     public static final String LOGGER_ERROR_PREFIX_NAME = "APP_ERROR.";
+    public static final String DATE_FORMAT = "yyyy-MM-dd";
 }

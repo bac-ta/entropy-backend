@@ -1,7 +1,10 @@
 package com.entropy.backend.models.anonations.validators;
 
+import com.entropy.backend.common.App;
 import com.entropy.backend.models.anonations.GenderVerifier;
 import com.entropy.backend.models.enumerations.GenderType;
+import com.entropy.backend.models.exceptions.GenderInvalidException;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -17,12 +20,19 @@ import java.util.stream.Stream;
  * @since 2021-06-13
  */
 public class GenderValidator implements ConstraintValidator<GenderVerifier, String> {
+
     @Override
-    public boolean isValid(String str, ConstraintValidatorContext constraintValidatorContext) {
+    public boolean isValid(String gender, ConstraintValidatorContext constraintValidatorContext) throws GenderInvalidException {
+        if (StringUtils.isBlank(gender))
+            throw new GenderInvalidException(String.format(App.ApiMessage.FILED_IS_REQUIRED, "gender"));
+
         List<String> enumNames = Stream.of(GenderType.values())
                 .map(GenderType::name)
                 .collect(Collectors.toList());
 
-        return enumNames.contains(str);
+        if (!enumNames.contains(gender))
+            throw new GenderInvalidException(App.ApiMessage.GENDER_INVALID);
+
+        return true;
     }
 }

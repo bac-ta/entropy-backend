@@ -5,6 +5,8 @@ package com.entropy.backend.common.constants;
  */
 public class APIMessage {
     //Common
+    public static final String FILED_IS_REQUIRED = "The field '%s' must be required";
+    public static final String FILED_IS_INVALID = "The field '%s' is invalid";
     public static final String PASSWORD_NOT_MATCH = "Password and confirm password not match";
     public static final String PASSWORD_NOT_BLANK = "Password must be not blank";
     public static final String EMAIL_NOT_BLANK = "Email must be not blank";
@@ -20,7 +22,7 @@ public class APIMessage {
     public static final String NOT_DETERMINE_FILE_TYPE = "Could not determine file type";
     public static final String FILE_TYPE_INVALID = "File type is invalid";
     public static final String PARAMS_INVALID = "Params is invalid";
-    public static final String ACCOUNT_NOTFOUND= "Account with email or username: '%s' is not found";
+    public static final String ACCOUNT_NOTFOUND = "Account with email or username: '%s' is not found";
 
     //Authenticate
     public static String RESOURCE_NOT_FOUND = "%s not found with %s : '%s'";

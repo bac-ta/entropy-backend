@@ -27,7 +27,7 @@ public class LoggerConfiguration {
      */
     @Bean("processLoggerConfig")
     @SneakyThrows
-    public void loadMemoryLoggerConfig() {
+    public LoggerContext loadMemoryLoggerConfig() {
         LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
         JoranConfigurator jc = new JoranConfigurator();
         jc.setContext(context);
@@ -38,6 +38,8 @@ public class LoggerConfiguration {
 
         InputStream inputStream = new ClassPathResource("logback-process.xml").getInputStream();
         jc.doConfigure(inputStream);
+
+        return context;
     }
 
     /**
@@ -46,7 +48,7 @@ public class LoggerConfiguration {
     @Lazy
     @Bean("errorLoggerConfig")
     @SneakyThrows
-    public void errorLoggerConfig() {
+    public LoggerContext errorLoggerConfig() {
         LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
         JoranConfigurator jc = new JoranConfigurator();
         jc.setContext(context);
@@ -57,6 +59,8 @@ public class LoggerConfiguration {
 
         InputStream inputStream = new ClassPathResource("logback-error.xml").getInputStream();
         jc.doConfigure(inputStream);
+
+        return context;
     }
 
 }

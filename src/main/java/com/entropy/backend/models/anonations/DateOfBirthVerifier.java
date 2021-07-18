@@ -1,7 +1,6 @@
 package com.entropy.backend.models.anonations;
 
-import com.entropy.backend.common.App;
-import com.entropy.backend.models.anonations.validators.GenderValidator;
+import com.entropy.backend.models.anonations.validators.DateOfBirthValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -13,18 +12,18 @@ import java.lang.annotation.Target;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Annotation check the gender field request
+ * Annotation check the date of birth field request
  *
  * @author bac-ta
- * @see GenderVerifier
- * @since 2021-06-13
+ * @see DateOfBirthVerifier
+ * @since 2021-07-18
  */
 @Target({ElementType.ANNOTATION_TYPE, ElementType.FIELD, ElementType.METHOD})
 @Retention(RUNTIME)
-@Constraint(validatedBy = GenderValidator.class)
+@Constraint(validatedBy = DateOfBirthValidator.class)
 @Documented
-public @interface GenderVerifier {
-    String message() default App.ApiMessage.GENDER_INVALID;
+public @interface DateOfBirthVerifier {
+    String message() default "";
 
     Class<?>[] groups() default {};
 

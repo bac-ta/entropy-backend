@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.util.WebUtils;
 
+import javax.validation.ValidationException;
 import java.time.format.DateTimeParseException;
 import java.util.Collections;
 import java.util.List;
@@ -41,7 +42,8 @@ public class GlobalExceptionController {
             ResourceNotFoundExceptionHandler.class,
             AccountAlreadyExistException.class,
             EnumNotFoundException.class,
-            DateTimeParseException.class
+            DateTimeParseException.class,
+            ValidationException.class
     })
     @Nullable
     public final ResponseEntity<Object> handleException(Exception ex, WebRequest request) {
@@ -63,6 +65,10 @@ public class GlobalExceptionController {
                     new UserRegistrationResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage()),
                     HttpStatus.BAD_REQUEST);
 
+        } else if (ex instanceof ValidationException) {
+            return new ResponseEntity<>(
+                    new UserRegistrationResponse(HttpStatus.BAD_REQUEST.value(), ex.getCause().getMessage()),
+                    HttpStatus.BAD_REQUEST);
         } else {
             if (LOGGER.isWarnEnabled()) {
                 LOGGER.warn("Unknown exception type: " + ex.getClass().getName());
