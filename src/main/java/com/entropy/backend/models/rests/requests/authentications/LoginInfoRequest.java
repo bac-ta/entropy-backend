@@ -1,7 +1,6 @@
 package com.entropy.backend.models.rests.requests.authentications;
 
 import com.entropy.backend.common.constants.APIMessage;
-import com.entropy.backend.models.anonations.PasswordVerifier;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,6 +16,5 @@ public class LoginInfoRequest {
     @JsonProperty(required = true)
     @NotBlank(message = APIMessage.EMAIL_NOT_BLANK)
     private String username;
-    @PasswordVerifier
     private String password;
 }

@@ -1,7 +1,6 @@
 package com.entropy.backend.models.rests.requests.users;
 
 import com.entropy.backend.common.constants.APIMessage;
-import com.entropy.backend.models.anonations.PasswordVerifier;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -17,6 +16,5 @@ public class UserOpenFireRegistrationRequest {
     private String name;
     @NotBlank(message = APIMessage.EMAIL_NOT_BLANK)
     private String email;
-    @PasswordVerifier
     private String password;
 }

@@ -61,10 +61,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserRegistrationResponse register(UserRegistrationRequest userRequest) {
-        logger.info("user request: ", userRequest);
 
         GenderType genderType = GenderType.findByName(userRequest.getGender());
-        RoleType roleType = RoleType.findByName(userRequest.getRole());
 
         String username = userRequest.getUsername();
         String email = userRequest.getEmail();
@@ -104,16 +102,17 @@ public class UserServiceImpl implements UserService {
         restTemplate.postForObject(openfireRestApiUrl, requestBody, OpenfireUserRegistrationRequest.class);
 
         //Update the fields remaining
+        @SuppressWarnings("OptionalGetWithoutIsPresent")
         User storedUser = userRepository.findById(username).get();
 
-        logger.info("storedUser: ", storedUser);
         storedUser.setGender((byte) genderType.getValue());
         storedUser.setBcryptedPassword(passwordEncoder.encode(userRequest.getPassword()));
         storedUser.setDateOfBirth(TimeUtil.toDate(userRequest.getDateOfBirth()));
         if (StringUtils.isNotBlank(phone))
             storedUser.setPhone(phone);
 
-        Role role = roleRepository.findById((byte) roleType.getValue()).get();
+        @SuppressWarnings("OptionalGetWithoutIsPresent")
+        Role role = roleRepository.findById((byte) RoleType.CLIENT.getValue()).get();
 
         storedUser.setRole(role);
 
