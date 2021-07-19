@@ -4,7 +4,7 @@ import com.entropy.backend.common.constants.APIMessage;
 import com.entropy.backend.models.anonations.DateOfBirthVerifier;
 import com.entropy.backend.models.anonations.GenderVerifier;
 import com.entropy.backend.models.anonations.PasswordMatchingWithRepeatPassword;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.entropy.backend.models.anonations.RoleVerifier;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,7 +16,7 @@ import javax.validation.constraints.NotBlank;
  * @author bac-ta
  */
 @PasswordMatchingWithRepeatPassword.List({
-        @PasswordMatchingWithRepeatPassword(first = "password", second = "repeatPassword", message = APIMessage.PASSWORD_NOT_MATCH)
+        @PasswordMatchingWithRepeatPassword(password = "password", repeatPassword = "repeatPassword", message = APIMessage.PASSWORD_NOT_MATCH)
 })
 @Data
 @AllArgsConstructor
@@ -37,7 +37,7 @@ public class UserRegistrationRequest extends OpenfireUserRegistrationRequest {
     @GenderVerifier
     private String gender;
 
-    @NotBlank
     @JsonProperty(value = "role")
+    @RoleVerifier
     private String role;
 }

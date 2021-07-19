@@ -21,10 +21,8 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = {})
 @ReportAsSingleViolation
 @Size(min = 8, max = 20)
-//@Pattern(regexp = "[a-zA-Z0-9!-/:-@\\[-`{-~]+")
-@Pattern(regexp = "((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])|(?=.*[a-z])(?=.*[A-Z])(?=.*[!-/:-@\\[-`{-~])|(?=.*[a-z])(?=.*[0-9])(?=.*[!-/:-@\\[-`{-~])|(?=.*[A-Z])(?=.*[0-9])(?=.*[!-/:-@\\[-`{-~]))[a-zA-Z0-9!-/:-@\\[-`{-~]{0,1000}")
 public @interface PasswordVerifier {
-    String message() default "{com.demo.webapp.PasswordVerifier.message}";
+    String message() default "";
 
     Class<?>[] groups() default {};
 

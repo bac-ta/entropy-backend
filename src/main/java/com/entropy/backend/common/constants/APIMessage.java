@@ -7,8 +7,9 @@ public class APIMessage {
     //Common
     public static final String FILED_IS_REQUIRED = "The field '%s' must be required";
     public static final String FILED_IS_INVALID = "The field '%s' is invalid";
-    public static final String PASSWORD_NOT_MATCH = "Password and confirm password not match";
-    public static final String PASSWORD_NOT_BLANK = "Password must be not blank";
+    public static final String PASSWORD_NOT_MATCH = "Password and repeat password not match";
+    public static final String PASSWORD_IS_INVALID = "Password must be a string that has length greater than equal 8 " +
+            "- less than equal 20 and has at least 1 upper case character, 1 lower case character, 1 number and 1 symbol character";
     public static final String EMAIL_NOT_BLANK = "Email must be not blank";
     public static final String NAME_NOT_BLANK = "Name must be not blank";
     public static final String REPEAT_PASSWORD_NOT_BLANK = "Repeat password must not blank";
@@ -38,8 +39,6 @@ public class APIMessage {
     public static final String USER_TYPE_INVALID = "User type invalid";
     public static final String OAUTH2_TYPE_INVALID = "OAuth2 type invalid";
     public static final String FIELD_ALREADY_EXIST = "This %s used by another user, please try with other information";
-    public static final String GENDER_INVALID = "The gender is invalid that must be in [Male, Female, Other]";
-
     //Post
     public static final String POST_ID_INVALID = "Post id not valid";
     public static final String CREATE_POST_FAILURE = "Create post failure";

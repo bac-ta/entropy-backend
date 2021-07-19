@@ -1,6 +1,6 @@
 package com.entropy.backend.models.anonations;
 
-import com.entropy.backend.models.anonations.validators.GenderValidator;
+import com.entropy.backend.models.anonations.validators.RoleValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -12,21 +12,20 @@ import java.lang.annotation.Target;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Annotation check the gender field request
+ * Annotation check the user role request
  *
  * @author bac-ta
- * @see GenderVerifier
- * @since 2021-06-13
+ * @see RoleVerifier
+ * @since 2021-07-19
  */
-@Target({ElementType.ANNOTATION_TYPE, ElementType.FIELD, ElementType.METHOD})
+@Target({ElementType.ANNOTATION_TYPE, ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
 @Retention(RUNTIME)
-@Constraint(validatedBy = GenderValidator.class)
+@Constraint(validatedBy = RoleValidator.class)
 @Documented
-public @interface GenderVerifier {
+public @interface RoleVerifier {
     String message() default "";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
-
 }

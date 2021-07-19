@@ -31,7 +31,7 @@ public class GenderValidator implements ConstraintValidator<GenderVerifier, Stri
                 .collect(Collectors.toList());
 
         if (!enumNames.contains(gender))
-            throw new GenderInvalidException(App.ApiMessage.GENDER_INVALID);
+            throw new GenderInvalidException(String.format(App.ApiMessage.FILED_IS_INVALID, "gender"));
 
         return true;
     }

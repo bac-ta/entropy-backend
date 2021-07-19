@@ -17,8 +17,6 @@ public class LoginInfoRequest {
     @JsonProperty(required = true)
     @NotBlank(message = APIMessage.EMAIL_NOT_BLANK)
     private String username;
-    @JsonProperty(required = true)
-    @NotBlank(message = APIMessage.PASSWORD_NOT_BLANK)
     @PasswordVerifier
     private String password;
 }
