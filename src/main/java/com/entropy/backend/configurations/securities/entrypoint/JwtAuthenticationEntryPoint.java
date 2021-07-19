@@ -1,6 +1,6 @@
 package com.entropy.backend.configurations.securities.entrypoint;
 
-import com.entropy.backend.common.constants.APIMessage;
+import com.entropy.backend.common.constants.ApiMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.AuthenticationException;
@@ -27,7 +27,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     public void commence(HttpServletRequest httpServletRequest,
                          HttpServletResponse httpServletResponse,
                          AuthenticationException e) throws IOException {
-        logger.error(APIMessage.ENDTRY_POINT_UNAUTHORIZED, APIMessage.ACCOUNT_INVALID);
-        httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, APIMessage.ACCOUNT_INVALID);
+        logger.error(ApiMessage.ENDTRY_POINT_UNAUTHORIZED, ApiMessage.ACCOUNT_INVALID);
+        httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, ApiMessage.ACCOUNT_INVALID);
     }
 }

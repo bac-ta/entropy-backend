@@ -1,6 +1,6 @@
 package com.entropy.backend.models.rests.requests.users;
 
-import com.entropy.backend.common.constants.APIMessage;
+import com.entropy.backend.common.constants.ApiMessage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,14 +21,14 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 @MappedSuperclass
 public class OpenfireUserRegistrationRequest {
-    @NotBlank(message = APIMessage.USER_NAME_NOT_BLANK)
+    @NotBlank(message = ApiMessage.USER_NAME_NOT_BLANK)
     private String username;
 
-    @NotBlank(message = APIMessage.NAME_NOT_BLANK)
+    @NotBlank(message = ApiMessage.NAME_NOT_BLANK)
     private String name;
 
     @Email
-    @NotBlank(message = APIMessage.EMAIL_NOT_BLANK)
+    @NotBlank(message = ApiMessage.EMAIL_NOT_BLANK)
     private String email;
     private String password;
 }

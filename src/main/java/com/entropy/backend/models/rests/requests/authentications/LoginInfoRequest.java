@@ -1,11 +1,8 @@
 package com.entropy.backend.models.rests.requests.authentications;
 
-import com.entropy.backend.common.constants.APIMessage;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.entropy.backend.models.anonations.FieldRequired;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import javax.validation.constraints.NotBlank;
 
 /**
  * @author bac-ta
@@ -13,8 +10,8 @@ import javax.validation.constraints.NotBlank;
 @Data
 @AllArgsConstructor
 public class LoginInfoRequest {
-    @JsonProperty(required = true)
-    @NotBlank(message = APIMessage.EMAIL_NOT_BLANK)
+    @FieldRequired(fieldName = "username")
     private String username;
+    @FieldRequired(fieldName = "password")
     private String password;
 }

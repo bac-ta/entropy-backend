@@ -1,31 +1,8 @@
 package com.entropy.backend.controllers;
 
-import com.entropy.backend.common.constants.APIEndpointBase;
-import com.entropy.backend.common.constants.APIMessage;
-import com.entropy.backend.models.exceptions.ResourceNotFoundExceptionHandler;
-import com.entropy.backend.models.entities.Category;
-import com.entropy.backend.models.enumerations.SortType;
-import com.entropy.backend.models.enumerations.StatusType;
-import com.entropy.backend.models.rests.requests.categories.CategoryCreateRequest;
-import com.entropy.backend.models.rests.responses.categories.CategoryFetchResponse;
-import com.entropy.backend.models.rests.responses.categories.CategoryGetResponse;
-import com.entropy.backend.models.rests.responses.categories.CategoryResponse;
-import com.entropy.backend.models.rests.responses.errors.ApiErrorResponse;
-import com.entropy.backend.services.CategoryService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import com.entropy.backend.common.constants.ApiEndpointBase;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
-import java.util.List;
 
 /**
  * Class controller for creates category APIs
@@ -35,7 +12,7 @@ import java.util.List;
  * @since 2021-05-31
  */
 @RestController
-@RequestMapping(APIEndpointBase.CATEGORY_URL_BASE)
+@RequestMapping(ApiEndpointBase.CATEGORY_URL_BASE)
 public class CategoryController {
 //    private final CategoryService categoryService;
 //

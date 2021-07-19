@@ -1,6 +1,6 @@
 package com.entropy.backend.services.impls;
 
-import com.entropy.backend.common.constants.APIMessage;
+import com.entropy.backend.common.constants.ApiMessage;
 import com.entropy.backend.common.utils.TimeUtil;
 import com.entropy.backend.models.entities.Role;
 import com.entropy.backend.models.entities.User;
@@ -118,7 +118,7 @@ public class UserServiceImpl implements UserService {
 
         userRepository.save(storedUser);
 
-        return new UserRegistrationResponse(HttpStatus.CREATED.value(), APIMessage.REGISTER_USER_SUCCESSFUL);
+        return new UserRegistrationResponse(HttpStatus.CREATED.value(), ApiMessage.REGISTER_USER_SUCCESSFUL);
     }
 
 }

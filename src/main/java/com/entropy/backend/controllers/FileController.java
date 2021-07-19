@@ -1,7 +1,7 @@
 package com.entropy.backend.controllers;
 
-import com.entropy.backend.common.constants.APIEndpointBase;
-import com.entropy.backend.common.constants.APIMessage;
+import com.entropy.backend.common.constants.ApiEndpointBase;
+import com.entropy.backend.common.constants.ApiMessage;
 import com.entropy.backend.models.rests.responses.file.FileResponse;
 import com.entropy.backend.services.FileService;
 import org.slf4j.Logger;
@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
  * @since 2021-05-31
  */
 @RestController
-@RequestMapping(APIEndpointBase.FILE_URL_BASE)
+@RequestMapping(ApiEndpointBase.FILE_URL_BASE)
 public class FileController {
     private final FileService service;
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
@@ -48,7 +48,7 @@ public class FileController {
         String fileName = service.storeFile(file);
 
         String fileUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(APIEndpointBase.FILE_URL_BASE + "/view-file/")
+                .path(ApiEndpointBase.FILE_URL_BASE + "/view-file/")
                 .path(fileName)
                 .toUriString();
 
@@ -70,7 +70,7 @@ public class FileController {
         try {
             contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
         } catch (IOException ex) {
-            logger.info(APIMessage.NOT_DETERMINE_FILE_TYPE);
+            logger.info(ApiMessage.NOT_DETERMINE_FILE_TYPE);
         }
 
         if (contentType == null) {

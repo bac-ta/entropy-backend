@@ -1,6 +1,6 @@
 package com.entropy.backend.controllers;
 
-import com.entropy.backend.common.constants.APIEndpointBase;
+import com.entropy.backend.common.constants.ApiEndpointBase;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-05-31
  */
 @RestController
-@RequestMapping(APIEndpointBase.POST_URL_BASE)
+@RequestMapping(ApiEndpointBase.POST_URL_BASE)
 public class PostController {
 //    private final PostService postService;
 //

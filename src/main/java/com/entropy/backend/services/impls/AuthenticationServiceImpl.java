@@ -1,6 +1,6 @@
 package com.entropy.backend.services.impls;
 
-import com.entropy.backend.common.constants.APIMessage;
+import com.entropy.backend.common.constants.ApiMessage;
 import com.entropy.backend.configurations.securities.jwts.AccountPrincipal;
 import com.entropy.backend.models.dtos.SessionDto;
 import com.entropy.backend.models.entities.RefreshToken;
@@ -110,7 +110,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if (dtoList.size() > 0) {
             for (SessionDto sessionDTO : dtoList) {
                 if (sessionDTO.getSessionStatus().equals(SessionStatusType.AUTHENTICATED.name()))
-                    return new LoginInfoResponse(APIMessage.LOGIN_SUCCESSFUL, accessToken, HttpStatus.OK.value(), refreshToken.getToken());
+                    return new LoginInfoResponse(ApiMessage.LOGIN_SUCCESSFUL, accessToken, HttpStatus.OK.value(), refreshToken.getToken());
             }
         }
         //If sessions not exist, we login
@@ -130,7 +130,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         }
 
 
-        return new LoginInfoResponse(APIMessage.LOGIN_SUCCESSFUL, accessToken, HttpStatus.OK.value(), refreshToken.getToken());
+        return new LoginInfoResponse(ApiMessage.LOGIN_SUCCESSFUL, accessToken, HttpStatus.OK.value(), refreshToken.getToken());
     }
 
     @Override
@@ -145,9 +145,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .map(RefreshToken::getUsername)
                 .map(username -> {
                     String accessToken = jwtFactory.generateToken(username);
-                    return new LoginInfoResponse(APIMessage.LOGIN_SUCCESSFUL, accessToken, HttpStatus.OK.value(), refreshToken);
+                    return new LoginInfoResponse(ApiMessage.LOGIN_SUCCESSFUL, accessToken, HttpStatus.OK.value(), refreshToken);
                 })
-                .orElseThrow(() -> new RefreshTokenException(refreshToken, APIMessage.REFRESH_TOKEN_NOT_FOUND));
+                .orElseThrow(() -> new RefreshTokenException(refreshToken, ApiMessage.REFRESH_TOKEN_NOT_FOUND));
     }
 
     @Override

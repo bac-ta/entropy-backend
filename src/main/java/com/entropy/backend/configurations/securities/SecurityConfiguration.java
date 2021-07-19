@@ -79,7 +79,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/auth/login", "/client/user/register", "/file/view-file/*").permitAll()
+                .antMatchers("/authentication/login", "/client/user/register", "/file/view-file/*").permitAll()
 //                .antMatchers("/post/*", "/file/*", "/category/*").hasRole(AccountType.ADMINISTRATOR.getName())
                 .anyRequest()
                 .authenticated()

@@ -1,6 +1,6 @@
 package com.entropy.backend.services.impls;
 
-import com.entropy.backend.common.constants.APIMessage;
+import com.entropy.backend.common.constants.ApiMessage;
 import com.entropy.backend.models.entities.RefreshToken;
 import com.entropy.backend.models.exceptions.RefreshTokenException;
 import com.entropy.backend.repositories.RefreshTokenRepository;
@@ -49,7 +49,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
     public RefreshToken verifyExpiration(RefreshToken refreshToken) {
         if (refreshToken.getExpiryDate().compareTo(System.currentTimeMillis()) < 0) {
             refreshTokenRepository.delete(refreshToken);
-            throw new RefreshTokenException(refreshToken.getToken(), APIMessage.REFRESH_TOKEN_EXPIRE);
+            throw new RefreshTokenException(refreshToken.getToken(), ApiMessage.REFRESH_TOKEN_EXPIRE);
         }
 
         return refreshToken;

@@ -1,6 +1,6 @@
 package com.entropy.backend.services.impls;
 
-import com.entropy.backend.common.constants.APIMessage;
+import com.entropy.backend.common.constants.ApiMessage;
 import com.entropy.backend.models.enumerations.FileType;
 import com.entropy.backend.models.exceptions.ResourceNotFoundExceptionHandler;
 import com.entropy.backend.models.properties.FileStorageProperties;
@@ -43,7 +43,7 @@ public class FileServiceImpl implements FileService {
             Files.createDirectories(this.fileStorageLocation);
         } catch (Exception e) {
             logger.debug(e.getMessage());
-            throw new ResourceNotFoundExceptionHandler(APIMessage.CREATE_FILEDIR_ERROR, e);
+            throw new ResourceNotFoundExceptionHandler(ApiMessage.CREATE_FILEDIR_ERROR, e);
         }
     }
 
@@ -55,7 +55,7 @@ public class FileServiceImpl implements FileService {
         try {
             // Check if the file's name contains invalid characters
             if (fileName.contains(".."))
-                throw new ResourceNotFoundExceptionHandler(APIMessage.FILE_INVALID_PATH_SEQUENCE + fileName);
+                throw new ResourceNotFoundExceptionHandler(ApiMessage.FILE_INVALID_PATH_SEQUENCE + fileName);
 
             String fileTypeStr = FilenameUtils.getExtension(file.getOriginalFilename());
 
@@ -73,7 +73,7 @@ public class FileServiceImpl implements FileService {
             return fileNameGen;
         } catch (IOException ex) {
             logger.debug(ex.getMessage());
-            throw new ResourceNotFoundExceptionHandler(String.format(APIMessage.FILE_NOT_STORE, fileName), ex);
+            throw new ResourceNotFoundExceptionHandler(String.format(ApiMessage.FILE_NOT_STORE, fileName), ex);
         }
     }
 
@@ -86,11 +86,11 @@ public class FileServiceImpl implements FileService {
             if (resource.exists()) {
                 return resource;
             } else {
-                throw new ResourceNotFoundExceptionHandler(String.format(APIMessage.FILE_NOT_FOUND, fileName));
+                throw new ResourceNotFoundExceptionHandler(String.format(ApiMessage.FILE_NOT_FOUND, fileName));
             }
         } catch (MalformedURLException e) {
             logger.debug(e.getMessage());
-            throw new ResourceNotFoundExceptionHandler(String.format(APIMessage.FILE_NOT_FOUND, fileName), e);
+            throw new ResourceNotFoundExceptionHandler(String.format(ApiMessage.FILE_NOT_FOUND, fileName), e);
         }
     }
 }

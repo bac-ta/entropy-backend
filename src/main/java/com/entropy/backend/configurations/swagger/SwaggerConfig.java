@@ -1,6 +1,6 @@
 package com.entropy.backend.configurations.swagger;
 
-import com.entropy.backend.common.constants.APIMessage;
+import com.entropy.backend.common.constants.ApiMessage;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.springframework.context.annotation.Bean;
@@ -53,7 +53,7 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
                         Lists.newArrayList(
                                 new ResponseMessageBuilder().code(HttpStatus.OK.value()).message(HttpStatus.OK.getReasonPhrase()).build(),
                                 new ResponseMessageBuilder().code(HttpStatus.BAD_REQUEST.value()).message(HttpStatus.BAD_REQUEST.getReasonPhrase()).build(),
-                                new ResponseMessageBuilder().code(HttpStatus.UNAUTHORIZED.value()).message(APIMessage.ENDTRY_POINT_UNAUTHORIZED).build(),
+                                new ResponseMessageBuilder().code(HttpStatus.UNAUTHORIZED.value()).message(ApiMessage.ENDTRY_POINT_UNAUTHORIZED).build(),
                                 new ResponseMessageBuilder().code(HttpStatus.FORBIDDEN.value()).message(HttpStatus.FORBIDDEN.getReasonPhrase()).build(),
                                 new ResponseMessageBuilder().code(HttpStatus.INTERNAL_SERVER_ERROR.value()).message(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()).build()
                         ))
@@ -61,7 +61,7 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
                         Lists.newArrayList(
                                 new ResponseMessageBuilder().code(HttpStatus.OK.value()).message(HttpStatus.OK.getReasonPhrase()).build(),
                                 new ResponseMessageBuilder().code(HttpStatus.BAD_REQUEST.value()).message(HttpStatus.BAD_REQUEST.getReasonPhrase()).build(),
-                                new ResponseMessageBuilder().code(HttpStatus.UNAUTHORIZED.value()).message(APIMessage.ENDTRY_POINT_UNAUTHORIZED).build(),
+                                new ResponseMessageBuilder().code(HttpStatus.UNAUTHORIZED.value()).message(ApiMessage.ENDTRY_POINT_UNAUTHORIZED).build(),
                                 new ResponseMessageBuilder().code(HttpStatus.INTERNAL_SERVER_ERROR.value()).message(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()).build()
                         ))
                 .securitySchemes(Lists.newArrayList(getApiKey()))

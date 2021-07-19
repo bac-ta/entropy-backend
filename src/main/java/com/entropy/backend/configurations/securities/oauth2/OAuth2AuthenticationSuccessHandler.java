@@ -1,6 +1,6 @@
 package com.entropy.backend.configurations.securities.oauth2;
 
-import com.entropy.backend.common.constants.APIMessage;
+import com.entropy.backend.common.constants.ApiMessage;
 import com.entropy.backend.common.App;
 import com.entropy.backend.configurations.securities.jwts.JwtTokenProviderImpl;
 import com.entropy.backend.models.exceptions.ResourceNotFoundExceptionHandler;
@@ -51,7 +51,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     protected String determineTargetUrl(HttpServletRequest request, Authentication authentication) {
         Optional<String> redirectUri = App.Cookie.getCookie(request, redirectUriParamCookieName).map(Cookie::getValue);
         if (redirectUri.isPresent() && !isAuthorizedRedirectUri(redirectUri.get())) {
-            throw new ResourceNotFoundExceptionHandler(APIMessage.OAUTH2_UNAUTHORIZED);
+            throw new ResourceNotFoundExceptionHandler(ApiMessage.OAUTH2_UNAUTHORIZED);
         }
         String targetUrl = redirectUri.orElse(getDefaultTargetUrl());
         String token = tokenProvider.generateToken(authentication);

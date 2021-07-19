@@ -3,7 +3,7 @@ package com.entropy.backend.common.constants;
 /**
  * @author bac-ta
  */
-public class APIMessage {
+public class ApiMessage {
     //Common
     public static final String FILED_IS_REQUIRED = "The field '%s' must be required";
     public static final String FILED_IS_INVALID = "The field '%s' is invalid";
