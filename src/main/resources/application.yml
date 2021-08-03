@@ -83,9 +83,6 @@ app:
 
   file:
     upload-dir: /otp/entropy-tech-blog/stores
-    ftp-host: localhost
-    ftp-user: entropy-tech-blog-ftp
-    ftp-password: Silencer&&55
 
 openfire:
   rest-secret-key: 46QUw5HcsuS8A9qe
