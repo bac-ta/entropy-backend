@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -44,12 +45,13 @@ public class UserDetailsImplServiceImpl implements UserDetailsService {
         String email = userStored.getEmail();
         String phone = userStored.getPhone();
 
-        Role roleStored = userStored.getRole();
-        String roleName = roleStored.getName().name();
+        Set<Role> rolesStored = userStored.getRoles();
+        Set<String> roleNames = rolesStored.stream().map(role -> role.getName().getName()).collect(Collectors.toSet());
 
-        Set<String> permissions = roleStored.getPermissions()
-                .stream().map(permission -> permission.getName().name()).collect(Collectors.toSet());
+        Set<String> permissionNames = rolesStored.stream().map(role -> role.getPermissions().stream().map(
+                permission -> permission.getName().getName()
+        ).collect(Collectors.toSet())).flatMap(Collection::stream).collect(Collectors.toSet());
 
-        return AccountPrincipal.create(username, email, phone, roleName, permissions);
+        return AccountPrincipal.create(username, email, phone, roleNames, permissionNames);
     }
 }

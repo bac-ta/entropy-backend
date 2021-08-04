@@ -30,6 +30,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Class handle JWT (generate, validate...) implement {@link JwtTokenProviderFactory}
@@ -78,15 +79,20 @@ public class JwtTokenProviderImpl implements JwtTokenProviderFactory {
             throw new AccountNotFoundException(emailOrUsername);
 
         User user = optionalUser.get();
-        Role role = user.getRole();
-        Set<Permission> permissions = role.getPermissions();
+        Set<Role> roles = user.getRoles();
+        Set<Permission> permissions = roles.stream().
+                flatMap(role -> role.getPermissions().stream()).
+                collect(Collectors.toSet());
 
         Map<String, Object> claimMap = new HashMap<>();
         claimMap.put("username", user.getUsername());
         claimMap.put("email", user.getEmail());
 
         Set<GrantedAuthority> authorities = new HashSet<>();
-        authorities.add(new SimpleGrantedAuthority(role.getName().name()));
+        roles.forEach(role ->
+                authorities.add(new SimpleGrantedAuthority(role.getName().name()))
+        );
+
         permissions.forEach(permission -> authorities.add(new SimpleGrantedAuthority(permission.getName().name())));
         claimMap.put("authorities", authorities);
 

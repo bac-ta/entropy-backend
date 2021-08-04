@@ -13,9 +13,9 @@ import java.util.Optional;
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, String>, UserRepositoryCustom {
-    @Query("FROM User u JOIN FETCH u.role r JOIN FETCH r.permissions WHERE (u.email=:emailOrUsername OR u.username=:emailOrUsername) AND u.status=:status")
+    @Query("FROM User u JOIN FETCH u.roles r JOIN FETCH r.permissions WHERE (u.email=:emailOrUsername OR u.username=:emailOrUsername) AND u.status=:status")
     Optional<User> loadUserAndAuthorities(String emailOrUsername, byte status);
 
-    @Query("FROM User u JOIN FETCH u.role r JOIN FETCH r.permissions WHERE u.username=:emailOrUsername AND u.status=:status")
+    @Query("FROM User u JOIN FETCH u.roles r JOIN FETCH r.permissions WHERE u.username=:emailOrUsername AND u.status=:status")
     Optional<User> loadUserAndAuthoritiesByUsername(String emailOrUsername, byte status);
 }

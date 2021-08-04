@@ -1,16 +1,13 @@
 package com.entropy.backend.configurations.securities.jwts;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -32,9 +29,11 @@ public class AccountPrincipal implements UserDetails, OAuth2User {
     private Map<String, Object> attributes;//For oath2
     private Collection<? extends GrantedAuthority> authorities;
 
-    public static AccountPrincipal create(String username, String email, String phone, String roleName, Set<String> permissionNames) {
+    public static AccountPrincipal create(String username, String email, String phone, Set<String> roleNames, Set<String> permissionNames) {
         Set<GrantedAuthority> authorities = new HashSet<>();
-        authorities.add(new SimpleGrantedAuthority(roleName));
+        roleNames.forEach(roleName -> {
+            authorities.add(new SimpleGrantedAuthority(roleName));
+        });
         permissionNames.forEach(name -> authorities.add(new SimpleGrantedAuthority(name)));
 
         AccountPrincipal principal = new AccountPrincipal();

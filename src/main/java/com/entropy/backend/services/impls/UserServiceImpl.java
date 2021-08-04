@@ -26,7 +26,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * This class implement {@link UserService}
@@ -114,7 +116,9 @@ public class UserServiceImpl implements UserService {
         @SuppressWarnings("OptionalGetWithoutIsPresent")
         Role role = roleRepository.findById((byte) RoleType.CLIENT.getValue()).get();
 
-        storedUser.setRole(role);
+        Set<Role> roles = new HashSet<>();
+        roles.add(role);
+        storedUser.setRoles(roles);
 
         userRepository.save(storedUser);
 
