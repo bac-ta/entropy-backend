@@ -14,4 +14,8 @@ public class TimeUtil {
     public static LocalDateTime toDateTime(String date) {
         return LocalDateTime.parse(date, DateTimeFormatter.ofPattern(AppConstant.DATE_FORMAT));
     }
+
+    public static long getCurrentTimeMillis() {
+        return System.currentTimeMillis();
+    }
 }

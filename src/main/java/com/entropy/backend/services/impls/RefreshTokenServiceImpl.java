@@ -1,6 +1,8 @@
 package com.entropy.backend.services.impls;
 
 import com.entropy.backend.common.constants.ApiMessage;
+import com.entropy.backend.common.utils.SystemUtil;
+import com.entropy.backend.common.utils.TimeUtil;
 import com.entropy.backend.models.entities.RefreshToken;
 import com.entropy.backend.models.exceptions.RefreshTokenException;
 import com.entropy.backend.repositories.RefreshTokenRepository;
@@ -10,7 +12,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.UUID;
 
 /**
  * This class implement {@link RefreshTokenService}
@@ -39,15 +40,15 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
     public RefreshToken createRefreshToken(String username) {
         RefreshToken refreshToken = new RefreshToken();
         refreshToken.setUsername(username);
-        refreshToken.setExpiryDate(System.currentTimeMillis() + refreshTokenExpire);
-        refreshToken.setToken(UUID.randomUUID().toString());
+        refreshToken.setExpiryDate(TimeUtil.getCurrentTimeMillis() + refreshTokenExpire);
+        refreshToken.setToken(SystemUtil.generateRefreshToken());
 
         return refreshTokenRepository.save(refreshToken);
     }
 
     @Override
     public RefreshToken verifyExpiration(RefreshToken refreshToken) {
-        if (refreshToken.getExpiryDate().compareTo(System.currentTimeMillis()) < 0) {
+        if (refreshToken.getExpiryDate().compareTo(TimeUtil.getCurrentTimeMillis()) < 0) {
             refreshTokenRepository.delete(refreshToken);
             throw new RefreshTokenException(refreshToken.getToken(), ApiMessage.REFRESH_TOKEN_EXPIRE);
         }
