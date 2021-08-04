@@ -1,0 +1,1 @@
+ALTER TABLE `ofUser` CHANGE COLUMN `status` `status` TINYINT NOT NULL DEFAULT '1';

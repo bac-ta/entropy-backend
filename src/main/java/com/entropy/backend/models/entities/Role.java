@@ -3,11 +3,9 @@ package com.entropy.backend.models.entities;
 import com.entropy.backend.models.entities.base.Base;
 import com.entropy.backend.models.enumerations.RoleType;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
