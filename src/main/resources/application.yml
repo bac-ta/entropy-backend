@@ -1,17 +1,19 @@
 #Config app
 spring:
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/entropyb?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
-    username: root
+    url: jdbc:mysql://localhost:3309/entropy-tech-blog?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
+    username: entropy
     password: Silencer&&55
+    platform: mysql
+    initialization-mode: always
 
   jpa:
     database: mysql
     show-sql: true
     hibernate:
       ddl-auto: validate
-      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
@@ -44,9 +46,9 @@ spring:
 
   flyway:
     baseline-on-migrate: true
-    validate-on-migrate: false
+    validate-on-migrate: true
     enabled: true
-    schemas: entropyb
+    schemas: entropy-tech-blog
     locations: classpath:db/migration
 
   servlet:
@@ -54,6 +56,9 @@ spring:
       enabled: true
       max-file-size: 100MB
       max-request-size: 100MB
+
+  main:
+    allow-bean-definition-overriding: true
 
 server:
   servlet:
@@ -64,6 +69,8 @@ app:
   auth:
     token-secret: ZGltYWdlc2hhcmUtbGVnYWN5LWJhY2tlbmQtcHJvamVjdA==
     token-expiration-msec: 36000000
+    refresh-token-expiration-msec: 360000000
+
 
   oauth2:
     auth-request-cookie-name: oauth2_auth_request
@@ -75,4 +82,11 @@ app:
       myiosapp://oauth2/redirect
 
   file:
-    upload-dir: /tmp/entropyb
+    upload-dir: /otp/entropy-tech-blog/stores
+
+openfire:
+  rest-secret-key: 46QUw5HcsuS8A9qe
+  host: http://172.22.0.3
+  xmpp-client-connection-port: 5222
+  xmpp-domain: entropy.tech.xmpp
+  xmpp-client-bin-port: 9090
